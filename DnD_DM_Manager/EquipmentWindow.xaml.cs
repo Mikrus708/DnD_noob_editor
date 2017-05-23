@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DnD;
 
 namespace DnD_DM_Manager
 {
@@ -22,6 +23,20 @@ namespace DnD_DM_Manager
         public EquipmentWindow()
         {
             InitializeComponent();
+        }
+
+        public EquipmentWindow(List<DnD.Equipment.Item> eq)
+        {
+            InitializeComponent();
+            //for (int i = MainGrid.RowDefinitions.Count; i < h; i++)
+            //{
+            //    MainGrid.RowDefinitions.Add(new RowDefinition());
+            //}
+            //for (int i = MainGrid.ColumnDefinitions.Count; i < w; i++)
+            //{
+            //    MainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            //}
+            DataContext = eq;
         }
     }
 }
