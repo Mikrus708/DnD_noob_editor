@@ -6,52 +6,65 @@
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
         Title="Equipment" Height="500" Width="350" MinHeight="350" MinWidth="200" >
-    <TabControl>
-        <TabItem Header="Grid">
-            <ListView Name="MainGrid" ItemsSource="{Binding}">
-
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical" Width="120" Height="120">
-                            <Border Width="60" Height="60" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Center" >
-                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFBB2D2D"/>
-                            </Border>
-                            <Label Content="{Binding Name}" HorizontalAlignment="Center"/>
-                            <Label Content="{Binding ValueInCopper}" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Width="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
-        </TabItem>
-        <TabItem Header="List">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Rectangle Fill="Bisque"/>
-                <ListView Name="MainList" ItemsSource="{Binding}" Grid.Column="1"> 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <TabControl>
+            <TabItem Header="Grid">
+                <ListView Name="MainGrid" ItemsSource="{Binding}">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Height="70">
+                            <StackPanel Orientation="Vertical" Width="120" Height="120">
+                                <Border Width="60" Height="60" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Center" >
+                                    <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFBB2D2D"/>
+                                </Border>
                                 <Label Content="{Binding Name}" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Family}"/>
-                                <Label Content="{Binding Category}"/>
                                 <Label Content="{Binding ValueInCopper}" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
 
-
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
                 </ListView>
-            </Grid>
-        </TabItem>
-    </TabControl>
+            </TabItem>
+            <TabItem Header="List">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="Bisque"/>
+                    <ListView Name="MainList" ItemsSource="{Binding}" Grid.Column="1">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Height="70">
+                                    <Label Content="{Binding Name}" HorizontalAlignment="Center"/>
+                                    <Label Content="{Binding Family}"/>
+                                    <Label Content="{Binding Category}"/>
+                                    <Label Content="{Binding ValueInCopper}" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+
+                    </ListView>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button Width="60" Click="Add_New_Item" Content="Add">
+            </Button>
+
+        </StackPanel>
+        
+    </Grid>
 </Window>
