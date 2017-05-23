@@ -5,38 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="Equipment" Height="500" Width="300" MinHeight="350" MinWidth="200">
+        Title="Equipment" Height="500" Width="350" MinHeight="350" MinWidth="200" >
     <TabControl>
         <TabItem Header="Grid">
             <ListView Name="MainGrid" ItemsSource="{Binding}">
-                <ListView.Background>
-                    <RadialGradientBrush>
-                        <GradientStop Color="#FF5D2049" Offset="0.217"/>
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF932E93" Offset="0.53"/>
-                        <GradientStop Color="#FF7B27C1" Offset="0.863"/>
-                    </RadialGradientBrush>
-                </ListView.Background>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical" Width="120" Height="100">
-                            <Border Width="60" Height="60" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" >
+                        <StackPanel Orientation="Vertical" Width="120" Height="120">
+                            <Border Width="60" Height="60" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Center" >
                                 <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFBB2D2D"/>
                             </Border>
-                            <Label Content="{Binding Name}" Foreground="Goldenrod"/>
+                            <Label Content="{Binding Name}" HorizontalAlignment="Center"/>
+                            <Label Content="{Binding ValueInCopper}" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel/>
+                        <WrapPanel Width="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
             </ListView>
         </TabItem>
         <TabItem Header="List">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="Bisque"/>
+                <ListView Name="MainList" ItemsSource="{Binding}" Grid.Column="1"> 
 
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Height="70">
+                                <Label Content="{Binding Name}" HorizontalAlignment="Center"/>
+                                <Label Content="{Binding Family}"/>
+                                <Label Content="{Binding Category}"/>
+                                <Label Content="{Binding ValueInCopper}" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+
+                </ListView>
+            </Grid>
         </TabItem>
     </TabControl>
 </Window>

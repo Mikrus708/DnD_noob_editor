@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DnD.Equipment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,37 @@ namespace DnD
     {
         private int[] _atr = new int[6];
         private int[] _marks = new int[Enum.GetValues(typeof(Skill.Type)).Length];
-        public Hero() { }
+        public Hero()
+        {
+            Inventory = new List<Item>();
+        }
+        public int Speed { get; set; }
+        public List<Item> Inventory { get; }
+        public CreatureSize Size { get; set; }
+        public int MaxHealthPoints { get; set; }
+        public int CurrentHealthPoints { get; set; }
+        public int Bruise { get; set; }
+        public int Armor
+        {
+            get
+            {
+                return 10 + Atribute.GetModifcator(this[Atribute.Type.Dexterity]);
+            }
+        }
+        public int ArmorTouch
+        {
+            get
+            {
+                return 10 + Atribute.GetModifcator(this[Atribute.Type.Dexterity]);
+            }
+        }
+        public int ArmorUnprepared
+        {
+            get
+            {
+                return 10;
+            }
+        }
         public int this[Atribute.Type t]
         {
             get
@@ -34,5 +65,17 @@ namespace DnD
             }
         }
         public string Name { get; set; }
+    }
+    public enum CreatureSize
+    {
+        Fine,
+        Diminutive,
+        Tiny,
+        Small,
+        Medium,
+        Large,
+        Huge,
+        Gargantuan,
+        Colossal
     }
 }

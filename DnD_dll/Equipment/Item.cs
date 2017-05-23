@@ -12,7 +12,7 @@ namespace DnD.Equipment
         protected string _family;
         protected string _category;
         protected int _value;
-        public Item(string name, int value, string family = null, string category = null)
+        public Item(string name, int value = 0, string family = null, string category = null)
         {
             _name = name;
             _category = category;
@@ -37,6 +37,7 @@ namespace DnD.Equipment
         public int ValueInCopper
         {
             get { return _value; }
+            set { _value = value; }
         }
         public int SaleValueInCopper
         {
