@@ -17,9 +17,9 @@ namespace DnD_DM_Manager
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class EquipmentWindow : Window
     {
-        public Window1()
+        public EquipmentWindow()
         {
             InitializeComponent();
         }

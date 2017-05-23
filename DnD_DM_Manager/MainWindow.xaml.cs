@@ -24,5 +24,11 @@ namespace DnD_DM_Manager
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            EquipmentWindow eqw = new EquipmentWindow();
+            eqw.Show();
+        }
     }
 }

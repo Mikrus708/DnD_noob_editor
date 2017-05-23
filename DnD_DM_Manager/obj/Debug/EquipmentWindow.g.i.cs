@@ -38,7 +38,7 @@ namespace DnD_DM_Manager {
     /// <summary>
     /// Window1
     /// </summary>
-    public partial class Window1 : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+    public partial class EquipmentWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         private bool _contentLoaded;
         
