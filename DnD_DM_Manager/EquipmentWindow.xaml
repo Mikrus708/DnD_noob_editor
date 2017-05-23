@@ -9,13 +9,21 @@
     <TabControl>
         <TabItem Header="Grid">
             <ListView Name="MainGrid" ItemsSource="{Binding}">
+                <ListView.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF5D2049" Offset="0.217"/>
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF932E93" Offset="0.53"/>
+                        <GradientStop Color="#FF7B27C1" Offset="0.863"/>
+                    </RadialGradientBrush>
+                </ListView.Background>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Width="120" Height="100">
                             <Border Width="60" Height="60" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" >
-                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{Binding pic}"/>
+                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFBB2D2D"/>
                             </Border>
-                            <TextBlock Text="{Binding Name}"/>
+                            <Label Content="{Binding Name}" Foreground="Goldenrod"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
