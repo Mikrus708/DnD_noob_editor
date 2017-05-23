@@ -10,6 +10,10 @@ namespace DnD
     {
         private Coin[] coins = new Coin[4];
         public Pouch() { }
+        public void Add(Coin c)
+        {
+            coins[(int)c.Type] += c;
+        }
         public static Pouch operator+(Pouch p, Coin c)
         {
             p[c.Type] += c.Ammount;

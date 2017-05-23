@@ -11,11 +11,16 @@ namespace DnD
     {
         private int[] _atr = new int[6];
         private int[] _marks = new int[Enum.GetValues(typeof(Skill.Type)).Length];
+        private Pouch _pouch = new Pouch();
         public Hero()
         {
             Inventory = new List<Item>();
         }
         public int Speed { get; set; }
+        public Pouch Pouch
+        {
+            get { return _pouch; }
+        }
         public List<Item> Inventory { get; }
         public CreatureSize Size { get; set; }
         public int MaxHealthPoints { get; set; }
