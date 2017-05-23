@@ -5,46 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="Equipment" Height="500" Width="300">
+        Title="Equipment" Height="500" Width="300" MinHeight="350" MinWidth="200">
     <TabControl>
         <TabItem Header="Grid">
-            <Grid Background="#FF6E5B44" ShowGridLines="True">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-            </Grid>
+            <ListView Name="MainGrid" ItemsSource="{Binding}">
+                <ListView.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF5D2049" Offset="0.217"/>
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF932E93" Offset="0.53"/>
+                        <GradientStop Color="#FF7B27C1" Offset="0.863"/>
+                    </RadialGradientBrush>
+                </ListView.Background>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Width="120" Height="100">
+                            <Border Width="60" Height="60" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" >
+                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFBB2D2D"/>
+                            </Border>
+                            <Label Content="{Binding Name}" Foreground="Goldenrod"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
         </TabItem>
         <TabItem Header="List">
 
