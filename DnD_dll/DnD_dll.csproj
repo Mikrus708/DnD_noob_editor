@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ability.cs" />
+    <Compile Include="Atributes.cs" />
     <Compile Include="Coin.cs" />
     <Compile Include="Dice.cs" />
     <Compile Include="EpicSpell.cs" />

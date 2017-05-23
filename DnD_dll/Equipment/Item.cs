@@ -19,6 +19,21 @@ namespace DnD.Equipment
             _family = family;
             _value = value;
         }
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        public string Family
+        {
+            get { return _family; }
+            set { _family = value; }
+        }
+        public string Category
+        {
+            get { return _category; }
+            set { _category = value; }
+        }
         public int ValueInCopper
         {
             get { return _value; }
@@ -26,10 +41,6 @@ namespace DnD.Equipment
         public int SaleValueInCopper
         {
             get { return _value / 2; }
-        }
-        public enum Family
-        {
-
         }
     }
 }
