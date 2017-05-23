@@ -3,3 +3,8 @@ D:\Visual Studio\DnD\bin\Debug\DnD.pdb
 D:\Visual Studio\DnD\obj\Debug\DnD.csprojResolveAssemblyReference.cache
 D:\Visual Studio\DnD\obj\Debug\DnD.dll
 D:\Visual Studio\DnD\obj\Debug\DnD.pdb
+D:\Visual Studio\Source\DnD_noob_editor\DnD\bin\Debug\DnD.dll
+D:\Visual Studio\Source\DnD_noob_editor\DnD\bin\Debug\DnD.pdb
+D:\Visual Studio\Source\DnD_noob_editor\DnD\obj\Debug\DnD.csprojResolveAssemblyReference.cache
+D:\Visual Studio\Source\DnD_noob_editor\DnD\obj\Debug\DnD.dll
+D:\Visual Studio\Source\DnD_noob_editor\DnD\obj\Debug\DnD.pdb
