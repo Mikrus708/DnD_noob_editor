@@ -1,0 +1,5 @@
+D:\Visual Studio\Source\DnD_noob_editor\DnD_dll\bin\Debug\DnD.dll
+D:\Visual Studio\Source\DnD_noob_editor\DnD_dll\bin\Debug\DnD.pdb
+D:\Visual Studio\Source\DnD_noob_editor\DnD_dll\obj\Debug\DnD_dll.csprojResolveAssemblyReference.cache
+D:\Visual Studio\Source\DnD_noob_editor\DnD_dll\obj\Debug\DnD.dll
+D:\Visual Studio\Source\DnD_noob_editor\DnD_dll\obj\Debug\DnD.pdb

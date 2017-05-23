@@ -28,3 +28,7 @@ C:\Users\Remi\Source\Repos\t\DnD_noob_editor\DnD_DM_Manager\obj\Debug\EquipmentW
 C:\Users\Remi\Source\Repos\t\DnD_noob_editor\DnD_DM_Manager\obj\Debug\DnD_DM_Manager.g.resources
 C:\Users\Remi\Source\Repos\t\DnD_noob_editor\DnD_DM_Manager\obj\Debug\DnD_DM_Manager.Properties.Resources.resources
 C:\Users\Remi\Source\Repos\t\DnD_noob_editor\DnD_DM_Manager\obj\Debug\DnD_DM_Manager.csproj.GenerateResource.Cache
+D:\Visual Studio\Source\DnD_noob_editor\DnD_DM_Manager\bin\Debug\DnD.dll
+D:\Visual Studio\Source\DnD_noob_editor\DnD_DM_Manager\bin\Debug\DnD.pdb
+D:\Visual Studio\Source\DnD_noob_editor\DnD_DM_Manager\obj\Debug\EquipmentWindow.g.cs
+D:\Visual Studio\Source\DnD_noob_editor\DnD_DM_Manager\obj\Debug\EquipmentWindow.baml
