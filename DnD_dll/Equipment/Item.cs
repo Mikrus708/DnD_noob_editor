@@ -13,6 +13,7 @@ namespace DnD.Equipment
         protected string _category;
         protected int _value;
         protected string _comment;
+
         public Item(string name, int value = 0, string family = null, string category = null)
         {
             _name = name;

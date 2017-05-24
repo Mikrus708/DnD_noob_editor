@@ -24,34 +24,40 @@ namespace DnD_DM_Manager
         List<Item> lista;
         public double TotalWeight
         {
+            get { return _inv.TotalWeight; }
+        }
+        public double TotalWeightTmp
+        {
             get { return 12.73; }
         }
+        private Inventory _inv;
+        private List<Inventory> _otherInventories = new List<Inventory>();
+
+
         public EquipmentWindow()
         {
             InitializeComponent();
 
 #warning usuń to gówno
             lista = SomeThings.list();
-
+            _inv = new Inventory();
 
             DataContext = lista;
             //DataContext = SomeThings.list();
         }
-
-        public EquipmentWindow(List<Item> eq)
+#warning jakiś fajny pomysł na przesyłanie między ekwipunkami poza drag&dropem? Nie chce mi się nad nim na razie pracować;
+        public EquipmentWindow(Inventory inv, List<Inventory> allInventories)
         {
             InitializeComponent();
-
-
-# warning usuń to gówno
-            lista = SomeThings.list();
-
-
-            DataContext = lista;
+            _otherInventories.AddRange(allInventories);
+            _otherInventories.Remove(inv);
+            _inv = inv;
+            DataContext = inv.Bag;
         }
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Not implemented yet. It'll just change the button color", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             Color c = new Color();
             c.A = 255;
             Random R = new Random();
@@ -61,10 +67,21 @@ namespace DnD_DM_Manager
             (sender as Button).Background = new SolidColorBrush(c);
         }
 
-        private void Button_IsMouseCapturedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void Remove_Item(object sender, RoutedEventArgs e)
         {
-
+            if(TabPanel.SelectedIndex == 0)
+                foreach (Item i in MainGrid.SelectedItems)
+                    _inv.Bag.Remove(i);
+            else if (TabPanel.SelectedIndex == 1)
+                foreach (Item i in MainList.SelectedItems)
+                    _inv.Bag.Remove(i);
+            MainGrid.Items.Refresh();
+            MainList.Items.Refresh();
         }
+        //private void Button_IsMouseCapturedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+
+        //}
     }
 
     public static class SomeThings

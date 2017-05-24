@@ -15,6 +15,7 @@ namespace DnD
         public Hero()
         {
             Inventory = new List<Item>();
+            
         }
         public int Speed { get; set; }
         public Pouch Pouch

@@ -30,5 +30,11 @@ namespace DnD_DM_Manager
             EquipmentWindow eqw = new EquipmentWindow();
             eqw.Show();
         }
+
+        private void Box1_Click(object sender, RoutedEventArgs e)
+        {
+            EquipmentWindow eqw = new EquipmentWindow(new DnD.Inventory(new DnD.Hero(), new DnD.Pouch(), SomeThings.list2()), new List<DnD.Inventory>());
+            eqw.Show();
+        }
     }
 }

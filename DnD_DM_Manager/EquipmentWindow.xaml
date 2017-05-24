@@ -12,7 +12,7 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        <TabControl>
+        <TabControl Name="TabPanel">
             <TabItem Header="Grid">
                 <ListView Name="MainGrid" ItemsSource="{Binding}">
 
@@ -63,7 +63,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <Button Width="80" Click="Add_New_Item" Content="Add"/>
-            <Button Width="80" Click="Add_New_Item" Content="Remove"/>
+            <Button Width="80" Click="Remove_Item" Content="Remove"/>
             <Button Width="80" Click="Add_New_Item" Content="Give"/>
 
 
