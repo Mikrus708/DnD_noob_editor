@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnD_DM_Manager", "DnD_DM_Manager\DnD_DM_Manager.csproj", "{EAB3EEAD-58BF-4F6B-9904-7D2EAE5843A5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B45EEA76-1942-45B2-9BCD-FA8C0631D389} = {B45EEA76-1942-45B2-9BCD-FA8C0631D389}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnD_dll", "DnD_dll\DnD_dll.csproj", "{B45EEA76-1942-45B2-9BCD-FA8C0631D389}"
 EndProject
