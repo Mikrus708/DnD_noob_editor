@@ -10,11 +10,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <TabControl Name="TabPanel">
             <TabItem Header="Grid">
-                <ListView Name="MainGrid" ItemsSource="{Binding}">
+                <ListView Name="MainGrid" ItemsSource="{Binding Inventory.Bag}">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -42,7 +42,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Rectangle Fill="Bisque"/>
-                    <ListView Name="MainList" ItemsSource="{Binding}" Grid.Column="1">
+                    <ListView Name="MainList" ItemsSource="{Binding Inventory.Bag}" Grid.Column="1">
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -68,9 +68,11 @@
 
 
         </StackPanel>
-        <StackPanel Grid.Row="2" Background="LightGray">
-            <Label Content="Total Weight: "/>
-            <!--<Label Content="{Binding RelativeSource=EqWnd, Path=Weight }"/>-->
+        <StackPanel Grid.Row="2" Background="LightGray" Orientation="Horizontal">
+            <Label Content="Total weight: "/>
+            <Label Content="{Binding Inventory.TotalWeight}" />
+            <Label Content="Total value: "/>
+            <Label Content="{Binding Inventory.TotalValue}" />
         </StackPanel>
 
     </Grid>

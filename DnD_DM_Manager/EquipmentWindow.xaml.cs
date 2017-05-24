@@ -19,20 +19,19 @@ namespace DnD_DM_Manager
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class EquipmentWindow : Window
+    public partial class EquipmentWindow : Window 
     {
         List<Item> lista;
-        public double TotalWeight
-        {
-            get { return _inv.TotalWeight; }
-        }
-        public double TotalWeightTmp
-        {
-            get { return 12.73; }
-        }
+
         private Inventory _inv;
         private List<Inventory> _otherInventories = new List<Inventory>();
 
+
+
+        public Inventory Inventory
+        {
+            get { return _inv; }
+        }
 
         public EquipmentWindow()
         {
@@ -40,9 +39,9 @@ namespace DnD_DM_Manager
 
 #warning usuń to gówno
             lista = SomeThings.list();
-            _inv = new Inventory();
+            _inv = new Inventory(lista);
 
-            DataContext = lista;
+            DataContext = this;
             //DataContext = SomeThings.list();
         }
 #warning jakiś fajny pomysł na przesyłanie między ekwipunkami poza drag&dropem? Nie chce mi się nad nim na razie pracować;
@@ -52,7 +51,8 @@ namespace DnD_DM_Manager
             _otherInventories.AddRange(allInventories);
             _otherInventories.Remove(inv);
             _inv = inv;
-            DataContext = inv.Bag;
+            //DataContext = _inv.Bag;
+            this.DataContext = this;
         }
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
@@ -69,6 +69,7 @@ namespace DnD_DM_Manager
 
         private void Remove_Item(object sender, RoutedEventArgs e)
         {
+#warning potrzebuje hinta odnośnie odświeżania labeli
             if(TabPanel.SelectedIndex == 0)
                 foreach (Item i in MainGrid.SelectedItems)
                     _inv.Bag.Remove(i);
@@ -78,10 +79,6 @@ namespace DnD_DM_Manager
             MainGrid.Items.Refresh();
             MainList.Items.Refresh();
         }
-        //private void Button_IsMouseCapturedChanged(object sender, DependencyPropertyChangedEventArgs e)
-        //{
-
-        //}
     }
 
     public static class SomeThings
@@ -103,14 +100,14 @@ namespace DnD_DM_Manager
         public static List<Item> list2()
         {
             var ret = new List<Item>();
-            ret.Add(new Item("Trawa", 20, "Family Rzepiński", "cat"));
-            ret.Add(new Item("Bieda", 20, "Family", "bron"));
-            ret.Add(new Item("Kamień", 50, "Family Remiszewski"));
-            ret.Add(new Item("Kula do kręgli", 120, "sth", "superItem"));
-            ret.Add(new Item("Kapusta", 40, "blah"));
-            ret.Add(new Item("Półtoraręczny telefon", 5520));
-            ret.Add(new Item("Szklanka z wódką ", 320, "fdfd"));
-            ret.Add(new Item("Drzewo", 12320));
+            ret.Add(new Item("Trawa", 40, "Family Rzepiński", "cat"));
+            ret.Add(new Item("Bieda", -100, "Family", "bron"));
+            ret.Add(new Item("Kamień", 0, "Family Remiszewski"));
+            ret.Add(new Item("Kula do kręgli", 150, "sth", "superItem"));
+            ret.Add(new Item("Kapusta", 30, "blah"));
+            ret.Add(new Item("Półtoraręczny telefon", 5000));
+            ret.Add(new Item("Szklanka z wódką ", 700, "fdfd"));
+            ret.Add(new Item("Drzewo", 1));
             return ret;
         }
     }

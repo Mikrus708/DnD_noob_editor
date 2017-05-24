@@ -14,9 +14,11 @@ namespace DnD
         private List<DnD.Equipment.Item> _itemList = new List<DnD.Equipment.Item>();
 
 
-        public Inventory()
+        public Inventory(List<Equipment.Item> l= null)
         {
             Owner = default(Hero);
+            if (l != null)
+                _itemList = l;
         }
 
         public Inventory(Hero h, Pouch p, List<Equipment.Item> l )
@@ -25,6 +27,7 @@ namespace DnD
             _pouch = p;
             _itemList = l; 
         }
+
 
         public string Description { get; set; }
 
