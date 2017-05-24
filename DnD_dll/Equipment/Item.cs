@@ -12,6 +12,7 @@ namespace DnD.Equipment
         protected string _family;
         protected string _category;
         protected int _value;
+        protected string _comment;
         public Item(string name, int value = 0, string family = null, string category = null)
         {
             _name = name;
@@ -19,6 +20,14 @@ namespace DnD.Equipment
             _family = family;
             _value = value;
         }
+        public string Comment
+        {
+            get { return _comment; }
+        }
+        /// <summary>
+        /// Waga w 0.01 kg
+        /// </summary>
+        public int Weight { get; set; }
         public string Name
         {
             get { return _name; }
