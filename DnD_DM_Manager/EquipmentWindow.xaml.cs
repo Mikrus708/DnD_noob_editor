@@ -22,6 +22,10 @@ namespace DnD_DM_Manager
     public partial class EquipmentWindow : Window
     {
         List<Item> lista;
+        public double TotalWeight
+        {
+            get { return 12.73; }
+        }
         public EquipmentWindow()
         {
             InitializeComponent();

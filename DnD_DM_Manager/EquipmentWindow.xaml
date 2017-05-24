@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="Equipment" Height="500" Width="350" MinHeight="350" MinWidth="200" >
+        Title="Equipment" Height="500" Width="350" MinHeight="350" MinWidth="200" Name="EqWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="80"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <TabControl>
             <TabItem Header="Grid">
@@ -61,10 +62,16 @@
         </TabControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Width="60" Click="Add_New_Item" Content="Add">
-            </Button>
+            <Button Width="80" Click="Add_New_Item" Content="Add"/>
+            <Button Width="80" Click="Add_New_Item" Content="Remove"/>
+            <Button Width="80" Click="Add_New_Item" Content="Give"/>
+
 
         </StackPanel>
-        
+        <StackPanel Grid.Row="2" Background="LightGray">
+            <Label Content="Total Weight: "/>
+            <!--<Label Content="{Binding RelativeSource=EqWnd, Path=Weight }"/>-->
+        </StackPanel>
+
     </Grid>
 </Window>
