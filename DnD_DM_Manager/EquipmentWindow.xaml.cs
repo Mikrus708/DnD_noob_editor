@@ -29,6 +29,8 @@ namespace DnD_DM_Manager
         public EquipmentWindow()
         {
             InitializeComponent();
+
+#warning usuń to gówno
             lista = SomeThings.list();
 
 
