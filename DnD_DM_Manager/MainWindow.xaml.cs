@@ -20,9 +20,13 @@ namespace DnD_DM_Manager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
+
+    
     public partial class MainWindow : Window
     {
         ObservableCollection<Hero> heros;
+        public static List<DnD.Inventory> lista = new List<DnD.Inventory> { new DnD.Inventory(SomeThings.list2(), "Box1"), new DnD.Inventory(SomeThings.list(), "Box2"), new DnD.Inventory(SomeThings.list(), "Box3") };
         public MainWindow()
         {
             InitializeComponent();
@@ -34,15 +38,28 @@ namespace DnD_DM_Manager
             this.DataContext = heros;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Box3_Click(object sender, RoutedEventArgs e)
         {
-            EquipmentWindow eqw = new EquipmentWindow();
+            EquipmentWindow eqw = new EquipmentWindow(lista[2], lista);
+            eqw.Show();
+        }
+
+        private void Box2_Click(object sender, RoutedEventArgs e)
+        {
+            EquipmentWindow eqw = new EquipmentWindow(lista[1], lista);
             eqw.Show();
         }
 
         private void Box1_Click(object sender, RoutedEventArgs e)
         {
-            EquipmentWindow eqw = new EquipmentWindow(new DnD.Inventory(new DnD.Hero(), new DnD.Pouch(), SomeThings.list2()), new List<DnD.Inventory>());
+            EquipmentWindow eqw = new EquipmentWindow(lista[0],lista);
+            eqw.Show();
+        }
+
+        private void RandomBox_Click(object sender, RoutedEventArgs e)
+        {
+#warning blah
+            EquipmentWindow eqw = new EquipmentWindow(lista[1], lista);
             eqw.Show();
         }
     }

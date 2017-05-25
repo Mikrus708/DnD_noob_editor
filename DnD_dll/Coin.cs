@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DnD
 {
     public struct Coin
     {
-        public readonly CoinType Type;
+        [XmlAttribute("Type"), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public CoinType _Type;
+        [XmlAttribute("Ammount")]
         public int Ammount;
-        public Coin(CoinType Type, int Ammount = 0)
+        public Coin(CoinType Type = CoinType.Copper, int Ammount = 0)
         {
-            this.Type = Type;
+            _Type = Type;
             this.Ammount = Ammount;
         }
         public static Coin operator+(Coin c1, Coin c2)
@@ -43,14 +47,21 @@ namespace DnD
         {
             return $"{Ammount} {Type} coins";
         }
+        [XmlIgnore]
+        public CoinType Type
+        {
+            get { return _Type; }
+        }
         public override int GetHashCode()
         {
             return Ammount.GetHashCode() ^ Type.GetHashCode();
         }
+        [XmlIgnore]
         public int Weight
         {
             get { return Ammount * 10; }
         }
+        [XmlIgnore]
         public int ValueInCopper
         {
             get
