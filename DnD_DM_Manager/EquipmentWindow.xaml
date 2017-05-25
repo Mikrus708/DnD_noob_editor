@@ -74,8 +74,6 @@
             <Label Content="{Binding TotalWeight}" />
             <Label Content="Total value: "/>
             <Label Content="{Binding TotalValue}" />
-            <Label Content="SomeValue: "/>
-            <Label Content="{Binding someText}"/>
         </StackPanel>
 
     </Grid>

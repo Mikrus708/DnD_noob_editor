@@ -24,6 +24,7 @@ namespace DnD.Equipment
         public string Comment
         {
             get { return _comment; }
+            set { _comment = value; }
         }
         /// <summary>
         /// Waga w 0.01 kg

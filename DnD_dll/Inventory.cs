@@ -33,6 +33,7 @@ namespace DnD
         private void _itemList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             NotifyPropertyChanged("TotalValue");
+            NotifyPropertyChanged("TotalWeight");
         }
 
         public Inventory(Hero h, Pouch p, List<Equipment.Item> l )
