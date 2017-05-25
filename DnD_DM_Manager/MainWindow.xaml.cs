@@ -25,17 +25,19 @@ namespace DnD_DM_Manager
     
     public partial class MainWindow : Window
     {
-        ObservableCollection<Hero> heros;
+        ObservableCollection<Hero> heroes;
         public static List<DnD.Inventory> lista = new List<DnD.Inventory> { new DnD.Inventory(SomeThings.list2(), "Box1"), new DnD.Inventory(SomeThings.list(), "Box2"), new DnD.Inventory(SomeThings.list(), "Box3") };
         public MainWindow()
         {
             InitializeComponent();
-            heros = new ObservableCollection<Hero>();
+            heroes = new ObservableCollection<Hero>();
             Hero rogue = new Hero{ Name = "Naeli", Size = CreatureSize.Medium, Speed = 10, MaxHealthPoints = 11, CurrentHealthPoints = 11 };
-            Hero warrior = new Hero{ Name = "Finto", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 15, CurrentHealthPoints = 15 };
-            heros.Add(rogue);
-            heros.Add(warrior);
-            this.DataContext = heros;
+            Hero druid = new Hero{ Name = "Finto", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 15, CurrentHealthPoints = 15 };
+            Hero hunter = new Hero{ Name = "Arato", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 17, CurrentHealthPoints = 13 };
+            heroes.Add(rogue);
+            heroes.Add(druid);
+            heroes.Add(hunter);
+            this.DataContext = heroes;
         }
 
         private void Box3_Click(object sender, RoutedEventArgs e)
