@@ -48,7 +48,7 @@ namespace DnD_DM_Manager
             _item.Name = name;
             _item.Weight = weight;
             _item.ValueInCopper = value;
-            _item.Comment = desc;
+            _item.Description = desc;
             this.DialogResult = true;
             this.Close();
         }
