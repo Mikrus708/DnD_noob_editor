@@ -86,8 +86,8 @@ namespace DnD_DM_Manager
             else if (TabPanel.SelectedIndex == 1)
                 foreach (Item i in MainList.SelectedItems)
                     _inv.RemoveItem(i);
-            //MainGrid.Items.Refresh();
-            //MainList.Items.Refresh();
+            MainGrid.Items.Refresh();
+            MainList.Items.Refresh();
         }
         private void Give_Item(object sender, RoutedEventArgs e)
         {

@@ -1,0 +1,4 @@
+C:\Users\Remi\Source\Repos\t\DnD_noob_editor\DnD_dll\bin\Debug\DnD.dll
+C:\Users\Remi\Source\Repos\t\DnD_noob_editor\DnD_dll\bin\Debug\DnD.pdb
+C:\Users\Remi\Source\Repos\t\DnD_noob_editor\DnD_dll\obj\Debug\DnD.dll
+C:\Users\Remi\Source\Repos\t\DnD_noob_editor\DnD_dll\obj\Debug\DnD.pdb
