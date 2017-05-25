@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DnD;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,16 @@ namespace DnD_DM_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<Hero> heros;
         public MainWindow()
         {
             InitializeComponent();
+            heros = new ObservableCollection<Hero>();
+            Hero rogue = new Hero{ Name = "Naeli", Size = CreatureSize.Medium, Speed = 10, MaxHealthPoints = 11, CurrentHealthPoints = 11 };
+            Hero warrior = new Hero{ Name = "Finto", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 15, CurrentHealthPoints = 15 };
+            heros.Add(rogue);
+            heros.Add(warrior);
+            this.DataContext = heros;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
