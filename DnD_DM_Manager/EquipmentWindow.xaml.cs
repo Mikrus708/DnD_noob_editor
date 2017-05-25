@@ -68,20 +68,24 @@ namespace DnD_DM_Manager
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Not implemented yet. It'll just change the button color", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            Color c = new Color();
-            c.A = 255;
-            Random R = new Random();
-            c.B = (byte)R.Next(0, 255);
-            c.G = (byte)R.Next(0, 255);
-            c.R = (byte)R.Next(0, 255);
-            (sender as Button).Background = new SolidColorBrush(c);
-            _inv.someText = R.Next(10000, 1000000).ToString();
+            //MessageBox.Show("Not implemented yet. It'll just change the button color", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //Color c = new Color();
+            //c.A = 255;
+            //Random R = new Random();
+            //c.B = (byte)R.Next(0, 255);
+            //c.G = (byte)R.Next(0, 255);
+            //c.R = (byte)R.Next(0, 255);
+            //(sender as Button).Background = new SolidColorBrush(c);
+            //_inv.someText = R.Next(10000, 1000000).ToString();
+            Item it = new Item("");
+            NewItemForm wnd = new NewItemForm(ref it);
+            if(wnd.ShowDialog() == true)
+                _inv.AddItem(it);
+
         }
 
         private void Remove_Item(object sender, RoutedEventArgs e)
         {
-#warning potrzebuje hinta odnośnie odświeżania labeli (INotifyPropertyChange)
             int lim = 0;
             if (TabPanel.SelectedIndex == 0)
             {
