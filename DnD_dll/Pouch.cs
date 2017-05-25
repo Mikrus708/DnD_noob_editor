@@ -1,15 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DnD
 {
-    public class Pouch
+    public class Pouch : INotifyPropertyChanged
     {
-        private Coin[] coins = new Coin[4];
-        public Pouch() { }
+        private Coin[] coins;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public Pouch()
+        {
+            coins = new Coin[4];
+            for (int i = 0; i < 4; ++i)
+            {
+                coins[i] = new Coin((CoinType)i);
+            }
+        }
+        protected void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private void Changes()
+        {
+            NotifyPropertyChanged("Coins");
+            NotifyPropertyChanged("ValueInCopper");
+            NotifyPropertyChanged("Weight");
+        }
         public void Add(Coin c)
         {
             coins[(int)c.Type] += c;
@@ -17,6 +38,7 @@ namespace DnD
         public static Pouch operator+(Pouch p, Coin c)
         {
             p[c.Type] += c.Ammount;
+            p.Changes();
             return p;
         }
         public static Pouch operator-(Pouch p, Coin c)
@@ -24,8 +46,27 @@ namespace DnD
             if (p[c.Type] < c.Ammount)
                 throw new Exception("Za malo monet danego typu");
             p[c.Type] -= c.Ammount;
+            p.Changes();
             return p;
         }
+        [XmlElement("Coin"), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public Coin[] List
+        {
+            get { return coins; }
+            set { coins = value; }
+        }
+        public IEnumerable<Coin> Coins
+        {
+            get
+            {
+                foreach (Coin c in coins)
+                {
+                    yield return c;
+                }
+                yield break;
+            }
+        }
+        [XmlIgnore]
         public int ValueInCopper
         {
             get
@@ -33,6 +74,7 @@ namespace DnD
                 return coins.Aggregate(0, (sum, coin) => sum + coin.ValueInCopper);
             }
         }
+        [XmlIgnore]
         public int Weight
         {
             get
@@ -66,6 +108,7 @@ namespace DnD
             set
             {
                 coins[(int)type].Ammount = value;
+                Changes();
             }
         }
     }

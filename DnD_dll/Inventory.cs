@@ -18,9 +18,9 @@ namespace DnD
         private string _sometext;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public Inventory(List<Equipment.Item> l= null, string name=null)
+        public Inventory(List<Item> l= null, string name=null)
         {
+            _pouch.PropertyChanged += _pouch_PropertyChanged;
             _itemList.CollectionChanged += _itemList_CollectionChanged;
             Name = name;
             Owner = default(Hero);
@@ -29,15 +29,22 @@ namespace DnD
                     _itemList.Add(x);
             _sometext = "blah";
         }
-
-        private void _itemList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void changes()
         {
             NotifyPropertyChanged("TotalValue");
             NotifyPropertyChanged("TotalWeight");
         }
-
-        public Inventory(Hero h, Pouch p, List<Equipment.Item> l )
+        private void _pouch_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            changes();
+        }
+        private void _itemList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            changes();
+        }
+        public Inventory(Hero h, Pouch p, List<Item> l )
+        {
+            _pouch.PropertyChanged += _pouch_PropertyChanged;
             Owner = h;
             _pouch = p;
             if (l != null)
@@ -45,42 +52,30 @@ namespace DnD
                     _itemList.Add(x);
             _sometext = "blah";
         }
-
         public string someText
         {
             get { return _sometext; }
-            set { _sometext = value; //NotifyPropertyChanged("someText"); 
-            }
+            set { _sometext = value; }
         }
-
         public string Description { get; set; }
-
         public Pouch Pouch
         {
-            get {  //NotifyPropertyChanged("Pouch"); 
-                return _pouch; }
+            get { return _pouch; }
         }
-
         public ObservableCollection<Item> Bag
         {
-            get {  //NotifyPropertyChanged("Bag");
-                return _itemList; }
+            get { return _itemList; }
         }
         protected void NotifyPropertyChanged( string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public string Name { get; set; }
-
         public Hero Owner { get; set; }
-
-        public void AddItem(Equipment.Item item)
+        public void AddItem(Item item)
         {
             _itemList.Add(item);
-
         }
-
         public int TotalWeight
         {
             get { return _itemList.Sum(x => x.Weight) + Pouch.Weight; }
@@ -93,10 +88,8 @@ namespace DnD
         {
             return Name;
         }
-
         public void RemoveItem(Item i)
         {
-
             _itemList.Remove(i);
         }
     }
