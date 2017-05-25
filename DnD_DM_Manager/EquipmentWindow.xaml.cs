@@ -63,6 +63,7 @@ namespace DnD_DM_Manager
             //    ComboList.Add(x.Name);
             Title = inv.ToString();
             this.DataContext = this;
+            sta.DataContext = Inventory;
         }
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
@@ -75,41 +76,65 @@ namespace DnD_DM_Manager
             c.G = (byte)R.Next(0, 255);
             c.R = (byte)R.Next(0, 255);
             (sender as Button).Background = new SolidColorBrush(c);
+            _inv.someText = R.Next(10000, 1000000).ToString();
         }
 
         private void Remove_Item(object sender, RoutedEventArgs e)
         {
 #warning potrzebuje hinta odnośnie odświeżania labeli (INotifyPropertyChange)
-            if(TabPanel.SelectedIndex == 0)
-                foreach (Item i in MainGrid.SelectedItems)
-                    _inv.RemoveItem(i);
+            int lim = 0;
+            if (TabPanel.SelectedIndex == 0)
+            {
+                lim = MainGrid.SelectedItems.Count;
+                for (int i = 0; i < lim; ++i)
+                    _inv.RemoveItem(MainGrid.SelectedItems[0] as Item);
+            }
+            //foreach (Item i in MainGrid.SelectedItems)
+            //_inv.RemoveItem(i);
+            //_inv.Bag.Remove(i);
             else if (TabPanel.SelectedIndex == 1)
-                foreach (Item i in MainList.SelectedItems)
-                    _inv.RemoveItem(i);
-            MainGrid.Items.Refresh();
-            MainList.Items.Refresh();
+            {
+                lim = MainList.SelectedItems.Count;
+                for (int i = 0; i < lim; ++i)
+                    _inv.RemoveItem(MainList.SelectedItems[0] as Item);
+            }
+
+
+            //MainGrid.Items.Refresh();
+            //MainList.Items.Refresh();
         }
         private void Give_Item(object sender, RoutedEventArgs e)
         {
             Inventory To = ComboInv.SelectedItem as Inventory;
 
+            int lim = 0;
             if (TabPanel.SelectedIndex == 0)
-                foreach (Item i in MainGrid.SelectedItems)
+            {
+                lim = MainGrid.SelectedItems.Count;
+                for (int i = 0; i < lim; ++i)
                 {
-                    _inv.RemoveItem(i);
-                    To.AddItem(i);
+                    To.AddItem(MainGrid.SelectedItems[0] as Item);
+                    _inv.RemoveItem(MainGrid.SelectedItems[0] as Item);
+                    
                 }
+            }
+            //foreach (Item i in MainGrid.SelectedItems)
+            //_inv.RemoveItem(i);
+            //_inv.Bag.Remove(i);
             else if (TabPanel.SelectedIndex == 1)
-                foreach (Item i in MainList.SelectedItems)
+            {
+                lim = MainList.SelectedItems.Count;
+                for (int i = 0; i < lim; ++i)
                 {
-                    _inv.RemoveItem(i);
-                    To.AddItem(i);
+                    To.AddItem(MainList.SelectedItems[0] as Item);
+                    _inv.RemoveItem(MainList.SelectedItems[0] as Item);
                 }
+            }
 
 
 
-            MainGrid.Items.Refresh();
-            MainList.Items.Refresh();
+            //MainGrid.Items.Refresh();
+            //MainList.Items.Refresh();
         }
 
     }

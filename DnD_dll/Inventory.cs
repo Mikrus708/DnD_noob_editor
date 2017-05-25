@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DnD.Equipment;
+using System.Collections.ObjectModel;
 
 namespace DnD
 {
@@ -13,25 +14,43 @@ namespace DnD
     public class Inventory : INotifyPropertyChanged
     {
         private Pouch _pouch = new Pouch();
-        private List<DnD.Equipment.Item> _itemList = new List<DnD.Equipment.Item>();
+        private ObservableCollection<Item> _itemList = new ObservableCollection<Item>();
+        private string _sometext;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Inventory(List<Equipment.Item> l= null, string name=null)
         {
+            _itemList.CollectionChanged += _itemList_CollectionChanged;
             Name = name;
             Owner = default(Hero);
             if (l != null)
-                _itemList = l;
+                foreach (var x in l)
+                    _itemList.Add(x);
+            _sometext = "blah";
+        }
+
+        private void _itemList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            NotifyPropertyChanged("TotalValue");
         }
 
         public Inventory(Hero h, Pouch p, List<Equipment.Item> l )
         {
             Owner = h;
             _pouch = p;
-            _itemList = l; 
+            if (l != null)
+                foreach (var x in l)
+                    _itemList.Add(x);
+            _sometext = "blah";
         }
 
+        public string someText
+        {
+            get { return _sometext; }
+            set { _sometext = value; //NotifyPropertyChanged("someText"); 
+            }
+        }
 
         public string Description { get; set; }
 
@@ -41,12 +60,10 @@ namespace DnD
                 return _pouch; }
         }
 
-        public List<Equipment.Item> Bag
+        public ObservableCollection<Item> Bag
         {
             get {  //NotifyPropertyChanged("Bag");
                 return _itemList; }
-
-            
         }
         protected void NotifyPropertyChanged( string propertyName)
         {
@@ -60,7 +77,7 @@ namespace DnD
         public void AddItem(Equipment.Item item)
         {
             _itemList.Add(item);
-            NotifyPropertyChanged("Bag");
+
         }
 
         public int TotalWeight
@@ -80,7 +97,6 @@ namespace DnD
         {
 
             _itemList.Remove(i);
-            NotifyPropertyChanged("Bag");
         }
     }
 }

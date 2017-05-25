@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="Equipment" Height="500" Width="350" MinHeight="350" MinWidth="200" Name="EqWnd">
+        Title="Equipment" Height="500" Width="450" MinHeight="350" MinWidth="200" Name="EqWnd" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -69,11 +69,13 @@
                 <ComboBox Name="ComboInv" ItemsSource="{Binding ComboList}" Width="Auto" Height="30"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="2" Background="LightGray" Orientation="Horizontal">
+        <StackPanel x:Name="sta" Grid.Row="2" Background="LightGray" Orientation="Horizontal" DataContext="{Binding Inventory}">
             <Label Content="Total weight: "/>
-            <Label Content="{Binding Inventory.TotalWeight}" />
+            <Label Content="{Binding TotalWeight}" />
             <Label Content="Total value: "/>
-            <Label Content="{Binding Inventory.TotalValue}" />
+            <Label Content="{Binding TotalValue}" />
+            <Label Content="SomeValue: "/>
+            <Label Content="{Binding someText}"/>
         </StackPanel>
 
     </Grid>
