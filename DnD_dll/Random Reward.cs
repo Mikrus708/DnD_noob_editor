@@ -100,6 +100,7 @@ namespace DnD
                     else                { roll = Dice.Roll(Dice.Type.k3); for (int i = 0; i < roll; i++) items.Add(new Item("Słaby przedmiot magiczny")); }
                     break;
                 case 6:
+
                     break;
                 case 7:
                     break;
