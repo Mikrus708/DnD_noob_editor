@@ -41,6 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Barbarian.cs" />
+    <Compile Include="Classes\Bard.cs" />
+    <Compile Include="Classes\Druid.cs" />
+    <Compile Include="Classes\HeroClass.cs" />
+    <Compile Include="Classes\Monk.cs" />
+    <Compile Include="Classes\Paladin.cs" />
+    <Compile Include="Classes\Priest.cs" />
+    <Compile Include="Classes\Ranger.cs" />
+    <Compile Include="Classes\Rouge.cs" />
+    <Compile Include="Classes\Sorcerer.cs" />
+    <Compile Include="Classes\Warrior.cs" />
+    <Compile Include="Classes\Wizard.cs" />
     <Compile Include="Damage.cs" />
     <Compile Include="EasyXML.cs" />
     <Compile Include="Inventory.cs" />
