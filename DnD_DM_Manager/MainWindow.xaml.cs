@@ -1,4 +1,6 @@
 ﻿using DnD;
+using DnD.Classes;
+using DnD.Races;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,15 +33,15 @@ namespace DnD_DM_Manager
         {
             InitializeComponent();
             heroes = new ObservableCollection<Hero>();
-            Hero rogue = new Hero{ Name = "Naeli", Age=110, Class="Rogue", EyesColor=Colors.Blue.ToString(), HairColor=Colors.Brown.ToString(), Height=155, Weight=40, PlayerName="Ania", Race="Elf", Sex="Female" , Size = CreatureSize.Medium, Speed = 10, MaxHealthPoints = 11, CurrentHealthPoints = 11 };
+            Hero rogue = new Hero{ Name = "Naeli", Age=110, Class = Rouge.Instance, EyesColor=Colors.Blue.ToString(), HairColor=Colors.Brown.ToString(), Height=155, Weight=40, PlayerName="Ania", Race= Elf.Instance, Sex="Female" , Size = CreatureSize.Medium, Speed = 10, MaxHealthPoints = 11, CurrentHealthPoints = 11 };
             rogue[Atribute.Type.Strength] = 12;
             rogue[Atribute.Type.Dexterity] = 12;
             for (int i=0; i<6; i++)
             {
                 //Grid.SetColumn()
             }
-            Hero druid = new Hero{ Name = "Finto", Class = "Druid", EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 170, Weight = 70, PlayerName = "Michał", Race = "Human", Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 15, CurrentHealthPoints = 15 };
-            Hero hunter = new Hero{ Name = "Arato", Class = "Hunter", EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 165, Weight = 50, PlayerName = "Michał", Race = "Elf", Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 17, CurrentHealthPoints = 13 };
+            Hero druid = new Hero{ Name = "Finto", Class = Druid.Instance, EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 170, Weight = 70, PlayerName = "Michał", Race = Human.Instance, Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 15, CurrentHealthPoints = 15 };
+            Hero hunter = new Hero{ Name = "Arato", Class = Ranger.Instance, EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 165, Weight = 50, PlayerName = "Michał", Race = Elf.Instance, Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 17, CurrentHealthPoints = 13 };
             heroes.Add(rogue);
             heroes.Add(druid);
             heroes.Add(hunter);
