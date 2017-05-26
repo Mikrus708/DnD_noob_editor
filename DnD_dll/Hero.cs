@@ -7,24 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace DnD
 {
-    public class Hero
+    public class Hero : IXmlSerializable
     {
         private int[] _atr = new int[6];
         private int[] _marks = new int[Enum.GetValues(typeof(Skill.Type)).Length];
-        private Pouch _pouch = new Pouch();
         public Hero()
         {
-            Inventory = new List<Item>();
+            Inventory = new Inventory();
+            Inventory.Name = $"Inventory of {Name}";
         }
         public int Speed { get; set; }
-        public Pouch Pouch
-        {
-            get { return _pouch; }
-        }
-        public List<Item> Inventory { get; }
+        public Inventory Inventory { get; set; }
         public CreatureSize Size { get; set; }
         public int MaxHealthPoints { get; set; }
         public int CurrentHealthPoints { get; set; }
@@ -72,11 +71,13 @@ namespace DnD
                 _marks[(int)t] = value;
             }
         }
+        [XmlAttribute]
         public string Name { get; set; }
+        [XmlAttribute]
         public string PlayerName { get; set; }
-#warning nk stworzy enuma do rasy
+        [XmlIgnore]
         public Race Race { get; set; }
-#warning nk stworzy klasy
+        [XmlIgnore]
         public HeroClass Class { get; set; }
         public int ClassLevel { get; set; }
         public int Modifier { get; set; }
@@ -86,6 +87,67 @@ namespace DnD
         public double Weight { get; set; }
         public string EyesColor { get; set; }
         public string HairColor { get; set; }
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+        public void ReadXml(XmlReader reader)
+        {
+            reader.MoveToContent();
+            Name = reader.GetAttribute("Name");
+            PlayerName = reader.GetAttribute("PlayerName");
+            while (reader.Read())
+            {
+                switch (reader.Name)
+                {
+                case "Class":
+                    foreach (var t in HeroClass.AllClasses())
+                        if (reader.Value == t.Name)
+                            {
+                                Class = t;
+                                break;
+                            }
+                    break;
+                }
+            }
+            //bool isEmptyElement = reader.IsEmptyElement; // (1)
+            //reader.ReadStartElement();
+            //if (!isEmptyElement) // (1)
+            //{
+            //    Birthday = DateTime.ParseExact(reader.
+            //        ReadElementString("Birthday"), "yyyy-MM-dd", null);
+            //    reader.ReadEndElement();
+            //}
+        }
+        public void WriteXml(XmlWriter writer)
+        {
+            if (Name != null)
+                writer.WriteAttributeString("Name", Name);
+            if (PlayerName != null)
+                writer.WriteAttributeString("PlayerName", PlayerName);
+            if (Class != null)
+                writer.WriteElementString("Class", Class.Name);
+            if (Race != null)
+                writer.WriteElementString("Race", Race.Name);
+            writer.WriteElementString("Speed", Speed.ToString());
+            writer.WriteElementString("Size", Size.ToString());
+            writer.WriteElementString("MaxHealthPoints", MaxHealthPoints.ToString());
+            writer.WriteElementString("CurrentHealthPoints", CurrentHealthPoints.ToString());
+            writer.WriteElementString("Bruise", Bruise.ToString());
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
+            var otherSer = new XmlSerializer(typeof(Inventory));
+            otherSer.Serialize(writer, Inventory, ns);
+            writer.WriteElementString("Age", Age.ToString());
+            writer.WriteElementString("Height", Height.ToString());
+            writer.WriteElementString("Weight", Weight.ToString());
+            if (Sex != null)
+                writer.WriteElementString("Sex", Sex);
+            if (EyesColor != null)
+                writer.WriteElementString("EyesColor", EyesColor);
+            if (HairColor != null)
+                writer.WriteElementString("HairColor", HairColor);
+        }
     }
     public enum CreatureSize
     {

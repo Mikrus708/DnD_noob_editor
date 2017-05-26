@@ -16,9 +16,9 @@ namespace DnD
             List<Coin> coins = new List<Coin>();
 
             int roll;
-            switch(SW)
+#pragma warning disable CS0642 // Possible mistaken empty statement
+            switch (SW)
             {
-
                 case 1:
                     roll = Dice.Roll(Dice.Type.k100);
                     if (roll < 15) ;
@@ -110,6 +110,7 @@ namespace DnD
                 case 10:
                     break;
             }
+#pragma warning restore CS0642 // Possible mistaken empty statement
             return new Tuple<List<Item>, List<Coin>>(items, coins);
         }
     }

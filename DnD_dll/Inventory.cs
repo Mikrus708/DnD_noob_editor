@@ -23,7 +23,7 @@ namespace DnD
             _pouch.PropertyChanged += _pouch_PropertyChanged;
             _itemList.CollectionChanged += _itemList_CollectionChanged;
         }
-        public Inventory(IEnumerable<Item> items, IEnumerable<Coin> coins,string name="Untitled")
+        public Inventory(IEnumerable<Item> items, IEnumerable<Coin> coins,string name=null)
         {
             _pouch.PropertyChanged += _pouch_PropertyChanged;
             _itemList.CollectionChanged += _itemList_CollectionChanged;
