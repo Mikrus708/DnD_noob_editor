@@ -64,6 +64,7 @@
     <Compile Include="Races\Halforc.cs" />
     <Compile Include="Races\Human.cs" />
     <Compile Include="Races\Race.cs" />
+    <Compile Include="Random Reward.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="Atributes.cs" />
     <Compile Include="Coin.cs" />
