@@ -10,7 +10,7 @@ namespace DnD.Classes
     {
         private static readonly Rouge _singleton = new Rouge();
         private Rouge() { }
-        public override HeroClass Instance
+        public static Rouge Instance
         {
             get { return _singleton; }
         }

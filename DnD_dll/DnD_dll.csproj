@@ -56,6 +56,14 @@
     <Compile Include="Damage.cs" />
     <Compile Include="EasyXML.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="Races\Dwarf.cs" />
+    <Compile Include="Races\Elf.cs" />
+    <Compile Include="Races\Gnom.cs" />
+    <Compile Include="Races\Halfelf.cs" />
+    <Compile Include="Races\Halfling.cs" />
+    <Compile Include="Races\Halforc.cs" />
+    <Compile Include="Races\Human.cs" />
+    <Compile Include="Races\Race.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="Atributes.cs" />
     <Compile Include="Coin.cs" />

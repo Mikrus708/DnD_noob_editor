@@ -10,7 +10,7 @@ namespace DnD.Classes
     {
         private static readonly Wizard _singleton = new Wizard();
         private Wizard() { }
-        public override HeroClass Instance
+        public static Wizard Instance
         {
             get { return _singleton; }
         }

@@ -10,7 +10,7 @@ namespace DnD.Classes
     {
         private static readonly Ranger _singleton = new Ranger();
         private Ranger() { }
-        public override HeroClass Instance
+        public static Ranger Instance
         {
             get { return _singleton; }
         }

@@ -8,7 +8,6 @@ namespace DnD.Classes
 {
     public abstract class HeroClass
     {
-        public abstract HeroClass Instance { get; }
         protected enum BaseAttackRatio
         {
             Low = 2,

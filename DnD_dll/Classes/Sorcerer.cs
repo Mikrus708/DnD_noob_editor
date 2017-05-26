@@ -10,7 +10,7 @@ namespace DnD.Classes
     {
         private static readonly Sorcerer _singleton = new Sorcerer();
         private Sorcerer() { }
-        public override HeroClass Instance
+        public static Sorcerer Instance
         {
             get { return _singleton; }
         }
