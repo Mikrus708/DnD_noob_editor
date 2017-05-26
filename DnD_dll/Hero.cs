@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace DnD
 {
@@ -70,6 +71,21 @@ namespace DnD
             }
         }
         public string Name { get; set; }
+        public string PlayerName { get; set; }
+#warning nk stworzy enuma do rasy
+        public string Race { get; set; }
+#warning nk stworzy klasy
+        public string Class { get; set; }
+        public int Modifier { get; set; }
+        public int Age { get; set; }
+        public string Sex { get; set; }
+        public double Height { get; set; }
+        public double Weight { get; set; }
+        public string EyesColor { get; set; }
+        public string HairColor { get; set; }
+
+
+
     }
     public enum CreatureSize
     {

@@ -31,9 +31,9 @@ namespace DnD_DM_Manager
         {
             InitializeComponent();
             heroes = new ObservableCollection<Hero>();
-            Hero rogue = new Hero{ Name = "Naeli", Size = CreatureSize.Medium, Speed = 10, MaxHealthPoints = 11, CurrentHealthPoints = 11 };
-            Hero druid = new Hero{ Name = "Finto", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 15, CurrentHealthPoints = 15 };
-            Hero hunter = new Hero{ Name = "Arato", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 17, CurrentHealthPoints = 13 };
+            Hero rogue = new Hero{ Name = "Naeli", Age=110, Class="Rogue", EyesColor=Colors.Blue.ToString(), HairColor=Colors.Brown.ToString(), Height=155, Weight=40, PlayerName="Ania", Race="Elf", Sex="Female" , Size = CreatureSize.Medium, Speed = 10, MaxHealthPoints = 11, CurrentHealthPoints = 11 };
+            Hero druid = new Hero{ Name = "Finto", Class = "Druid", EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 170, Weight = 70, PlayerName = "Michał", Race = "Human", Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 15, CurrentHealthPoints = 15 };
+            Hero hunter = new Hero{ Name = "Arato", Class = "Hunter", EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 165, Weight = 50, PlayerName = "Michał", Race = "Elf", Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 17, CurrentHealthPoints = 13 };
             heroes.Add(rogue);
             heroes.Add(druid);
             heroes.Add(hunter);
