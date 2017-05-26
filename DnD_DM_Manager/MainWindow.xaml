@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="DnD Editor" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <FontFamily x:Key="Beyond Wonderland">
             /resources/fonts/#Beyond Wonderland
@@ -35,12 +35,11 @@
                                         <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
                                     </RadialGradientBrush>
                                 </Border.Background>
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextElement.FontFamily="{StaticResource Beyond Wonderland}" TextElement.FontSize="30" TextElement.FontWeight="Bold" TextElement.Foreground="Goldenrod"/>
+                                
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextElement.FontFamily="{StaticResource Beyond Wonderland}"  TextElement.FontSize="25" TextElement.FontWeight="Bold" TextElement.Foreground="Goldenrod"/>
                             </Border>
-
                         </Grid>
                         <ControlTemplate.Triggers>
-
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background" TargetName="border">
                                     <Setter.Value>
@@ -82,9 +81,9 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
-            <Label Content="Heroes" FontSize="28" HorizontalAlignment="Center" Foreground="Goldenrod" Style="{StaticResource LabelStyle}"/>
+            <Label Content="Bohaterowie" FontSize="28" HorizontalAlignment="Center" Foreground="Goldenrod" Style="{StaticResource LabelStyle}"/>
             <Border Margin="10,5,5,10" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="10" Background="AntiqueWhite">
-                <ListView Margin="5" ItemsSource="{Binding}" Background="Transparent" HorizontalContentAlignment="Stretch" BorderBrush="Transparent">
+                <ListView Name="HeroesListView" Margin="5" ItemsSource="{Binding}" Background="Transparent" HorizontalContentAlignment="Stretch" BorderBrush="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border Margin="3" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="5">
@@ -112,20 +111,26 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.ColumnSpan="4" Content="Boxes" FontSize="28" HorizontalAlignment="Center" Foreground="Goldenrod" Style="{StaticResource LabelStyle}"/>
+            <Label Grid.Row="0" Grid.ColumnSpan="4" Content="Skrzynie" FontSize="28" HorizontalAlignment="Center" Foreground="Goldenrod" Style="{StaticResource LabelStyle}"/>
             <Button Grid.Row="1" Grid.Column="0" Content="1" Style="{DynamicResource RoundCorner}" Click="Box1_Click"/>
             <Button Grid.Row="1" Grid.Column="1" Content="2" Style="{DynamicResource RoundCorner}" Click="Box2_Click"/>
             <Button Grid.Row="1" Grid.Column="2" Content="3" Style="{DynamicResource RoundCorner}" Click="Box3_Click"/>
-            <Button Grid.Row="1" Grid.Column="3" Content="RANDOM" Style="{DynamicResource RoundCorner}" Click="RandomBox_Click"/>
+            <Button Grid.Row="1" Grid.Column="3" Content="RANDOM" Style="{DynamicResource RoundCorner}" Click="RandomBox_Click">
+                <!--<Button.RenderTransform>
+                    <RotateTransform CenterX="0" CenterY="0" Angle="90" />
+                </Button.RenderTransform>-->
+            </Button>
         </Grid>
         <Border Grid.Column="1" Grid.RowSpan="2" Margin="10" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="10" Background="AntiqueWhite">
-            <!--<Canvas Background="AntiqueWhite"/>-->
+            <DockPanel>
+                <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="40" FontFamily="{StaticResource Beyond Wonderland}" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Name}"/>
+            </DockPanel>
         </Border>
         <GridSplitter Grid.Column="2" Grid.RowSpan="2" Width="5" Background="#FF4B2B1A" ResizeBehavior="PreviousAndNext" />
         <StackPanel Grid.Column="3" Grid.RowSpan="2">
             <Border Margin="10" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="10" Background="AntiqueWhite">
                 <Expander Header="Hero info" IsExpanded="False">
-                    <Grid>
+                    <Grid Name="HeroInfoGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -145,27 +150,44 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label Content="Player: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="1" Content="Name: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="2" Content="Race: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="3" Content="Character: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="4" Content="God: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="5" Content="Class: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="6" Content="Size: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="7" Content="Modifier: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="8" Content="Age: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="9" Content="Sex: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="10" Content="Height: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="11" Content="Weight: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="12" Content="Eyes: " FontWeight="SemiBold"/>
-                        <Label Grid.Row="13" Content="Hair: " FontWeight="SemiBold"/>
+                        <Label Content="Gracz: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="1" Content="Imię: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="2" Content="Rasa: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="3" Content="Charakter: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="4" Content="Bóstwo: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="5" Content="Klasa: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="6" Content="Rozmiar: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="7" Content="Modifkator: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="8" Content="Wiek: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="9" Content="Płeć: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="10" Content="Wzrost: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="11" Content="Waga: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="12" Content="Kolor oczu: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="13" Content="Kolor włosów: " FontWeight="SemiBold"/>
+                        <Label Grid.Row="14" Content="Szybkość: " FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.PlayerName}"/>
+                        <Label Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Name}"/>
+                        <Label Grid.Column="1" Grid.Row="2" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Race}"/>
+                        <Label Grid.Column="1" Grid.Row="3" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Character}"/>
+                        <Label Grid.Column="1" Grid.Row="4" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.God}"/>
+                        <Label Grid.Column="1" Grid.Row="5" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Class}"/>
+                        <Label Grid.Column="1" Grid.Row="6" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Size}"/>
+                        <Label Grid.Column="1" Grid.Row="7" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Modifier}"/>
+                        <Label Grid.Column="1" Grid.Row="8" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Age}"/>
+                        <Label Grid.Column="1" Grid.Row="9" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Sex}"/>
+                        <Label Grid.Column="1" Grid.Row="10" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Height}"/>
+                        <Label Grid.Column="1" Grid.Row="11" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Weight}"/>
+                        <Label Grid.Column="1" Grid.Row="12" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.EyesColor}"/>
+                        <Label Grid.Column="1" Grid.Row="13" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.HairColor}"/>
+                        <Label Grid.Column="1" Grid.Row="14" Content="{Binding ElementName=HeroesListView, Path=SelectedItem.Speed}"/>
                     </Grid>
                 </Expander>
             </Border>
             <Border Margin="10" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="10" Background="AntiqueWhite">
                 <Expander Header="Hero stats" IsExpanded="False">
-                    <Grid>
+                    <Grid Name="StatsGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition/>
@@ -179,12 +201,18 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label Content="Strength" FontWeight="SemiBold"/>
-                        <Label Grid.Row="1" Content="Dexterity" FontWeight="SemiBold"/>
-                        <Label Grid.Row="2" Content="Constitution" FontWeight="SemiBold"/>
-                        <Label Grid.Row="3" Content="Intelligence" FontWeight="SemiBold"/>
-                        <Label Grid.Row="4" Content="Wisdom" FontWeight="SemiBold"/>
-                        <Label Grid.Row="5" Content="Charisma" FontWeight="SemiBold"/>
+                        <Label Content="Siła" FontWeight="SemiBold"/>
+                        <Label Grid.Row="1" Content="Zręczność" FontWeight="SemiBold"/>
+                        <Label Grid.Row="2" Content="Budowa" FontWeight="SemiBold"/>
+                        <Label Grid.Row="3" Content="Intelekt" FontWeight="SemiBold"/>
+                        <Label Grid.Row="4" Content="Roztropność" FontWeight="SemiBold"/>
+                        <Label Grid.Row="5" Content="Charyzma" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Content="Siła" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Atribute.Type.Dexterity]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="2" Content="Budowa" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="3" Content="Intelekt" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="4" Content="Roztropność" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="5" Content="Charyzma" FontWeight="SemiBold"/>
                     </Grid>
                 </Expander>
             </Border>

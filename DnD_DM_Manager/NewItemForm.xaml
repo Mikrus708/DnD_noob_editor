@@ -21,10 +21,10 @@
                     <Setter Property="Margin" Value="0,2,0,0"/>
                 </Style>
             </StackPanel.Resources>
-            <Label Height="30">Name: </Label>
-            <Label Height="30">Value: </Label>
-            <Label Height="30">Weight: </Label>
-            <Label Height="30">Description: </Label>
+            <Label Height="30">Nazwa: </Label>
+            <Label Height="30">Wartość: </Label>
+            <Label Height="30">Waga: </Label>
+            <Label Height="30">Opis: </Label>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="4">
             <StackPanel.Resources>
@@ -37,6 +37,6 @@
             <TextBox Height="30" Name="WeightBox"/>
             <TextBox Height="90" Name="DescBox"/>
         </StackPanel>
-        <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="100" Content="Done" Click="Button_Click"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="100" Content="OK" Click="Button_Click"/>
     </Grid>
 </Window>
