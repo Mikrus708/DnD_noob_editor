@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Damage.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="Random Reward.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="Atributes.cs" />
     <Compile Include="Coin.cs" />

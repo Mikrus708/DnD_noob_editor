@@ -34,18 +34,18 @@ namespace DnD
                 foreach (var c in coins)
                     _pouch.Add(c);
         }
-        private void changes()
+        public void NotifyChanges()
         {
             NotifyPropertyChanged("TotalValue");
             NotifyPropertyChanged("TotalWeight");
         }
         private void _pouch_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            changes();
+            NotifyChanges();
         }
         private void _itemList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            changes();
+            NotifyChanges();
         }
         public string Description { get; set; }
         public Pouch Pouch

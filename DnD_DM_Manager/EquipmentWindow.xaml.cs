@@ -89,19 +89,30 @@ namespace DnD_DM_Manager
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("Not implemented yet. It'll just change the button color", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //Color c = new Color();
-            //c.A = 255;
-            //Random R = new Random();
-            //c.B = (byte)R.Next(0, 255);
-            //c.G = (byte)R.Next(0, 255);
-            //c.R = (byte)R.Next(0, 255);
-            //(sender as Button).Background = new SolidColorBrush(c);
-            //_inv.someText = R.Next(10000, 1000000).ToString();
             Item it = new Item("");
-            NewItemForm wnd = new NewItemForm(ref it);
+            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
             if(wnd.ShowDialog() == true)
                 _inv.AddItem(it);
+
+        }
+
+        private void Edit_Item(object sender, RoutedEventArgs e)
+        {
+            if (TabPanel.SelectedIndex == 0)
+            {
+                Item sel = MainGrid.SelectedItem as Item;
+                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                wnd.ShowDialog();
+                MainGrid.Items.Refresh();
+            }
+            else if (TabPanel.SelectedIndex == 1)
+            {
+                Item sel = MainList.SelectedItem as Item;
+                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                wnd.ShowDialog();
+                MainList.Items.Refresh();
+            }
+            _inv.NotifyChanges();
 
         }
 

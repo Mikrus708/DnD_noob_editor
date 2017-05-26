@@ -70,6 +70,7 @@
                 <Button Height="50" Click="Give_Item" Content="Przekaż"/>
                 <ComboBox Name="ComboInv" ItemsSource="{Binding ComboList}" Width="Auto" Height="30"/>
             </StackPanel>
+            <Button Width="80" Click="Edit_Item" Content="Edytuj"/>
         </StackPanel>
         <StackPanel x:Name="sta" Grid.Row="2" Background="LightGray" Orientation="Horizontal" DataContext="{Binding Inventory}">
             <Label Content="Waga całkowita: "/>

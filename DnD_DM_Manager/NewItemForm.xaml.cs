@@ -20,10 +20,19 @@ namespace DnD_DM_Manager
     public partial class NewItemForm : Window
     {
         private DnD.Equipment.Item _item;
-        public NewItemForm(ref DnD.Equipment.Item it)
+        private ItemFormMode _ifm;
+        public NewItemForm(ref DnD.Equipment.Item it, ItemFormMode ifm)
         {
             InitializeComponent();
             _item = it;
+            _ifm = ifm;
+            if(ifm == ItemFormMode.Edit || ifm == ItemFormMode.Show)
+            {
+                NameBox.Text = it.Name;
+                ValueBox.Text = it.ValueInCopper.ToString();
+                WeightBox.Text = it.Weight.ToString();
+                DescBox.Text = it.Description;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -53,4 +62,12 @@ namespace DnD_DM_Manager
             this.Close();
         }
     }
+
+    public enum ItemFormMode
+    {
+        Add,
+        Edit,
+        Show
+    }
 }
+

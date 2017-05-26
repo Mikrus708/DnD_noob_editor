@@ -26,7 +26,7 @@ namespace DnD_DM_Manager
     public partial class MainWindow : Window
     {
         ObservableCollection<Hero> heroes;
-        public static List<DnD.Inventory> lista = new List<DnD.Inventory> { new DnD.Inventory(SomeThings.list2(), null, "Box1"), new DnD.Inventory(SomeThings.list(), null, "Box2"), new DnD.Inventory(SomeThings.list(), null, "Box3") };
+        public static List<DnD.Inventory> lista = new List<DnD.Inventory> { new DnD.Inventory(SomeThings.list2(), null, "Skrzynia DMa #1"), new DnD.Inventory(SomeThings.list(), null, "Skrzynia DMa #2"), new DnD.Inventory(SomeThings.list(), null, "Skrzynia DMa #3")  };
         public MainWindow()
         {
             InitializeComponent();
@@ -67,7 +67,10 @@ namespace DnD_DM_Manager
         private void RandomBox_Click(object sender, RoutedEventArgs e)
         {
 #warning blah
-            EquipmentWindow eqw = new EquipmentWindow(lista[1], lista);
+            int SW = 4;
+            var x = RandomReward.GenerateTreasure(SW);
+
+            EquipmentWindow eqw = new EquipmentWindow(new Inventory(x.Item1, x.Item2, $"Losowy skarb poziomu {SW}"), lista);
             eqw.Show();
         }
     }

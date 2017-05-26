@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="NewItemForm" Height="270" Width="250" ResizeMode="CanMinimize" Background="Chartreuse"> 
+        Title="NewItemForm" Height="270" Width="250" ResizeMode="CanMinimize" Background="BurlyWood"> 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
