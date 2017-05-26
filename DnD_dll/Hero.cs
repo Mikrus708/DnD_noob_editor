@@ -76,6 +76,7 @@ namespace DnD
         public string Race { get; set; }
 #warning nk stworzy klasy
         public string Class { get; set; }
+        public int ClassLevel { get; set; }
         public int Modifier { get; set; }
         public int Age { get; set; }
         public string Sex { get; set; }
