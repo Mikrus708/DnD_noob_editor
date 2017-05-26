@@ -47,5 +47,9 @@ namespace DnD.Classes
             return Level * (int)_drEndur / 6 + _drEndur == DefensiveRollRatio.High ? 2 : 0;
         }
         public abstract Dice.Type HitDice { get; }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

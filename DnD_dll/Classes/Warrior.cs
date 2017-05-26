@@ -20,7 +20,7 @@ namespace DnD.Classes
         }
         public override string Name
         {
-            get { return "Warrior"; }
+            get { return "Wojownik"; }
         }
         protected override BaseAttackRatio _bar
         {

@@ -1,4 +1,6 @@
-﻿using DnD.Equipment;
+﻿using DnD.Classes;
+using DnD.Equipment;
+using DnD.Races;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,9 +75,9 @@ namespace DnD
         public string Name { get; set; }
         public string PlayerName { get; set; }
 #warning nk stworzy enuma do rasy
-        public string Race { get; set; }
+        public Race Race { get; set; }
 #warning nk stworzy klasy
-        public string Class { get; set; }
+        public HeroClass Class { get; set; }
         public int ClassLevel { get; set; }
         public int Modifier { get; set; }
         public int Age { get; set; }
@@ -84,9 +86,6 @@ namespace DnD
         public double Weight { get; set; }
         public string EyesColor { get; set; }
         public string HairColor { get; set; }
-
-
-
     }
     public enum CreatureSize
     {
