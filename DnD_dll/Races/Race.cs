@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnD
+namespace DnD.Races
 {
-    interface IValuable
+    public abstract class Race
     {
-
+        public abstract string Name { get; }
     }
 }

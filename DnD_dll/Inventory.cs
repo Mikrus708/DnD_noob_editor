@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DnD.Equipment;
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
+using System.IO;
 
 namespace DnD
 {
@@ -81,6 +82,37 @@ namespace DnD
         public void RemoveItem(Item i)
         {
             _itemList.Remove(i);
+        }
+        public bool SerializeXML(string FilePath)
+        {
+            bool result = true;
+            XmlSerializer ser = new XmlSerializer(typeof(Inventory));
+            FileStream fs = File.Open(FilePath, FileMode.Create);
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
+            try
+            {
+                ser.Serialize(fs, this, ns);
+            }
+            catch
+            {
+                result = false;
+            }
+            fs.Close();
+            return result;
+        }
+        public static object DeserializeXML(string FilePath)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Inventory));
+            FileStream fs = File.Open(FilePath, FileMode.Open);
+            Inventory result = new Inventory();
+            try
+            {
+                result = (Inventory)ser.Deserialize(fs);
+            }
+            catch { }
+            fs.Close();
+            return result;
         }
     }
 }

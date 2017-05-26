@@ -41,9 +41,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Barbarian.cs" />
+    <Compile Include="Classes\Bard.cs" />
+    <Compile Include="Classes\Druid.cs" />
+    <Compile Include="Classes\HeroClass.cs" />
+    <Compile Include="Classes\Monk.cs" />
+    <Compile Include="Classes\Paladin.cs" />
+    <Compile Include="Classes\Priest.cs" />
+    <Compile Include="Classes\Ranger.cs" />
+    <Compile Include="Classes\Rouge.cs" />
+    <Compile Include="Classes\Sorcerer.cs" />
+    <Compile Include="Classes\Warrior.cs" />
+    <Compile Include="Classes\Wizard.cs" />
     <Compile Include="Damage.cs" />
+    <Compile Include="EasyXML.cs" />
     <Compile Include="Inventory.cs" />
-    <Compile Include="Random Reward.cs" />
+    <Compile Include="Races\Dwarf.cs" />
+    <Compile Include="Races\Elf.cs" />
+    <Compile Include="Races\Gnom.cs" />
+    <Compile Include="Races\Halfelf.cs" />
+    <Compile Include="Races\Halfling.cs" />
+    <Compile Include="Races\Halforc.cs" />
+    <Compile Include="Races\Human.cs" />
+    <Compile Include="Races\Race.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="Atributes.cs" />
     <Compile Include="Coin.cs" />
@@ -52,7 +72,6 @@
     <Compile Include="Equipment\Item.cs" />
     <Compile Include="Equipment\Weapon.cs" />
     <Compile Include="Hero.cs" />
-    <Compile Include="IValuable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pouch.cs" />
     <Compile Include="Spell.cs" />
