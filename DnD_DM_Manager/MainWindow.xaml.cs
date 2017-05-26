@@ -26,7 +26,7 @@ namespace DnD_DM_Manager
     public partial class MainWindow : Window
     {
         ObservableCollection<Hero> heroes;
-        public static List<DnD.Inventory> lista = new List<DnD.Inventory> { new DnD.Inventory(SomeThings.list2(), "Box1"), new DnD.Inventory(SomeThings.list(), "Box2"), new DnD.Inventory(SomeThings.list(), "Box3") };
+        public static List<DnD.Inventory> lista = new List<DnD.Inventory> { new DnD.Inventory(SomeThings.list2(), null, "Box1"), new DnD.Inventory(SomeThings.list(), null, "Box2"), new DnD.Inventory(SomeThings.list(), null, "Box3") };
         public MainWindow()
         {
             InitializeComponent();

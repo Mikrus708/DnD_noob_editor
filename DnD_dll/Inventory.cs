@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DnD.Equipment;
 using System.Collections.ObjectModel;
+using System.Xml.Serialization;
 
 namespace DnD
 {
@@ -15,19 +16,23 @@ namespace DnD
     {
         private Pouch _pouch = new Pouch();
         private ObservableCollection<Item> _itemList = new ObservableCollection<Item>();
-        private string _sometext;
-
         public event PropertyChangedEventHandler PropertyChanged;
-        public Inventory(List<Item> l= null, string name=null)
+        public Inventory()
+        {
+            _pouch.PropertyChanged += _pouch_PropertyChanged;
+            _itemList.CollectionChanged += _itemList_CollectionChanged;
+        }
+        public Inventory(IEnumerable<Item> items, IEnumerable<Coin> coins,string name="Untitled")
         {
             _pouch.PropertyChanged += _pouch_PropertyChanged;
             _itemList.CollectionChanged += _itemList_CollectionChanged;
             Name = name;
-            Owner = default(Hero);
-            if (l != null)
-                foreach (var x in l)
+            if (items != null)
+                foreach (var x in items)
                     _itemList.Add(x);
-            _sometext = "blah";
+            if (coins != null)
+                foreach (var c in coins)
+                    _pouch.Add(c);
         }
         private void changes()
         {
@@ -42,21 +47,6 @@ namespace DnD
         {
             changes();
         }
-        public Inventory(Hero h, Pouch p, List<Item> l )
-        {
-            _pouch.PropertyChanged += _pouch_PropertyChanged;
-            Owner = h;
-            _pouch = p;
-            if (l != null)
-                foreach (var x in l)
-                    _itemList.Add(x);
-            _sometext = "blah";
-        }
-        public string someText
-        {
-            get { return _sometext; }
-            set { _sometext = value; }
-        }
         public string Description { get; set; }
         public Pouch Pouch
         {
@@ -70,8 +60,8 @@ namespace DnD
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        [XmlAttribute("Name")]
         public string Name { get; set; }
-        public Hero Owner { get; set; }
         public void AddItem(Item item)
         {
             _itemList.Add(item);
