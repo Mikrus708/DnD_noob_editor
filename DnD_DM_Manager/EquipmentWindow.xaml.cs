@@ -25,7 +25,7 @@ namespace DnD_DM_Manager
 
         private Inventory _inv;
         private List<Inventory> _otherInventories = new List<Inventory>();
-
+        
 
 
         public List<Inventory> ComboList
@@ -64,6 +64,27 @@ namespace DnD_DM_Manager
             Title = inv.ToString();
             this.DataContext = this;
             sta.DataContext = Inventory;
+            MainGrid.DragEnter += MainGrid_DragEnter;
+            MainGrid.Drop += MainGrid_Drop;
+        }
+
+        private void MainGrid_Drop(object sender, DragEventArgs e)
+        {
+            var data = e.Data.GetData(typeof(ListViewItem[]));
+            ListViewItem[] items = data as ListViewItem[];
+            // data ok?
+            if (items != null)
+                // now loop over the array..
+                foreach (ListViewItem lvi in items)
+                {
+                    // do stuff.. here we can check where we come from:
+                    MainGrid.Items.Add(lvi.Content + " coming from " + lvi.Name);
+                }
+        }
+
+        private void MainGrid_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(ListViewItem[]))) e.Effects = DragDropEffects.Move;
         }
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
@@ -140,6 +161,7 @@ namespace DnD_DM_Manager
             //MainGrid.Items.Refresh();
             //MainList.Items.Refresh();
         }
+
 
     }
 
