@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace DnD
 {
-    public class Pouch : INotifyPropertyChanged
+    public class Pouch : INotifyPropertyChanged, IEnumerable<Coin>
     {
         private Coin[] coins;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -59,11 +60,7 @@ namespace DnD
         {
             get
             {
-                foreach (Coin c in coins)
-                {
-                    yield return c;
-                }
-                yield break;
+                return coins;
             }
         }
         [XmlIgnore]
@@ -98,6 +95,16 @@ namespace DnD
             if (valueInCopper > 0)
                 throw new Exception("To nie powinno sie wysypac. Sprawdz Pouch.Pay()");
             return result;
+        }
+        public IEnumerator<Coin> GetEnumerator()
+        {
+            foreach (var c in coins)
+                yield return c;
+            yield break;
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return coins.GetEnumerator();
         }
         public int this[CoinType type]
         {

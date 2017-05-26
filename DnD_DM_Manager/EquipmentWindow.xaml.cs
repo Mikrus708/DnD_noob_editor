@@ -43,7 +43,7 @@ namespace DnD_DM_Manager
             InitializeComponent();
 
             lista = SomeThings.list();
-            _inv = new Inventory(lista);
+            _inv = new Inventory(lista, null);
 
             DataContext = this;
             //DataContext = SomeThings.list();
