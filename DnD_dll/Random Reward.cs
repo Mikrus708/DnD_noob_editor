@@ -16,7 +16,8 @@ namespace DnD
             List<Coin> coins = new List<Coin>();
 
             int roll;
-            switch(SW)
+#pragma warning disable CS0642 // Possible mistaken empty statement
+            switch (SW)
             {
 
                 case 1:
@@ -100,17 +101,106 @@ namespace DnD
                     else                { roll = Dice.Roll(Dice.Type.k3); for (int i = 0; i < roll; i++) items.Add(new Item("Słaby przedmiot magiczny")); }
                     break;
                 case 6:
-
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 11) ;
+                    else if (roll < 19) coins.Add(new Coin(CoinType.Copper, Dice.Roll(Dice.Type.k6) * 10000));
+                    else if (roll < 38) coins.Add(new Coin(CoinType.Silver, Dice.Roll(Dice.Type.k8) * 1000));
+                    else if (roll < 96) coins.Add(new Coin(CoinType.Gold, Dice.Roll(Dice.Type.k10) * 100));
+                    else                coins.Add(new Coin(CoinType.Platinium, Dice.Roll(Dice.Type.k12) * 10));
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 57) ;
+                    else if (roll < 93) { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Klejnot")); }
+                    else                { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Dzieło sztuki")); }
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 55) ;
+                    else if (roll < 60)     { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Zwykły przedmiot")); }
+                    else if (roll < 100)    { roll = Dice.Roll(Dice.Type.k3); for (int i = 0; i < roll; i++) items.Add(new Item("Słaby magiczny przedmiot")); }
+                    else                    items.Add(new Item("Przeciętny magiczny przedmiot"));
                     break;
                 case 7:
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 12) ;
+                    else if (roll < 19) coins.Add(new Coin(CoinType.Copper, Dice.Roll(Dice.Type.k10) * 10000));
+                    else if (roll < 36) coins.Add(new Coin(CoinType.Silver, Dice.Roll(Dice.Type.k12) * 1000));
+                    else if (roll < 94) coins.Add(new Coin(CoinType.Gold, Dice.Roll(Dice.Type.k6, 2) * 100));
+                    else                coins.Add(new Coin(CoinType.Platinium, Dice.Roll(Dice.Type.k4, 3) * 10));
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 49) ;
+                    else if (roll < 89) { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Klejnot")); }
+                    else                { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Dzieło sztuki")); }
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 52) ;
+                    else if (roll < 98) { roll = Dice.Roll(Dice.Type.k3); for (int i = 0; i < roll; i++) items.Add(new Item("Słaby magiczny przedmiot")); }
+                    else                items.Add(new Item("Przeciętny magiczny przedmiot"));
                     break;
                 case 8:
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 11) ;
+                    else if (roll < 16) coins.Add(new Coin(CoinType.Copper, Dice.Roll(Dice.Type.k12) * 10000));
+                    else if (roll < 30) coins.Add(new Coin(CoinType.Silver, Dice.Roll(Dice.Type.k6, 2) * 1000));
+                    else if (roll < 88) coins.Add(new Coin(CoinType.Gold, Dice.Roll(Dice.Type.k8, 2) * 100));
+                    else                coins.Add(new Coin(CoinType.Platinium, Dice.Roll(Dice.Type.k6, 3) * 10));
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 46) ;
+                    else if (roll < 86) { roll = Dice.Roll(Dice.Type.k6); for (int i = 0; i < roll; i++) items.Add(new Item("Klejnot")); }
+                    else                { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Dzieło sztuki")); }
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 49) ;
+                    else if (roll < 97) { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Słaby magiczny przedmiot")); }
+                    else                items.Add(new Item("Przeciętny magiczny przedmiot"));
                     break;
                 case 9:
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 11) ;
+                    else if (roll < 16) coins.Add(new Coin(CoinType.Copper, Dice.Roll(Dice.Type.k6, 2) * 10000));
+                    else if (roll < 30) coins.Add(new Coin(CoinType.Silver, Dice.Roll(Dice.Type.k8, 2) * 1000));
+                    else if (roll < 86) coins.Add(new Coin(CoinType.Gold, Dice.Roll(Dice.Type.k4, 5) * 100));
+                    else                coins.Add(new Coin(CoinType.Platinium, Dice.Roll(Dice.Type.k12, 2) * 10));
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 41) ;
+                    else if (roll < 81) { roll = Dice.Roll(Dice.Type.k8); for (int i = 0; i < roll; i++) items.Add(new Item("Klejnot")); }
+                    else                { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Dzieło sztuki")); }
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 44) ;
+                    else if (roll < 92) { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Słaby magiczny przedmiot")); }
+                    else items.Add(new Item("Przeciętny magiczny przedmiot"));
                     break;
                 case 10:
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 11) ;
+                    else if (roll < 25) coins.Add(new Coin(CoinType.Silver, Dice.Roll(Dice.Type.k10, 2) * 1000));
+                    else if (roll < 80) coins.Add(new Coin(CoinType.Gold, Dice.Roll(Dice.Type.k4, 6) * 100));
+                    else                coins.Add(new Coin(CoinType.Platinium, Dice.Roll(Dice.Type.k6, 5) * 10));
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 36) ;
+                    else if (roll < 80) { roll = Dice.Roll(Dice.Type.k8); for (int i = 0; i < roll; i++) items.Add(new Item("Klejnot")); }
+                    else                { roll = Dice.Roll(Dice.Type.k6); for (int i = 0; i < roll; i++) items.Add(new Item("Dzieło sztuki")); }
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 41) ;
+                    else if (roll < 89)     { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Słaby magiczny przedmiot")); }
+                    else if (roll < 100)    items.Add(new Item("Przeciętny magiczny przedmiot")); 
+                    else                    items.Add(new Item("Potężny magiczny przedmiot"));
+                    break;
+                case 11:
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 9) ;
+                    else if (roll < 15) coins.Add(new Coin(CoinType.Silver, Dice.Roll(Dice.Type.k10, 3) * 1000));
+                    else if (roll < 76) coins.Add(new Coin(CoinType.Gold, Dice.Roll(Dice.Type.k8, 4) * 100));
+                    else                coins.Add(new Coin(CoinType.Platinium, Dice.Roll(Dice.Type.k10, 4) * 10));
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 25) ;
+                    else if (roll < 75) { roll = Dice.Roll(Dice.Type.k10); for (int i = 0; i < roll; i++) items.Add(new Item("Klejnot")); }
+                    else                { roll = Dice.Roll(Dice.Type.k6); for (int i = 0; i < roll; i++) items.Add(new Item("Dzieło sztuki")); }
+                    roll = Dice.Roll(Dice.Type.k100);
+                    if (roll < 32) ;
+                    else if (roll < 85)     { roll = Dice.Roll(Dice.Type.k4); for (int i = 0; i < roll; i++) items.Add(new Item("Słaby magiczny przedmiot")); }
+                    else if (roll < 99)     items.Add(new Item("Przeciętny magiczny przedmiot"));
+                    else                    items.Add(new Item("Potężny magiczny przedmiot"));
+                    break;
+                default:
                     break;
             }
+#pragma warning restore CS0642 // Possible mistaken empty statement
             return new Tuple<List<Item>, List<Coin>>(items, coins);
         }
     }
