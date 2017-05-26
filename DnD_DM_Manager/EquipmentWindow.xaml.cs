@@ -64,28 +64,9 @@ namespace DnD_DM_Manager
             Title = inv.ToString();
             this.DataContext = this;
             sta.DataContext = Inventory;
-            MainGrid.DragEnter += MainGrid_DragEnter;
-            MainGrid.Drop += MainGrid_Drop;
+            RefreshCoins();
         }
 
-        private void MainGrid_Drop(object sender, DragEventArgs e)
-        {
-            var data = e.Data.GetData(typeof(ListViewItem[]));
-            ListViewItem[] items = data as ListViewItem[];
-            // data ok?
-            if (items != null)
-                // now loop over the array..
-                foreach (ListViewItem lvi in items)
-                {
-                    // do stuff.. here we can check where we come from:
-                    MainGrid.Items.Add(lvi.Content + " coming from " + lvi.Name);
-                }
-        }
-
-        private void MainGrid_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(ListViewItem[]))) e.Effects = DragDropEffects.Move;
-        }
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
         {
@@ -93,7 +74,6 @@ namespace DnD_DM_Manager
             NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
             if(wnd.ShowDialog() == true)
                 _inv.AddItem(it);
-
         }
 
         private void Edit_Item(object sender, RoutedEventArgs e)
@@ -113,9 +93,7 @@ namespace DnD_DM_Manager
                 MainList.Items.Refresh();
             }
             _inv.NotifyChanges();
-
         }
-
         private void Remove_Item(object sender, RoutedEventArgs e)
         {
             int lim = 0;
@@ -125,19 +103,12 @@ namespace DnD_DM_Manager
                 for (int i = 0; i < lim; ++i)
                     _inv.RemoveItem(MainGrid.SelectedItems[0] as Item);
             }
-            //foreach (Item i in MainGrid.SelectedItems)
-            //_inv.RemoveItem(i);
-            //_inv.Bag.Remove(i);
             else if (TabPanel.SelectedIndex == 1)
             {
                 lim = MainList.SelectedItems.Count;
                 for (int i = 0; i < lim; ++i)
                     _inv.RemoveItem(MainList.SelectedItems[0] as Item);
             }
-
-
-            //MainGrid.Items.Refresh();
-            //MainList.Items.Refresh();
         }
         private void Give_Item(object sender, RoutedEventArgs e)
         {
@@ -150,13 +121,9 @@ namespace DnD_DM_Manager
                 for (int i = 0; i < lim; ++i)
                 {
                     To.AddItem(MainGrid.SelectedItems[0] as Item);
-                    _inv.RemoveItem(MainGrid.SelectedItems[0] as Item);
-                    
+                    _inv.RemoveItem(MainGrid.SelectedItems[0] as Item); 
                 }
             }
-            //foreach (Item i in MainGrid.SelectedItems)
-            //_inv.RemoveItem(i);
-            //_inv.Bag.Remove(i);
             else if (TabPanel.SelectedIndex == 1)
             {
                 lim = MainList.SelectedItems.Count;
@@ -166,11 +133,14 @@ namespace DnD_DM_Manager
                     _inv.RemoveItem(MainList.SelectedItems[0] as Item);
                 }
             }
+        }
 
-
-
-            //MainGrid.Items.Refresh();
-            //MainList.Items.Refresh();
+        private void RefreshCoins()
+        {
+            smLabel.Content = _inv.Pouch[CoinType.Copper].ToString();
+            ssLabel.Content = _inv.Pouch[CoinType.Silver].ToString();
+            szLabel.Content = _inv.Pouch[CoinType.Gold].ToString();
+            spLabel.Content = _inv.Pouch[CoinType.Platinium].ToString();
         }
 
 
