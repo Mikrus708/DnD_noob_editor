@@ -10,10 +10,12 @@ namespace DnD
     {
         private static HeroAttribute.Type[] _atr;
         private static bool[] _training;
+        private static string[] _pol;
         static Skill()
         {
             _atr = new HeroAttribute.Type[Enum.GetValues(typeof(Type)).Length];
             _training = new bool[Enum.GetValues(typeof(Type)).Length];
+            _pol = new string[Enum.GetValues(typeof(Type)).Length];
             #region Atrybuty umiejętności
             _atr[(int)Type.Bluff] = HeroAttribute.Type.Charisma;
             _atr[(int)Type.MoveSilently] = HeroAttribute.Type.Dexterity;
@@ -90,6 +92,48 @@ namespace DnD
             _training[(int)Type.SleightOfHand] = true;
             _training[(int)Type.Tumble] = true;
             #endregion
+            #region Polskie nazwy
+            _pol[(int)Type.Bluff] = "Blefowanie";
+            _pol[(int)Type.MoveSilently] = "Ciche poruszanie się";
+            _pol[(int)Type.Spellcraft] = "Czarostwo";
+            _pol[(int)Type.Diplomacy] = "Dyplomacja";
+            _pol[(int)Type.Forgery] = "Fałszerstwo";
+            _pol[(int)Type.Ride] = "Jeździectwo";
+            _pol[(int)Type.SpeakLanguage] = "Język obcy";
+            _pol[(int)Type.Concentration] = "Koncentracja";
+            _pol[(int)Type.Heal] = "Leczenie";
+            _pol[(int)Type.Listen] = "Nasłuchiwanie";
+            _pol[(int)Type.DecipherScript] = "Odcyfrowywanie zapisków";
+            _pol[(int)Type.OpenLock] = "Otwieranie zamków";
+            _pol[(int)Type.Swim] = "Pływanie";
+            _pol[(int)Type.HandleAnimal] = "Postępowanie ze zwierzętami";
+            _pol[(int)Type.Disguise] = "Przebieranie się";
+            _pol[(int)Type.Search] = "Przeszukiwanie";
+            _pol[(int)Type.Craft] = "Rzemisoło";
+            _pol[(int)Type.Jump] = "Skakanie";
+            _pol[(int)Type.Spot] = "Spostrzegwaczość";
+            _pol[(int)Type.Appraise] = "Szacowanie";
+            _pol[(int)Type.Survival] = "Sztuka przetrwania";
+            _pol[(int)Type.Hide] = "Ukrywanie się";
+            _pol[(int)Type.DisableDevice] = "Unieszkodliwianie mechanizmów";
+            _pol[(int)Type.UseRope] = "Używanie liny";
+            _pol[(int)Type.UseMagicDevice] = "Używanie magicznych urządzeń";
+            _pol[(int)Type.Knowledge] = "Wiedza";
+            _pol[(int)Type.Climb] = "Wspinaczka";
+            _pol[(int)Type.SenseMotive] = "Wyczucie pobudek";
+            _pol[(int)Type.Perform] = "Występy";
+            _pol[(int)Type.EscapeArtist] = "Wyzwalanie się";
+            _pol[(int)Type.Balance] = "Zachowanie równowagi";
+            _pol[(int)Type.Intimidate] = "Zastraszanie";
+            _pol[(int)Type.Profession] = "Zawód";
+            _pol[(int)Type.GatherInformation] = "Zbieranie informacji";
+            _pol[(int)Type.SleightOfHand] = "Zręczna dłoń";
+            _pol[(int)Type.Tumble] = "Zwinność";
+            #endregion
+        }
+        public static string GetPolishName(Type t)
+        {
+            return _pol[(int)t];
         }
         public static bool NeedTraining(Type t)
         {
