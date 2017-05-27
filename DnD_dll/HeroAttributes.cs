@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DnD
 {
-    public static class Attribute
+    public static class HeroAttribute
     {
         public static int GetModifcator(int level)
         {

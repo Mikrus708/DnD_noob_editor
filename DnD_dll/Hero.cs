@@ -15,7 +15,7 @@ namespace DnD
 {
     public class Hero : IXmlSerializable
     {
-        private int[] _atr = new int[Enum.GetValues(typeof(Attribute.Type)).Length];
+        private int[] _atr = new int[Enum.GetValues(typeof(HeroAttribute.Type)).Length];
         private int[] _marks = new int[Enum.GetValues(typeof(Skill.Type)).Length];
         public Hero()
         {
@@ -32,14 +32,14 @@ namespace DnD
         {
             get
             {
-                return 10 + Attribute.GetModifcator(this[Attribute.Type.Dexterity]);
+                return 10 + HeroAttribute.GetModifcator(this[HeroAttribute.Type.Dexterity]);
             }
         }
         public int ArmorTouch
         {
             get
             {
-                return 10 + Attribute.GetModifcator(this[Attribute.Type.Dexterity]);
+                return 10 + HeroAttribute.GetModifcator(this[HeroAttribute.Type.Dexterity]);
             }
         }
         public int ArmorUnprepared
@@ -49,7 +49,7 @@ namespace DnD
                 return 10;
             }
         }
-        public int this[Attribute.Type t]
+        public int this[HeroAttribute.Type t]
         {
             get
             {
@@ -129,7 +129,7 @@ namespace DnD
             if (xelm != null)
                 foreach (XmlElement el in xelm)
                 {
-                    Attribute.Type ttt;
+                    HeroAttribute.Type ttt;
                     if (Enum.TryParse(el.Name, out ttt) && int.TryParse(el.InnerText, out tmp))
                         _atr[(int)ttt] = tmp;
                 }
@@ -176,7 +176,7 @@ namespace DnD
             var otherSer = new XmlSerializer(typeof(Inventory));
             otherSer.Serialize(writer, Inventory, ns);
             writer.WriteStartElement("Attributes");
-            foreach(Attribute.Type t in Enum.GetValues(typeof(Attribute.Type)))
+            foreach(HeroAttribute.Type t in Enum.GetValues(typeof(HeroAttribute.Type)))
                 writer.WriteElementString(t.ToString(), _atr[(int)t].ToString());
             writer.WriteEndElement();
             writer.WriteStartElement("SkillMarks");
