@@ -9,15 +9,18 @@ namespace DnD.Classes
 {
     public abstract class HeroClass
     {
-        public static IEnumerable<HeroClass> AllClasses()
+        public static IEnumerable<HeroClass> AllClasses
         {
-            foreach (Type type in
-                Assembly.GetAssembly(typeof(HeroClass)).GetTypes()
-                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(HeroClass))))
+            get
             {
-                yield return (HeroClass)(type.GetProperty("Instance").GetValue(null));
+                foreach (Type type in
+                    Assembly.GetAssembly(typeof(HeroClass)).GetTypes()
+                    .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(HeroClass))))
+                {
+                    yield return (HeroClass)(type.GetProperty("Instance").GetValue(null));
+                }
+                yield break;
             }
-            yield break;
         }
         protected enum BaseAttackRatio
         {

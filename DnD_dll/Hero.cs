@@ -15,7 +15,7 @@ namespace DnD
 {
     public class Hero : IXmlSerializable
     {
-        private int[] _atr = new int[6];
+        private int[] _atr = new int[Enum.GetValues(typeof(Attribute.Type)).Length];
         private int[] _marks = new int[Enum.GetValues(typeof(Skill.Type)).Length];
         public Hero()
         {
@@ -32,14 +32,14 @@ namespace DnD
         {
             get
             {
-                return 10 + Atribute.GetModifcator(this[Atribute.Type.Dexterity]);
+                return 10 + Attribute.GetModifcator(this[Attribute.Type.Dexterity]);
             }
         }
         public int ArmorTouch
         {
             get
             {
-                return 10 + Atribute.GetModifcator(this[Atribute.Type.Dexterity]);
+                return 10 + Attribute.GetModifcator(this[Attribute.Type.Dexterity]);
             }
         }
         public int ArmorUnprepared
@@ -49,7 +49,7 @@ namespace DnD
                 return 10;
             }
         }
-        public int this[Atribute.Type t]
+        public int this[Attribute.Type t]
         {
             get
             {
@@ -71,13 +71,9 @@ namespace DnD
                 _marks[(int)t] = value;
             }
         }
-        [XmlAttribute]
         public string Name { get; set; }
-        [XmlAttribute]
         public string PlayerName { get; set; }
-        [XmlIgnore]
         public Race Race { get; set; }
-        [XmlIgnore]
         public HeroClass Class { get; set; }
         public int ClassLevel { get; set; }
         public int Modifier { get; set; }
@@ -93,31 +89,67 @@ namespace DnD
         }
         public void ReadXml(XmlReader reader)
         {
-            reader.MoveToContent();
-            Name = reader.GetAttribute("Name");
-            PlayerName = reader.GetAttribute("PlayerName");
-            while (reader.Read())
-            {
-                switch (reader.Name)
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+            XmlElement root = doc.DocumentElement;
+            Name = root.GetAttribute("Name");
+            PlayerName = root.GetAttribute("PlayerName");
+            int tmp;
+            CreatureSize cstmp;
+            XmlElement xelm = (XmlElement)root.SelectSingleNode("Class");
+            string stmp = xelm?.InnerText;
+            if (stmp != null)
+                foreach(HeroClass hc in HeroClass.AllClasses)
+                    if (stmp == hc.Name)
+                    {
+                        Class = hc;
+                        if (int.TryParse(xelm.GetAttribute("Level"), out tmp))
+                            ClassLevel = tmp;
+                        break;
+                    }
+            stmp = root.SelectSingleNode("Race")?.InnerText;
+            if (stmp != null)
+                foreach (Race r in Race.AllRaces)
+                    if (stmp == r.Name)
+                    {
+                        Race = r;
+                        break;
+                    }
+            if (int.TryParse(root.SelectSingleNode("Speed")?.InnerText, out tmp))
+                Speed = tmp;
+            if (Enum.TryParse(root.SelectSingleNode("Size")?.InnerText, out cstmp))
+                Size = cstmp;
+            if (int.TryParse(root.SelectSingleNode("MaxHealthPoints")?.InnerText, out tmp))
+                MaxHealthPoints = tmp;
+            if (int.TryParse(root.SelectSingleNode("CurrentHealthPoints")?.InnerText, out tmp))
+                CurrentHealthPoints = tmp;
+            XmlSerializer ser = new XmlSerializer(typeof(Inventory));
+            Inventory = (Inventory)ser.Deserialize(new XmlNodeReader(root.SelectSingleNode("Inventory")));
+            xelm = (XmlElement)root.SelectSingleNode("Attributes");
+            if (xelm != null)
+                foreach (XmlElement el in xelm)
                 {
-                case "Class":
-                    foreach (var t in HeroClass.AllClasses())
-                        if (reader.Value == t.Name)
-                            {
-                                Class = t;
-                                break;
-                            }
-                    break;
+                    Attribute.Type ttt;
+                    if (Enum.TryParse(el.Name, out ttt) && int.TryParse(el.InnerText, out tmp))
+                        _atr[(int)ttt] = tmp;
                 }
-            }
-            //bool isEmptyElement = reader.IsEmptyElement; // (1)
-            //reader.ReadStartElement();
-            //if (!isEmptyElement) // (1)
-            //{
-            //    Birthday = DateTime.ParseExact(reader.
-            //        ReadElementString("Birthday"), "yyyy-MM-dd", null);
-            //    reader.ReadEndElement();
-            //}
+            xelm = (XmlElement)root.SelectSingleNode("SkillMarks");
+            if (xelm != null)
+                foreach (XmlElement el in xelm)
+                {
+                    Skill.Type ttt;
+                    if (Enum.TryParse(el.Name, out ttt) && int.TryParse(el.InnerText, out tmp))
+                        _marks[(int)ttt] = tmp;
+                }
+            if (int.TryParse(root.SelectSingleNode("Age")?.InnerText, out tmp))
+                Age = tmp;
+            if (int.TryParse(root.SelectSingleNode("Height")?.InnerText, out tmp))
+                Height = tmp;
+            if (int.TryParse(root.SelectSingleNode("Weight")?.InnerText, out tmp))
+                Weight = tmp;
+            Sex = root.SelectSingleNode("Sex")?.InnerText;
+            EyesColor = root.SelectSingleNode("EyesColor")?.InnerText;
+            HairColor = root.SelectSingleNode("HairColor")?.InnerText;
         }
         public void WriteXml(XmlWriter writer)
         {
@@ -126,7 +158,12 @@ namespace DnD
             if (PlayerName != null)
                 writer.WriteAttributeString("PlayerName", PlayerName);
             if (Class != null)
-                writer.WriteElementString("Class", Class.Name);
+            {
+                writer.WriteStartElement("Class");
+                writer.WriteAttributeString("Level", ClassLevel.ToString());
+                writer.WriteString(Class.Name);
+                writer.WriteEndElement();
+            }
             if (Race != null)
                 writer.WriteElementString("Race", Race.Name);
             writer.WriteElementString("Speed", Speed.ToString());
@@ -138,6 +175,14 @@ namespace DnD
             ns.Add("", "");
             var otherSer = new XmlSerializer(typeof(Inventory));
             otherSer.Serialize(writer, Inventory, ns);
+            writer.WriteStartElement("Attributes");
+            foreach(Attribute.Type t in Enum.GetValues(typeof(Attribute.Type)))
+                writer.WriteElementString(t.ToString(), _atr[(int)t].ToString());
+            writer.WriteEndElement();
+            writer.WriteStartElement("SkillMarks");
+            foreach (Skill.Type t in Enum.GetValues(typeof(Skill.Type)))
+                writer.WriteElementString(t.ToString(), _marks[(int)t].ToString());
+            writer.WriteEndElement();
             writer.WriteElementString("Age", Age.ToString());
             writer.WriteElementString("Height", Height.ToString());
             writer.WriteElementString("Weight", Weight.ToString());

@@ -8,49 +8,49 @@ namespace DnD
 {
     public static class Skill
     {
-        private static Atribute.Type[] _atr;
+        private static Attribute.Type[] _atr;
         private static bool[] _training;
         static Skill()
         {
-            _atr = new Atribute.Type[Enum.GetValues(typeof(Type)).Length];
+            _atr = new Attribute.Type[Enum.GetValues(typeof(Type)).Length];
             _training = new bool[Enum.GetValues(typeof(Type)).Length];
             #region Atrybuty umiejętności
-            _atr[(int)Type.Bluff] = Atribute.Type.Charisma;
-            _atr[(int)Type.MoveSilently] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Spellcraft] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Diplomacy] = Atribute.Type.Charisma;
-            _atr[(int)Type.Forgery] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Ride] = Atribute.Type.Dexterity;
-            _atr[(int)Type.SpeakLanguage] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Concentration] = Atribute.Type.Constitution;
-            _atr[(int)Type.Heal] = Atribute.Type.Wisdom;
-            _atr[(int)Type.Listen] = Atribute.Type.Wisdom;
-            _atr[(int)Type.DecipherScript] = Atribute.Type.Intelligence;
-            _atr[(int)Type.OpenLock] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Swim] = Atribute.Type.Strength;
-            _atr[(int)Type.HandleAnimal] = Atribute.Type.Charisma;
-            _atr[(int)Type.Disguise] = Atribute.Type.Charisma;
-            _atr[(int)Type.Search] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Craft] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Jump] = Atribute.Type.Strength;
-            _atr[(int)Type.Spot] = Atribute.Type.Wisdom;
-            _atr[(int)Type.Appraise] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Survival] = Atribute.Type.Wisdom;
-            _atr[(int)Type.Hide] = Atribute.Type.Dexterity;
-            _atr[(int)Type.DisableDevice] = Atribute.Type.Intelligence;
-            _atr[(int)Type.UseRope] = Atribute.Type.Dexterity;
-            _atr[(int)Type.UseMagicDevice] = Atribute.Type.Charisma;
-            _atr[(int)Type.Knowledge] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Climb] = Atribute.Type.Strength;
-            _atr[(int)Type.SenseMotive] = Atribute.Type.Wisdom;
-            _atr[(int)Type.Perform] = Atribute.Type.Charisma;
-            _atr[(int)Type.EscapeArtist] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Balance] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Intimidate] = Atribute.Type.Charisma;
-            _atr[(int)Type.Profession] = Atribute.Type.Wisdom;
-            _atr[(int)Type.GatherInformation] = Atribute.Type.Charisma;
-            _atr[(int)Type.SleightOfHand] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Tumble] = Atribute.Type.Dexterity;
+            _atr[(int)Type.Bluff] = Attribute.Type.Charisma;
+            _atr[(int)Type.MoveSilently] = Attribute.Type.Dexterity;
+            _atr[(int)Type.Spellcraft] = Attribute.Type.Intelligence;
+            _atr[(int)Type.Diplomacy] = Attribute.Type.Charisma;
+            _atr[(int)Type.Forgery] = Attribute.Type.Intelligence;
+            _atr[(int)Type.Ride] = Attribute.Type.Dexterity;
+            _atr[(int)Type.SpeakLanguage] = Attribute.Type.Intelligence;
+            _atr[(int)Type.Concentration] = Attribute.Type.Constitution;
+            _atr[(int)Type.Heal] = Attribute.Type.Wisdom;
+            _atr[(int)Type.Listen] = Attribute.Type.Wisdom;
+            _atr[(int)Type.DecipherScript] = Attribute.Type.Intelligence;
+            _atr[(int)Type.OpenLock] = Attribute.Type.Dexterity;
+            _atr[(int)Type.Swim] = Attribute.Type.Strength;
+            _atr[(int)Type.HandleAnimal] = Attribute.Type.Charisma;
+            _atr[(int)Type.Disguise] = Attribute.Type.Charisma;
+            _atr[(int)Type.Search] = Attribute.Type.Intelligence;
+            _atr[(int)Type.Craft] = Attribute.Type.Intelligence;
+            _atr[(int)Type.Jump] = Attribute.Type.Strength;
+            _atr[(int)Type.Spot] = Attribute.Type.Wisdom;
+            _atr[(int)Type.Appraise] = Attribute.Type.Intelligence;
+            _atr[(int)Type.Survival] = Attribute.Type.Wisdom;
+            _atr[(int)Type.Hide] = Attribute.Type.Dexterity;
+            _atr[(int)Type.DisableDevice] = Attribute.Type.Intelligence;
+            _atr[(int)Type.UseRope] = Attribute.Type.Dexterity;
+            _atr[(int)Type.UseMagicDevice] = Attribute.Type.Charisma;
+            _atr[(int)Type.Knowledge] = Attribute.Type.Intelligence;
+            _atr[(int)Type.Climb] = Attribute.Type.Strength;
+            _atr[(int)Type.SenseMotive] = Attribute.Type.Wisdom;
+            _atr[(int)Type.Perform] = Attribute.Type.Charisma;
+            _atr[(int)Type.EscapeArtist] = Attribute.Type.Dexterity;
+            _atr[(int)Type.Balance] = Attribute.Type.Dexterity;
+            _atr[(int)Type.Intimidate] = Attribute.Type.Charisma;
+            _atr[(int)Type.Profession] = Attribute.Type.Wisdom;
+            _atr[(int)Type.GatherInformation] = Attribute.Type.Charisma;
+            _atr[(int)Type.SleightOfHand] = Attribute.Type.Dexterity;
+            _atr[(int)Type.Tumble] = Attribute.Type.Dexterity;
             #endregion
             #region Czy wyszkolone
             _training[(int)Type.Bluff] = false;
@@ -95,7 +95,7 @@ namespace DnD
         {
             return _training[(int)t];
         }
-        public static Atribute.Type BaseAtribute(Type t)
+        public static Attribute.Type BaseAtribute(Type t)
         {
             return _atr[(int)t];
         }
