@@ -76,6 +76,8 @@ namespace DnD
         public Race Race { get; set; }
         public HeroClass Class { get; set; }
         public int ClassLevel { get; set; }
+        public HeroClass SecondaryClass { get; set; }
+        public int SecondaryClassLevel { get; set; }
         public int Modifier { get; set; }
         public int Age { get; set; }
         public string Sex { get; set; }
@@ -105,6 +107,17 @@ namespace DnD
                         Class = hc;
                         if (int.TryParse(xelm.GetAttribute("Level"), out tmp))
                             ClassLevel = tmp;
+                        break;
+                    }
+            xelm = (XmlElement)root.SelectSingleNode("SecondaryClass");
+            stmp = xelm?.InnerText;
+            if (stmp != null)
+                foreach (HeroClass hc in HeroClass.AllClasses)
+                    if (stmp == hc.Name)
+                    {
+                        SecondaryClass = hc;
+                        if (int.TryParse(xelm.GetAttribute("Level"), out tmp))
+                            SecondaryClassLevel = tmp;
                         break;
                     }
             stmp = root.SelectSingleNode("Race")?.InnerText;
@@ -163,6 +176,13 @@ namespace DnD
                 writer.WriteStartElement("Class");
                 writer.WriteAttributeString("Level", ClassLevel.ToString());
                 writer.WriteString(Class.Name);
+                writer.WriteEndElement();
+            }
+            if (SecondaryClass != null)
+            {
+                writer.WriteStartElement("SecondaryClass");
+                writer.WriteAttributeString("Level", SecondaryClassLevel.ToString());
+                writer.WriteString(SecondaryClass.Name);
                 writer.WriteEndElement();
             }
             if (Race != null)
