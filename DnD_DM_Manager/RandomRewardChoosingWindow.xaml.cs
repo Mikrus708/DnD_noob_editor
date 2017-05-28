@@ -20,10 +20,9 @@ namespace DnD_DM_Manager
     public partial class RandomRewardChoosingWindow : Window
     {
         private static int _llr;
-        public RandomRewardChoosingWindow(Window owner)
+        public RandomRewardChoosingWindow()
         {
             InitializeComponent();
-            this.Owner = owner;
             _llr = 0;
         }
 

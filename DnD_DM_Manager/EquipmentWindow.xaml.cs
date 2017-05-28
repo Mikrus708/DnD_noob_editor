@@ -38,16 +38,7 @@ namespace DnD_DM_Manager
             get { return _inv; }
         }
 
-        public EquipmentWindow()
-        {
-            InitializeComponent();
 
-            lista = SomeThings.list();
-            _inv = new Inventory(lista, null);
-
-            DataContext = this;
-            //DataContext = SomeThings.list();
-        }
 
         
         
@@ -63,15 +54,32 @@ namespace DnD_DM_Manager
             Title = inv.ToString();
             this.DataContext = this;
             sta.DataContext = Inventory;
+            this.KeyDown += EquipmentWindow_KeyDown;
+            MainGrid.MouseDoubleClick += MainGrid_MouseDoubleClick;
+            MainList.MouseDoubleClick += MainGrid_MouseDoubleClick;
             RefreshCoins();
         }
 
+        private void MainGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Edit_Item(TabPanel.SelectedContent, null);
+        }
+
+        private void EquipmentWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Delete)
+            {
+                Remove_Item(TabPanel.SelectedContent, null);
+            }
+        }
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
         {
             Item it = new Item("");
-            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add, this);
-            if(wnd.ShowDialog() == true)
+            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            wnd.Owner = this;
+
+            if (wnd.ShowDialog() == true)
                 _inv.AddItem(it);
         }
 
@@ -81,7 +89,8 @@ namespace DnD_DM_Manager
             {
                 if (MainGrid.SelectedItems.Count != 1) { MessageBox.Show("Musisz wybrać dokładnie jeden przedmiot do edycj.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error); return; }
                 Item sel = MainGrid.SelectedItem as Item;
-                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit, this);
+                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                wnd.Owner = this;
                 wnd.ShowDialog();
                 MainGrid.Items.Refresh();
             }
@@ -89,7 +98,8 @@ namespace DnD_DM_Manager
             {
                 if (MainList.SelectedItems.Count != 1) { MessageBox.Show("Musisz wybrać dokładnie jeden przedmiot do edycj.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error); return; }
                 Item sel = MainList.SelectedItem as Item;
-                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit, this);
+                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                wnd.Owner = this;
                 wnd.ShowDialog();
                 MainList.Items.Refresh();
             }
@@ -138,14 +148,10 @@ namespace DnD_DM_Manager
 
         private void Money_Click(object sender, RoutedEventArgs e)
         {
-            if((sender as Button).Name[0]=='D')
-            {
+            MoneyEdit me = new MoneyEdit(_inv.Pouch);
+            me.Owner = this;
+            me.ShowDialog();
 
-            }
-            else if((sender as Button).Name[0]=='Z')
-            {
-
-            }
             RefreshCoins();
         }
 
