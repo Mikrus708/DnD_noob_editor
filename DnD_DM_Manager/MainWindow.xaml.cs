@@ -69,7 +69,9 @@ namespace DnD_DM_Manager
         private void RandomBox_Click(object sender, RoutedEventArgs e)
         {
 #warning blah
-            int SW = 4;
+            RandomRewardChoosingWindow rrcw = new RandomRewardChoosingWindow(this);
+            if (rrcw.ShowDialog() == false) return; 
+            int SW = RandomRewardChoosingWindow.LastRewardLevel();
             var x = RandomReward.GenerateTreasure(SW);
 
             EquipmentWindow eqw = new EquipmentWindow(new Inventory(x.Item1, x.Item2, $"Losowy skarb poziomu {SW}"), lista);

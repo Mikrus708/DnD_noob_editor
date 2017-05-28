@@ -21,7 +21,7 @@ namespace DnD_DM_Manager
     {
         private DnD.Equipment.Item _item;
         private ItemFormMode _ifm;
-        public NewItemForm(ref DnD.Equipment.Item it, ItemFormMode ifm)
+        public NewItemForm(ref DnD.Equipment.Item it, ItemFormMode ifm, Window owner)
         {
             InitializeComponent();
             _item = it;
@@ -33,6 +33,7 @@ namespace DnD_DM_Manager
                 WeightBox.Text = it.Weight.ToString();
                 DescBox.Text = it.Description;
             }
+            this.Owner = owner;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

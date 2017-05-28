@@ -79,7 +79,7 @@
                     <ComboBox Name="ComboInv" ItemsSource="{Binding ComboList}" Width="Auto" Height="30" SelectedIndex="0"/>
                 </StackPanel>
                 <Button Width="60" Click="Edit_Item" Content="Edytuj"/>
-                
+
 
             </StackPanel>
             <StackPanel x:Name="sta" Grid.Row="2"  Orientation="Horizontal" DataContext="{Binding Inventory}">
@@ -117,3 +117,4 @@
 
     </Grid>
 </Window>
+

@@ -71,7 +71,7 @@ namespace DnD_DM_Manager
         private void Add_New_Item (object sender, RoutedEventArgs e)
         {
             Item it = new Item("");
-            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add, this);
             if(wnd.ShowDialog() == true)
                 _inv.AddItem(it);
         }
@@ -80,15 +80,17 @@ namespace DnD_DM_Manager
         {
             if (TabPanel.SelectedIndex == 0)
             {
+                if (MainGrid.SelectedItems.Count != 1) { MessageBox.Show("Musisz wybrać dokładnie jeden przedmiot do edycj.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error); return; }
                 Item sel = MainGrid.SelectedItem as Item;
-                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit, this);
                 wnd.ShowDialog();
                 MainGrid.Items.Refresh();
             }
             else if (TabPanel.SelectedIndex == 1)
             {
+                if (MainList.SelectedItems.Count != 1) { MessageBox.Show("Musisz wybrać dokładnie jeden przedmiot do edycj.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error); return; }
                 Item sel = MainList.SelectedItem as Item;
-                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit, this);
                 wnd.ShowDialog();
                 MainList.Items.Refresh();
             }
