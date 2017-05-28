@@ -60,7 +60,7 @@ namespace DnD
         public void ReadXml(XmlReader reader)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load(reader);
+            doc.AppendChild(doc.ReadNode(reader));
             XmlElement root = doc.DocumentElement;
             int tmp;
             if (int.TryParse(root.GetAttribute("Base"), out tmp))

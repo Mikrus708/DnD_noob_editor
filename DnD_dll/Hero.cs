@@ -92,7 +92,7 @@ namespace DnD
         public void ReadXml(XmlReader reader)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load(reader);
+            doc.AppendChild(doc.ReadNode(reader));
             XmlElement root = doc.DocumentElement;
             Name = root.GetAttribute("Name");
             PlayerName = root.GetAttribute("PlayerName");
