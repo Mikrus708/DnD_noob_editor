@@ -37,7 +37,7 @@ namespace DnD.Classes
         protected enum BaseAttackRatio
         {
             Low = 2,
-            Avarage = 3,
+            Average = 3,
             High = 4
         }
         protected enum DefensiveRollRatio

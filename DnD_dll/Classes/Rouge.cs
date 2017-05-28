@@ -33,7 +33,7 @@ namespace DnD.Classes
         }
         protected override BaseAttackRatio _bar
         {
-            get { return BaseAttackRatio.Avarage; }
+            get { return BaseAttackRatio.Average; }
         }
         protected override DefensiveRollRatio _drEndur
         {

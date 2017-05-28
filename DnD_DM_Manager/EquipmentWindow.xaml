@@ -24,7 +24,7 @@
                                     <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFBB2D2D"/>
                                 </Border>
                                 <Label Content="{Binding Name}" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding ValueInCopper}" HorizontalAlignment="Center"/>
+                                <Label Content="{Binding Value}" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
