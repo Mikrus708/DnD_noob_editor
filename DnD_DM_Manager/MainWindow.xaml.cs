@@ -34,8 +34,12 @@ namespace DnD_DM_Manager
             InitializeComponent();
             heroes = new ObservableCollection<Hero>();
             Hero rogue = new Hero{ Name = "Naeli", Age=110, Class = Rouge.Instance, EyesColor=Colors.Blue.ToString(), HairColor=Colors.Brown.ToString(), Height=155, Weight=40, PlayerName="Ania", Race= Elf.Instance, Sex="Female" , Size = CreatureSize.Medium, Speed = 10, MaxHealthPoints = 11, CurrentHealthPoints = 11 };
-            rogue[HeroAttribute.Type.Strength] = 12;
-            rogue[HeroAttribute.Type.Dexterity] = 12;
+            rogue[HeroAttribute.Type.Strength] = 9;
+            rogue[HeroAttribute.Type.Dexterity] = 10;
+            rogue[HeroAttribute.Type.Constitution] = 11;
+            rogue[HeroAttribute.Type.Intelligence] = 12;
+            rogue[HeroAttribute.Type.Wisdom] = 13;
+            rogue[HeroAttribute.Type.Charisma] = 14;
             for (int i=0; i<6; i++)
             {
                 //Grid.SetColumn()

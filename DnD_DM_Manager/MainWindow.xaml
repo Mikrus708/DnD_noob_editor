@@ -207,12 +207,12 @@
                         <Label Grid.Row="3" Content="Intelekt" FontWeight="SemiBold"/>
                         <Label Grid.Row="4" Content="Roztropność" FontWeight="SemiBold"/>
                         <Label Grid.Row="5" Content="Charyzma" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Content="Siła" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Atribute.Type.Dexterity]}" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="2" Content="Budowa" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="3" Content="Intelekt" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="4" Content="Roztropność" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="5" Content="Charyzma" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Strength]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Dexterity]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="2" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Constitution]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="3" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Intelligence]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="4" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Wisdom]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="5" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Charisma]}" FontWeight="SemiBold"/>
                     </Grid>
                 </Expander>
             </Border>
