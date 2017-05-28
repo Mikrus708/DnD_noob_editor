@@ -8,11 +8,20 @@ namespace DnD.Races
 {
     public class Dwarf : Race
     {
-        private static readonly Dwarf _singleton = new Dwarf();
+        private static Dwarf _singleton;
         private Dwarf() { }
         public static Dwarf Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Dwarf tmp = new Dwarf();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override string Name
         {

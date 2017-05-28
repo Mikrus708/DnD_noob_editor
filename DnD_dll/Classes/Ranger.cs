@@ -8,11 +8,20 @@ namespace DnD.Classes
 {
     public class Ranger : HeroClass
     {
-        private static readonly Ranger _singleton = new Ranger();
+        private static Ranger _singleton;
         private Ranger() { }
         public static Ranger Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Ranger tmp = new Ranger();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override Dice.Type HitDice
         {

@@ -8,11 +8,20 @@ namespace DnD.Classes
 {
     public class Warrior : HeroClass
     {
-        private static readonly Warrior _singleton = new Warrior();
+        private static Warrior _singleton;
         private Warrior() { }
         public static Warrior Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Warrior tmp = new Warrior();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override Dice.Type HitDice
         {

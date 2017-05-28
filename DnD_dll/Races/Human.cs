@@ -8,11 +8,20 @@ namespace DnD.Races
 {
     public class Human : Race
     {
-        private static readonly Human _singleton = new Human();
+        private static Human _singleton;
         private Human() { }
         public static Human Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Human tmp = new Human();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override string Name
         {

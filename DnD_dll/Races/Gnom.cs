@@ -8,11 +8,20 @@ namespace DnD.Races
 {
     public class Gnom : Race
     {
-        private static readonly Gnom _singleton = new Gnom();
+        private static Gnom _singleton;
         private Gnom() { }
         public static Gnom Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Gnom tmp = new Gnom();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override string Name
         {

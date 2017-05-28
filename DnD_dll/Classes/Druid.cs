@@ -8,11 +8,20 @@ namespace DnD.Classes
 {
     public class Druid : HeroClass
     {
-        private static readonly Druid _singleton = new Druid();
+        private static Druid _singleton;
         private Druid() { }
         public static Druid Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Druid tmp = new Druid();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override Dice.Type HitDice
         {

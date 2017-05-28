@@ -8,15 +8,24 @@ namespace DnD.Races
 {
     public class Halforc : Race
     {
-        private static readonly Halforc _singleton = new Halforc();
+        private static Halforc _singleton = new Halforc();
         private Halforc() { }
         public static Halforc Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Halforc tmp = new Halforc();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override string Name
         {
-            get { return "Człowiek"; }
+            get { return "Półork"; }
         }
     }
 }

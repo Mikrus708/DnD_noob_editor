@@ -8,11 +8,20 @@ namespace DnD.Races
 {
     public class Elf : Race
     {
-        private static readonly Elf _singleton = new Elf();
+        private static Elf _singleton;
         private Elf() { }
         public static Elf Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Elf tmp = new Elf();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override string Name
         {

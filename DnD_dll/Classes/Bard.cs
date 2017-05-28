@@ -8,11 +8,20 @@ namespace DnD.Classes
 {
     public class Bard : HeroClass
     {
-        private static readonly Bard _singleton = new Bard();
+        private static Bard _singleton;
         private Bard() { }
         public static Bard Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Bard tmp = new Bard();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override Dice.Type HitDice
         {

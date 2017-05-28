@@ -8,11 +8,20 @@ namespace DnD.Classes
 {
     public class Sorcerer : HeroClass
     {
-        private static readonly Sorcerer _singleton = new Sorcerer();
+        private static Sorcerer _singleton;
         private Sorcerer() { }
         public static Sorcerer Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Sorcerer tmp = new Sorcerer();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override Dice.Type HitDice
         {

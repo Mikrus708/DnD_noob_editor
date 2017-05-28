@@ -9,17 +9,29 @@ namespace DnD.Classes
 {
     public abstract class HeroClass
     {
+        private static Dictionary<string ,HeroClass> _classes;
+        static HeroClass()
+        {
+            _classes = new Dictionary<string, HeroClass>();
+            foreach (Type type in
+                Assembly.GetAssembly(typeof(HeroClass)).GetTypes()
+                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(HeroClass))))
+            {
+                HeroClass cl = (HeroClass)(type.GetProperty("Instance").GetValue(null));
+                _classes.Add(cl.Name, cl);
+            }
+        }
+        public static HeroClass GetClassByName(string Name)
+        {
+            HeroClass result = null;
+            _classes.TryGetValue(Name, out result);
+            return result;
+        }
         public static IEnumerable<HeroClass> AllClasses
         {
             get
             {
-                foreach (Type type in
-                    Assembly.GetAssembly(typeof(HeroClass)).GetTypes()
-                    .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(HeroClass))))
-                {
-                    yield return (HeroClass)(type.GetProperty("Instance").GetValue(null));
-                }
-                yield break;
+                return _classes.Values;
             }
         }
         protected enum BaseAttackRatio

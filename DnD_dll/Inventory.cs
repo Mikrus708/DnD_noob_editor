@@ -11,8 +11,6 @@ using System.IO;
 
 namespace DnD
 {
-#warning Stasiu weź ogarnij tutaj i spójrz czy Ci wszystko odpowiada. Hero może mieć inventory zamiast listy, dodatkowo jedna osoba może mieć ich kilka, albo można coś gdziś wówczas zostawić itp. \
-
     public class Inventory : INotifyPropertyChanged
     {
         private Pouch _pouch = new Pouch();
@@ -86,37 +84,6 @@ namespace DnD
         public void RemoveItem(Item i)
         {
             _itemList.Remove(i);
-        }
-        public bool SerializeXML(string FilePath)
-        {
-            bool result = true;
-            XmlSerializer ser = new XmlSerializer(typeof(Inventory));
-            FileStream fs = File.Open(FilePath, FileMode.Create);
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            ns.Add("", "");
-            try
-            {
-                ser.Serialize(fs, this, ns);
-            }
-            catch
-            {
-                result = false;
-            }
-            fs.Close();
-            return result;
-        }
-        public static object DeserializeXML(string FilePath)
-        {
-            XmlSerializer ser = new XmlSerializer(typeof(Inventory));
-            FileStream fs = File.Open(FilePath, FileMode.Open);
-            Inventory result = new Inventory();
-            try
-            {
-                result = (Inventory)ser.Deserialize(fs);
-            }
-            catch { }
-            fs.Close();
-            return result;
         }
     }
 }

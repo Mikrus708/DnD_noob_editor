@@ -9,17 +9,29 @@ namespace DnD.Races
 {
     public abstract class Race
     {
+        private static Dictionary<string, Race> _races;
+        static Race()
+        {
+            _races = new Dictionary<string, Race>();
+            foreach (Type type in
+                Assembly.GetAssembly(typeof(Race)).GetTypes()
+                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Race))))
+            {
+                Race cl = (Race)(type.GetProperty("Instance").GetValue(null));
+                _races.Add(cl.Name, cl);
+            }
+        }
+        public static Race GetRaceByName(string Name)
+        {
+            Race result = null;
+            _races.TryGetValue(Name, out result);
+            return result;
+        }
         public static IEnumerable<Race> AllRaces
         {
             get
             {
-                foreach (Type type in
-                    Assembly.GetAssembly(typeof(Race)).GetTypes()
-                    .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Race))))
-                {
-                    yield return (Race)(type.GetProperty("Instance").GetValue(null));
-                }
-                yield break;
+                return _races.Values;
             }
         }
         public abstract string Name { get; }

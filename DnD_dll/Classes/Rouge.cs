@@ -8,11 +8,20 @@ namespace DnD.Classes
 {
     public class Rouge : HeroClass
     {
-        private static readonly Rouge _singleton = new Rouge();
+        private static Rouge _singleton;
         private Rouge() { }
         public static Rouge Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+                    Rouge tmp = new Rouge();
+                    if (_singleton == null)
+                        _singleton = tmp;
+                }
+                return _singleton;
+            }
         }
         public override Dice.Type HitDice
         {

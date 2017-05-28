@@ -8,11 +8,20 @@ namespace DnD.Races
 {
     public class Halfling : Race
     {
-        private static readonly Halfling _singleton = new Halfling();
+        private static Halfling _singleton;
         private Halfling() { }
         public static Halfling Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Halfling tmp = new Halfling();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override string Name
         {

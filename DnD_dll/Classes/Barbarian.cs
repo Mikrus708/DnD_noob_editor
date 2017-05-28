@@ -8,11 +8,20 @@ namespace DnD.Classes
 {
     public class Barbarian : HeroClass
     {
-        private static readonly Barbarian _singleton = new Barbarian();
+        private static Barbarian _singleton;
         private Barbarian() { }
         public static Barbarian Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Barbarian tmp = new Barbarian();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override Dice.Type HitDice
         {

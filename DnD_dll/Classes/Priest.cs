@@ -8,11 +8,20 @@ namespace DnD.Classes
 {
     public class Priest : HeroClass
     {
-        private static readonly Priest _singleton = new Priest();
+        private static Priest _singleton;
         private Priest() { }
         public static Priest Instance
         {
-            get { return _singleton; }
+            get
+            {
+                if (_singleton == null)
+                {
+					Priest tmp = new Priest();
+					if (_singleton == null)
+						_singleton = tmp;
+				}
+                return _singleton;
+            }
         }
         public override Dice.Type HitDice
         {
