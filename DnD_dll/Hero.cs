@@ -153,6 +153,7 @@ namespace DnD
         }
         public void WriteXml(XmlWriter writer)
         {
+            //new XmlDocument().Save(writer);
             if (Name != null)
                 writer.WriteAttributeString("Name", Name);
             if (PlayerName != null)
