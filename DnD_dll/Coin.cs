@@ -5,14 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace DnD
 {
-    public struct Coin
+    public struct Coin : IXmlSerializable
     {
-        [XmlAttribute("Type"), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public CoinType _Type;
+        private CoinType _Type;
         [XmlAttribute("Ammount")]
         public int Ammount;
         public Coin(CoinType Type = CoinType.Copper, int Ammount = 0)
@@ -57,12 +58,27 @@ namespace DnD
         {
             return Ammount.GetHashCode() ^ Type.GetHashCode();
         }
-        [XmlIgnore]
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+        public void ReadXml(XmlReader reader)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.AppendChild(doc.ReadNode(reader));
+            XmlElement root = doc.DocumentElement;
+            Enum.TryParse(root.GetAttribute("Type"), out _Type);
+            int.TryParse(root.GetAttribute("Ammount"), out Ammount);
+        }
+        public void WriteXml(XmlWriter writer)
+        {
+            writer.WriteAttributeString("Type", _Type.ToString());
+            writer.WriteAttributeString("Ammount", Ammount.ToString());
+        }
         public decimal Weight
         {
             get { return Ammount * 0.01m; }
         }
-        [XmlIgnore]
         public decimal Value
         {
             get

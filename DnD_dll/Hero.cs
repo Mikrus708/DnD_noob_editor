@@ -17,6 +17,9 @@ namespace DnD
     {
         private int[] _atr = new int[Enum.GetValues(typeof(HeroAttribute.Type)).Length];
         private int[] _marks = new int[Enum.GetValues(typeof(Skill.Type)).Length];
+        private Weapon _mainWeapon;
+        private Armor _mainArmor;
+        private Armor _mainShield;
         public Hero()
         {
             Inventory = new Inventory();
@@ -75,6 +78,36 @@ namespace DnD
         public string PlayerName { get; set; }
         public Race Race { get; set; }
         public HeroClass Class { get; set; }
+        public Weapon MainWeapon
+        {
+            get { return _mainWeapon; }
+            set
+            {
+                if (value != null && !Inventory.Bag.Contains(value))
+                    Inventory.Bag.Add(value);
+                _mainWeapon = value;
+            }
+        }
+        public Armor MainArmor
+        {
+            get { return _mainArmor; }
+            set
+            {
+                if (value != null && !Inventory.Bag.Contains(value))
+                    Inventory.Bag.Add(value);
+                _mainArmor = value;
+            }
+        }
+        public Armor MainShield
+        {
+            get { return _mainShield; }
+            set
+            {
+                if (value != null && !Inventory.Bag.Contains(value))
+                    Inventory.Bag.Add(value);
+                _mainShield = value;
+            }
+        }
         public int ClassLevel { get; set; }
         public HeroClass SecondaryClass { get; set; }
         public int SecondaryClassLevel { get; set; }
@@ -136,8 +169,43 @@ namespace DnD
                 MaxHealthPoints = tmp;
             if (int.TryParse(root.SelectSingleNode("CurrentHealthPoints")?.InnerText, out tmp))
                 CurrentHealthPoints = tmp;
-            XmlSerializer ser = new XmlSerializer(typeof(Inventory));
-            Inventory = (Inventory)ser.Deserialize(new XmlNodeReader(root.SelectSingleNode("Inventory")));
+            {
+                XmlSerializer sss;
+                Pouch pppc = null;
+                List<Item> lit = new List<Item>();
+                XmlElement el;
+                XmlElement inv = (XmlElement)root.SelectSingleNode("Inventory");
+                sss = new XmlSerializer(typeof(Pouch));
+                el = (XmlElement)inv.SelectSingleNode("Pouch");
+                if (el != null)
+                    pppc = (Pouch)sss.Deserialize(new XmlNodeReader(el));
+                XmlElement bag = (XmlElement)inv.SelectSingleNode("Bag");
+                if (bag != null)
+                {
+                    sss = new XmlSerializer(typeof(Item));
+                    foreach (XmlElement it in bag.SelectNodes("Item"))
+                        lit.Add((Item)sss.Deserialize(new XmlNodeReader(it)));
+                    sss = new XmlSerializer(typeof(Weapon));
+                    foreach (XmlElement it in bag.SelectNodes("Weapon"))
+                        lit.Add((Item)sss.Deserialize(new XmlNodeReader(it)));
+                    sss = new XmlSerializer(typeof(Armor));
+                    foreach (XmlElement it in bag.SelectNodes("Armor"))
+                        lit.Add((Item)sss.Deserialize(new XmlNodeReader(it)));
+                }
+                Inventory = new Inventory(lit, pppc);
+                el = (XmlElement)inv.SelectSingleNode("MainWeapon")?.SelectSingleNode("Weapon");
+                sss = new XmlSerializer(typeof(Weapon));
+                if (el != null)
+                    MainWeapon = (Weapon)sss.Deserialize(new XmlNodeReader(el));
+                el = (XmlElement)inv.SelectSingleNode("MainArmor")?.SelectSingleNode("Armor");
+                sss = new XmlSerializer(typeof(Armor));
+                if (el != null)
+                    MainArmor = (Armor)sss.Deserialize(new XmlNodeReader(el));
+                el = (XmlElement)inv.SelectSingleNode("MainShield")?.SelectSingleNode("Armor");
+                if (el != null)
+                    MainShield = (Armor)sss.Deserialize(new XmlNodeReader(el));
+
+            }
             xelm = (XmlElement)root.SelectSingleNode("Attributes");
             if (xelm != null)
                 foreach (XmlElement el in xelm)
@@ -194,8 +262,49 @@ namespace DnD
             writer.WriteElementString("Bruise", Bruise.ToString());
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             ns.Add("", "");
-            var otherSer = new XmlSerializer(typeof(Inventory));
-            otherSer.Serialize(writer, Inventory, ns);
+            XmlSerializer otherSer;
+            {
+                writer.WriteStartElement("Inventory");
+                if (_mainWeapon != null)
+                {
+                    otherSer = new XmlSerializer(typeof(Weapon));
+                    writer.WriteStartElement("MainWeapon");
+                    otherSer.Serialize(writer, _mainWeapon, ns);
+                    writer.WriteEndElement();
+                }
+                otherSer = new XmlSerializer(typeof(Armor));
+                if (_mainArmor != null)
+                {
+                    writer.WriteStartElement("MainArmor");
+                    otherSer.Serialize(writer, _mainArmor, ns);
+                    writer.WriteEndElement();
+                }
+                if (_mainShield != null)
+                {
+                    writer.WriteStartElement("MainShield");
+                    otherSer.Serialize(writer, _mainShield, ns);
+                    writer.WriteEndElement();
+                }
+                otherSer = new XmlSerializer(typeof(Pouch));
+                otherSer.Serialize(writer, Inventory.Pouch, ns);
+                {
+                    writer.WriteStartElement("Bag");
+                    XmlSerializer serItem = new XmlSerializer(typeof(Item));
+                    XmlSerializer serArmo = new XmlSerializer(typeof(Armor));
+                    XmlSerializer serWeap = new XmlSerializer(typeof(Weapon));
+                    foreach (object it in Inventory.Bag.Where((i) => i != MainWeapon && i != MainArmor && i != MainShield))
+                    {
+                        if (it.GetType() == typeof(Item))
+                            serItem.Serialize(writer, it, ns);
+                        else if (it.GetType() == typeof(Weapon))
+                            serWeap.Serialize(writer, it, ns);
+                        else if (it.GetType() == typeof(Armor))
+                            serArmo.Serialize(writer, it, ns);
+                    }
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+            }
             writer.WriteStartElement("Attributes");
             foreach(HeroAttribute.Type t in Enum.GetValues(typeof(HeroAttribute.Type)))
             {

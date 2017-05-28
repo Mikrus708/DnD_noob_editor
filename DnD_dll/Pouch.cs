@@ -6,20 +6,22 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace DnD
 {
-    public class Pouch : INotifyPropertyChanged, IEnumerable<Coin>
+    public class Pouch : INotifyPropertyChanged, IEnumerable<Coin>, IXmlSerializable
     {
-        private Coin[] coins;
+        private Coin[] _coins;
         public event PropertyChangedEventHandler PropertyChanged;
         public Pouch()
         {
-            coins = new Coin[4];
+            _coins = new Coin[4];
             for (int i = 0; i < 4; ++i)
             {
-                coins[i] = new Coin((CoinType)i);
+                _coins[i] = new Coin((CoinType)i);
             }
         }
         protected void NotifyPropertyChanged(string propertyName)
@@ -35,7 +37,7 @@ namespace DnD
         }
         public void Add(Coin c)
         {
-            coins[(int)c.Type] += c;
+            _coins[(int)c.Type] += c;
         }
         public static Pouch operator+(Pouch p, Coin c)
         {
@@ -51,17 +53,11 @@ namespace DnD
             p.Changes();
             return p;
         }
-        [XmlElement("Coin"), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public Coin[] List
-        {
-            get { return coins; }
-            set { coins = value; }
-        }
         public IEnumerable<Coin> Coins
         {
             get
             {
-                return coins;
+                return _coins;
             }
         }
         [XmlAttribute]
@@ -69,7 +65,7 @@ namespace DnD
         {
             get
             {
-                return coins.Aggregate(0m, (sum, coin) => sum + coin.Value);
+                return _coins.Aggregate(0m, (sum, coin) => sum + coin.Value);
             }
         }
         [XmlIgnore]
@@ -77,7 +73,7 @@ namespace DnD
         {
             get
             {
-                return coins.Aggregate(0m, (sum, coin) => sum + coin.Weight);
+                return _coins.Aggregate(0m, (sum, coin) => sum + coin.Weight);
             }
         }
         public Pouch Pay(int valueInCopper)
@@ -88,10 +84,10 @@ namespace DnD
             int tmp;
             for (int i = 3; i >= 0; --i)
             {
-                tmp = Math.Min(valueInCopper / (int)Math.Pow(10, i), coins[i].Ammount);
+                tmp = Math.Min(valueInCopper / (int)Math.Pow(10, i), _coins[i].Ammount);
                 valueInCopper -= tmp * (int)Math.Pow(10, i);
-                coins[i].Ammount -= tmp;
-                result.coins[i].Ammount += tmp;
+                _coins[i].Ammount -= tmp;
+                result._coins[i].Ammount += tmp;
             }
             if (valueInCopper > 0)
                 throw new Exception("To nie powinno sie wysypac. Sprawdz Pouch.Pay()");
@@ -99,23 +95,47 @@ namespace DnD
         }
         public IEnumerator<Coin> GetEnumerator()
         {
-            foreach (var c in coins)
+            foreach (var c in _coins)
                 yield return c;
             yield break;
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return coins.GetEnumerator();
+            return _coins.GetEnumerator();
+        }
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+        public void ReadXml(XmlReader reader)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.AppendChild(doc.ReadNode(reader));
+            XmlElement root = doc.DocumentElement;
+            XmlSerializer ser = new XmlSerializer(typeof(Coin));
+            foreach (XmlElement el in root.SelectNodes("Coin"))
+            {
+                Coin c = (Coin)ser.Deserialize(new XmlNodeReader(el));
+                this[c.Type] += c.Ammount;
+            }
+        }
+        public void WriteXml(XmlWriter writer)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Coin));
+            foreach (Coin c in _coins)
+            {
+                ser.Serialize(writer, c);
+            }
         }
         public int this[CoinType type]
         {
             get
             {
-                return coins[(int)type].Ammount;
+                return _coins[(int)type].Ammount;
             }
             set
             {
-                coins[(int)type].Ammount = value;
+                _coins[(int)type].Ammount = value;
                 Changes();
             }
         }
