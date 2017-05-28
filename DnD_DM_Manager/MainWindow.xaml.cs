@@ -72,7 +72,6 @@ namespace DnD_DM_Manager
 
         private void RandomBox_Click(object sender, RoutedEventArgs e)
         {
-#warning blah
             RandomRewardChoosingWindow rrcw = new RandomRewardChoosingWindow(this);
             if (rrcw.ShowDialog() == false) return; 
             int SW = RandomRewardChoosingWindow.LastRewardLevel();

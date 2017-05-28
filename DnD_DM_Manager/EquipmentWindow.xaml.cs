@@ -51,7 +51,6 @@ namespace DnD_DM_Manager
 
         
         
-#warning jakiś fajny pomysł na przesyłanie między ekwipunkami poza drag&dropem? Nie chce mi się nad nim na razie pracować;
         public EquipmentWindow(Inventory inv, List<Inventory> allInventories)
         {
             InitializeComponent();
@@ -135,6 +134,19 @@ namespace DnD_DM_Manager
                     _inv.RemoveItem(MainList.SelectedItems[0] as Item);
                 }
             }
+        }
+
+        private void Money_Click(object sender, RoutedEventArgs e)
+        {
+            if((sender as Button).Name[0]=='D')
+            {
+
+            }
+            else if((sender as Button).Name[0]=='Z')
+            {
+
+            }
+            RefreshCoins();
         }
 
         private void RefreshCoins()
