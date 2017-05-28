@@ -5,11 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="Wybierz poziom losowego skarbu" Height="300" Width="300" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" Background="Bisque">
+        Title="Wybierz poziom losowego skarbu" Height="420" Width="420" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" Background="Bisque">
     <Window.Resources>
         <Button Background="LightBlue" Content="BlahBlah" x:Name="strangebut" x:Key="strangebut" Height="190" Width="50"/>
+        <FontFamily x:Key="Beyond Wonderland">
+            /resources/fonts/#Beyond Wonderland
+        </FontFamily>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource Beyond Wonderland}"/>
+        </Style>
+        <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid" Margin="5,0,5,5">
+                            <Border x:Name="border" CornerRadius="8" BorderBrush="Goldenrod" BorderThickness="2" Opacity="0.5">
+                                <Border.Background>
+                                    <RadialGradientBrush GradientOrigin="0.496,1.052" Center="0.5, 0.5">
+                                        <RadialGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" 
+                                   ScaleX="1.5" ScaleY="1.5"/>
+                                                <TranslateTransform X="0.02" Y="0.3"/>
+                                            </TransformGroup>
+                                        </RadialGradientBrush.RelativeTransform>
+                                        <GradientStop Offset="1" Color="#00000000"/>
+                                        <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
+                                    </RadialGradientBrush>
+                                </Border.Background>
+
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextElement.FontFamily="{StaticResource Beyond Wonderland}"  TextElement.FontSize="25" TextElement.FontWeight="Bold" TextElement.Foreground="Gold"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    <Grid Name="MainGrid">
+    <Grid Name="MainGrid" Background="#FF7D4C30">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -24,27 +85,27 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Grid.Column="0" Grid.Row="0" Content="1" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="2" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="2" Grid.Row="0" Content="3" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="3" Grid.Row="0" Content="4" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="4" Grid.Row="0" Content="5" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="0" Grid.Row="1" Content="6" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="1" Grid.Row="1" Content="7" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="2" Grid.Row="1" Content="8" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="3" Grid.Row="1" Content="9" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="4" Grid.Row="1" Content="10" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="0" Grid.Row="2" Content="11" Margin="8" Click="Button_Click"/>
-        <Button Grid.Column="1" Grid.Row="2" Content="12" Margin="8" Click="Button_Click" ToolTip="Not implemented"/>
-        <Button Grid.Column="2" Grid.Row="2" Content="13" Margin="8" Click="Button_Click" ToolTip="Not implemented"/>
-        <Button Grid.Column="3" Grid.Row="2" Content="14" Margin="8" Click="Button_Click" ToolTip="Not implemented"/>
-        <Button Grid.Column="4" Grid.Row="2" Content="15" Margin="8" Click="Button_Click" ToolTip="Not implemented"/>
-        <Button Grid.Column="0" Grid.Row="3" Content="16" Margin="8" Click="Button_Click" ToolTip="Not implemented"/>
-        <Button Grid.Column="1" Grid.Row="3" Content="17" Margin="8" Click="Button_Click" ToolTip="Not implemented"/>
-        <Button Grid.Column="2" Grid.Row="3" Content="18" Margin="8" Click="Button_Click" ToolTip="Not implemented"/>
-        <Button Grid.Column="3" Grid.Row="3" Content="19" Margin="8" Click="Button_Click" ToolTip="Not implemented"/>
-        <Button Grid.Column="4" Grid.Row="3" Content="20" Margin="8" Click="Button_Click" ToolTip="{StaticResource strangebut}"/>
-        <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Content="Wróć" Margin="10" Click="Close_Click"/>
+        <Button Grid.Column="0" Grid.Row="0" Content="1" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="1" Grid.Row="0" Content="2" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="3" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="3" Grid.Row="0" Content="4" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="4" Grid.Row="0" Content="5" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="0" Grid.Row="1" Content="6" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="7" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="2" Grid.Row="1" Content="8" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="3" Grid.Row="1" Content="9" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="4" Grid.Row="1" Content="10" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="0" Grid.Row="2" Content="11" Style="{StaticResource RoundCorner}" Click="Button_Click"/>
+        <Button Grid.Column="1" Grid.Row="2" Content="12" Style="{StaticResource RoundCorner}" Click="Button_Click" ToolTip="Not implemented"/>
+        <Button Grid.Column="2" Grid.Row="2" Content="13" Style="{StaticResource RoundCorner}" Click="Button_Click" ToolTip="Not implemented"/>
+        <Button Grid.Column="3" Grid.Row="2" Content="14" Style="{StaticResource RoundCorner}" Click="Button_Click" ToolTip="Not implemented"/>
+        <Button Grid.Column="4" Grid.Row="2" Content="15" Style="{StaticResource RoundCorner}" Click="Button_Click" ToolTip="Not implemented"/>
+        <Button Grid.Column="0" Grid.Row="3" Content="16" Style="{StaticResource RoundCorner}" Click="Button_Click" ToolTip="Not implemented"/>
+        <Button Grid.Column="1" Grid.Row="3" Content="17" Style="{StaticResource RoundCorner}" Click="Button_Click" ToolTip="Not implemented"/>
+        <Button Grid.Column="2" Grid.Row="3" Content="18" Style="{StaticResource RoundCorner}" Click="Button_Click" ToolTip="Not implemented"/>
+        <Button Grid.Column="3" Grid.Row="3" Content="19" Style="{StaticResource RoundCorner}" Click="Button_Click" ToolTip="Not implemented"/>
+        <Button Grid.Column="4" Grid.Row="3" Content="20" Style="{StaticResource RoundCorner}" Click="Button_Click" ToolTip="{StaticResource strangebut}"/>
+        <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Content="Wroc" Style="{StaticResource RoundCorner}" Click="Close_Click"/>
 
     </Grid>
 </Window>
