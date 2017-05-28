@@ -65,6 +65,9 @@
     <Compile Include="EquipmentWindow.xaml.cs">
       <DependentUpon>EquipmentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MoneyEdit.xaml.cs">
+      <DependentUpon>MoneyEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RandomRewardChoosingWindow.xaml.cs">
       <DependentUpon>RandomRewardChoosingWindow.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="EquipmentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MoneyEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

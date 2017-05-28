@@ -80,8 +80,7 @@
                 </StackPanel>
                 <Button Width="60" Click="Edit_Item" Content="Edytuj"/>
                 <StackPanel Orientation="Vertical" Width="80">
-                    <Button Height="40" Content="Dodaj $" Click="Money_Click" Name="DodajHajsButton"/>
-                    <Button Height="40" Content="Zabierz $" Click="Money_Click" Name="ZabierzHajsButton"/>
+                    <Button Height="80" Content="Zmień $" Click="Money_Click" Name="DodajHajsButton"/>
                 </StackPanel>
 
 
