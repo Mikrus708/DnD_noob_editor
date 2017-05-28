@@ -72,7 +72,23 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" >
-                <Button Width="60" Click="Add_New_Item" Content="Dodaj"/>
+                <Button Width="90" Click="Show_Add_Options">
+                    <Grid Width="85" Height="75">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Dodaj" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Name="Add_Label"/>
+                        <Button Grid.Column="0" Grid.Row="0" Content="Przedmiot" Visibility="Hidden" Name="AddItem_Button" Click="Add_New_Item"/>
+                        <Button Grid.Column="1" Grid.Row="0" Content="Broń" Visibility="Hidden" Name="AddWeapon_Button" Click="Add_New_Weapon"/>
+                        <Button Grid.Column="0" Grid.Row="1" Content="Zbroja" Visibility="Hidden" Name="AddArmour_Button" Click="Add_New_Armour"/>
+                        <Button Grid.Column="1" Grid.Row="1" Content="Useless" Visibility="Hidden" Name="AddNothing_Button" Click="Add_New_Item"/>
+                    </Grid>
+                </Button>
                 <Button Width="60" Click="Remove_Item" Content="Usuń"/>
                 <StackPanel Width="120">
                     <Button Height="50" Click="Give_Item" Content="Przekaż"/>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="NewItemForm" Height="270" Width="250" ResizeMode="CanMinimize" Background="BurlyWood" WindowStartupLocation="CenterOwner"> 
+        Title="Dodaj nowy przedmiot" Height="270" Width="250" ResizeMode="CanMinimize" Background="BurlyWood" WindowStartupLocation="CenterOwner"> 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
@@ -25,6 +25,9 @@
             <Label Height="30">Wartość: </Label>
             <Label Height="30">Waga: </Label>
             <Label Height="30">Opis: </Label>
+            <Label Height="30" Content="val1:" Name="Value_Label1" Margin="0,62,0,0" Visibility="Hidden"/>
+            <Label Height="30" Content="val2:" Name="Value_Label2"  Visibility="Hidden"/>
+            <Label Height="30" Content="val3:" Name="Value_Label3"  Visibility="Hidden"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="4">
             <StackPanel.Resources>
@@ -36,6 +39,9 @@
             <TextBox Height="30" Name="ValueBox"/>
             <TextBox Height="30" Name="WeightBox"/>
             <TextBox Height="90" Name="DescBox"/>
+            <TextBox Height="30" Name="Value_Box1" Visibility="Hidden"/>
+            <TextBox Height="30" Name="Value_Box2" Visibility="Hidden"/>
+            <TextBox Height="30" Name="Value_Box3" Visibility="Hidden"/>
         </StackPanel>
         <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="100" Content="OK" Click="Button_Click"/>
     </Grid>

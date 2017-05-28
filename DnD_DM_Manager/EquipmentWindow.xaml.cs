@@ -21,7 +21,8 @@ namespace DnD_DM_Manager
     /// </summary>
     public partial class EquipmentWindow : Window 
     {
-        List<Item> lista;
+
+        private static bool messageshown = false;
 
         private Inventory _inv;
         private List<Inventory> _otherInventories = new List<Inventory>();
@@ -75,7 +76,32 @@ namespace DnD_DM_Manager
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
         {
+            e.Handled = true;
+            UnclickAddButton();
             Item it = new Item("");
+            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            wnd.Owner = this;
+
+            if (wnd.ShowDialog() == true)
+                _inv.AddItem(it);
+            
+        }
+        private void Add_New_Weapon(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            UnclickAddButton();
+            Weapon it = new Weapon();
+            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            wnd.Owner = this;
+
+            if (wnd.ShowDialog() == true)
+                _inv.AddItem(it);
+        }
+        private void Add_New_Armour(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            UnclickAddButton();
+            Armor it = new Armor();
             NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
             wnd.Owner = this;
 
@@ -153,6 +179,25 @@ namespace DnD_DM_Manager
             me.ShowDialog();
 
             RefreshCoins();
+        }
+        private void Show_Add_Options(object sender, RoutedEventArgs e)
+        {
+            if (messageshown == false) { MessageBox.Show("na razie dziala biednie", "", MessageBoxButton.OK, MessageBoxImage.Information); messageshown = true; }
+
+            Add_Label.Visibility = Visibility.Hidden;
+            AddWeapon_Button.Visibility = Visibility.Visible;
+            AddItem_Button.Visibility = Visibility.Visible;
+            AddArmour_Button.Visibility = Visibility.Visible;
+            AddNothing_Button.Visibility = Visibility.Visible;
+        }
+
+        private void UnclickAddButton()
+        {
+            Add_Label.Visibility = Visibility.Visible;
+            AddWeapon_Button.Visibility = Visibility.Hidden;
+            AddItem_Button.Visibility = Visibility.Hidden;
+            AddArmour_Button.Visibility = Visibility.Hidden;
+            AddNothing_Button.Visibility = Visibility.Hidden;
         }
 
         private void RefreshCoins()
