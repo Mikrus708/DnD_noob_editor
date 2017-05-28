@@ -53,6 +53,9 @@ namespace DnD
         {
             get { return _pouch; }
         }
+        [XmlArray("Bag")]
+        [XmlArrayItem("Item", typeof(Item))]
+        [XmlArrayItem("Weapon", typeof(Weapon))]
         public ObservableCollection<Item> Bag
         {
             get { return _itemList; }
