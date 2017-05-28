@@ -76,8 +76,8 @@ namespace DnD_DM_Manager
             if (rrcw.ShowDialog() == false) return; 
             int SW = RandomRewardChoosingWindow.LastRewardLevel();
             var x = RandomReward.GenerateTreasure(SW);
-
-            EquipmentWindow eqw = new EquipmentWindow(new Inventory(x.Item1, x.Item2, $"Losowy skarb poziomu {SW}"), lista);
+            x.Name = $"Losowy skarb poziomu {SW}";
+            EquipmentWindow eqw = new EquipmentWindow(x, lista);
             eqw.Show();
         }
     }

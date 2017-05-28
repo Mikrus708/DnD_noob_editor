@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace DnD
@@ -33,12 +34,15 @@ namespace DnD
             XmlSerializer ser = new XmlSerializer(typeof(T));
             FileStream fs = File.Open(FilePath, FileMode.Open);
             T result = default(T);
-            try
+            using (XmlReader red = XmlReader.Create(fs, new XmlReaderSettings { IgnoreComments = true, IgnoreWhitespace = true }))
             {
-                result = (T)ser.Deserialize(fs);
+                try
+                {
+                    result = (T)ser.Deserialize(red);
+                }
+                catch { }
+                fs.Close();
             }
-            catch { }
-            fs.Close();
             return result;
         }
     }

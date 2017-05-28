@@ -64,25 +64,25 @@ namespace DnD
                 return coins;
             }
         }
-        [XmlIgnore]
-        public int ValueInCopper
+        [XmlAttribute]
+        public decimal TotalValue
         {
             get
             {
-                return coins.Aggregate(0, (sum, coin) => sum + coin.ValueInCopper);
+                return coins.Aggregate(0m, (sum, coin) => sum + coin.Value);
             }
         }
         [XmlIgnore]
-        public int Weight
+        public decimal Weight
         {
             get
             {
-                return coins.Aggregate(0, (sum, coin) => sum + coin.Weight);
+                return coins.Aggregate(0m, (sum, coin) => sum + coin.Weight);
             }
         }
         public Pouch Pay(int valueInCopper)
         {
-            if (ValueInCopper < valueInCopper)
+            if (TotalValue < valueInCopper)
                 return null;
             Pouch result = new Pouch();
             int tmp;

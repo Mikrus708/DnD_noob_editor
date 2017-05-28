@@ -9,12 +9,10 @@ namespace DnD
 {
     public static class RandomReward
     {
-        public static Tuple<List<Item>, List<Coin>> GenerateTreasure(int SW)
+        public static Inventory GenerateTreasure(int SW)
         {
-#warning bieda funkcja
             List<Item> items = new List<Item>();
             List<Coin> coins = new List<Coin>();
-
             int roll;
 #pragma warning disable CS0642 // Possible mistaken empty statement
             switch (SW)
@@ -200,7 +198,7 @@ namespace DnD
                     break;
             }
 #pragma warning restore CS0642 // Possible mistaken empty statement
-            return new Tuple<List<Item>, List<Coin>>(items, coins);
+            return new Inventory(items, coins);
         }
     }
 }

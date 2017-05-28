@@ -13,7 +13,7 @@ namespace DnD.Equipment
         protected string _name;
         protected string _family;
         protected string _category;
-        protected int _value;
+        protected decimal _value;
         protected string _description;
         public Item()
         {
@@ -22,7 +22,7 @@ namespace DnD.Equipment
             _family = string.Empty;
             _value = 0;
         }
-        public Item(string name, int value = 0, string family = null, string category = null)
+        public Item(string name, decimal value = 0, string family = null, string category = null)
         {
             _name = name;
             _category = category;
@@ -53,7 +53,7 @@ namespace DnD.Equipment
             set { _category = value; }
         }
         [XmlAttribute]
-        public int ValueInCopper
+        public decimal Value
         {
             get { return _value; }
             set { _value = value; }
@@ -62,6 +62,6 @@ namespace DnD.Equipment
         /// Waga w 0.01 kg
         /// </summary>
         [XmlAttribute]
-        public int Weight { get; set; }
+        public decimal Weight { get; set; }
     }
 }

@@ -143,7 +143,7 @@ namespace DnD
                 foreach (XmlElement el in xelm)
                 {
                     HeroAttribute.Type ttt;
-                    if (Enum.TryParse(el.Name, out ttt) && int.TryParse(el.InnerText, out tmp))
+                    if (Enum.TryParse(el.Name, out ttt) && int.TryParse(el.GetAttribute("Value"), out tmp))
                         _atr[(int)ttt] = tmp;
                 }
             xelm = (XmlElement)root.SelectSingleNode("SkillMarks");
@@ -151,7 +151,7 @@ namespace DnD
                 foreach (XmlElement el in xelm)
                 {
                     Skill.Type ttt;
-                    if (Enum.TryParse(el.Name, out ttt) && int.TryParse(el.InnerText, out tmp))
+                    if (Enum.TryParse(el.Name, out ttt) && int.TryParse(el.GetAttribute("Value"), out tmp))
                         _marks[(int)ttt] = tmp;
                 }
             if (int.TryParse(root.SelectSingleNode("Age")?.InnerText, out tmp))
@@ -198,11 +198,20 @@ namespace DnD
             otherSer.Serialize(writer, Inventory, ns);
             writer.WriteStartElement("Attributes");
             foreach(HeroAttribute.Type t in Enum.GetValues(typeof(HeroAttribute.Type)))
-                writer.WriteElementString(t.ToString(), _atr[(int)t].ToString());
+            {
+                writer.WriteStartElement(t.ToString());
+                writer.WriteAttributeString("Value", _atr[(int)t].ToString());
+                writer.WriteEndElement();
+            }
             writer.WriteEndElement();
             writer.WriteStartElement("SkillMarks");
             foreach (Skill.Type t in Enum.GetValues(typeof(Skill.Type)))
-                writer.WriteElementString(t.ToString(), _marks[(int)t].ToString());
+            {
+                //writer.WriteComment(Skill.GetPolishName(t));
+                writer.WriteStartElement(t.ToString());
+                writer.WriteAttributeString("Value", _marks[(int)t].ToString());
+                writer.WriteEndElement();
+            }
             writer.WriteEndElement();
             writer.WriteElementString("Age", Age.ToString());
             writer.WriteElementString("Height", Height.ToString());

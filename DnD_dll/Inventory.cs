@@ -56,6 +56,7 @@ namespace DnD
         [XmlArray("Bag")]
         [XmlArrayItem("Item", typeof(Item))]
         [XmlArrayItem("Weapon", typeof(Weapon))]
+        [XmlArrayItem("Armor", typeof(Armor))]
         public ObservableCollection<Item> Bag
         {
             get { return _itemList; }
@@ -70,13 +71,13 @@ namespace DnD
         {
             _itemList.Add(item);
         }
-        public int TotalWeight
+        public decimal TotalWeight
         {
             get { return _itemList.Sum(x => x.Weight) + Pouch.Weight; }
         }
-        public int TotalValue
+        public decimal TotalValue
         {
-            get { return _itemList.Sum(x => x.ValueInCopper) + Pouch.ValueInCopper; }
+            get { return _itemList.Sum(x => x.Value) + Pouch.TotalValue; }
         }
         public override string ToString()
         {

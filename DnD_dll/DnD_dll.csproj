@@ -55,6 +55,7 @@
     <Compile Include="Classes\Wizard.cs" />
     <Compile Include="Damage.cs" />
     <Compile Include="EasyXML.cs" />
+    <Compile Include="Equipment\Armor.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Races\Dwarf.cs" />
     <Compile Include="Races\Elf.cs" />

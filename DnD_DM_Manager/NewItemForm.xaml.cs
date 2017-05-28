@@ -29,7 +29,7 @@ namespace DnD_DM_Manager
             if(ifm == ItemFormMode.Edit || ifm == ItemFormMode.Show)
             {
                 NameBox.Text = it.Name;
-                ValueBox.Text = it.ValueInCopper.ToString();
+                ValueBox.Text = it.Value.ToString();
                 WeightBox.Text = it.Weight.ToString();
                 DescBox.Text = it.Description;
             }
@@ -40,16 +40,16 @@ namespace DnD_DM_Manager
         {
             
             string name = NameBox.Text;
-            int value;
-            int weight;
+            decimal value;
+            decimal weight;
             string desc = DescBox.Text;
-            if(int.TryParse(ValueBox.Text, out value)==false)
+            if(decimal.TryParse(ValueBox.Text, out value)==false)
             {
                 MessageBox.Show("Value is incorrect", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.DialogResult = false;
                 this.Close();
             }
-            if (int.TryParse(WeightBox.Text, out weight) == false)
+            if (decimal.TryParse(WeightBox.Text, out weight) == false)
             {
                 MessageBox.Show("Weight is incorrect", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.DialogResult = false;
@@ -57,7 +57,7 @@ namespace DnD_DM_Manager
             }
             _item.Name = name;
             _item.Weight = weight;
-            _item.ValueInCopper = value;
+            _item.Value = value;
             _item.Description = desc;
             this.DialogResult = true;
             this.Close();

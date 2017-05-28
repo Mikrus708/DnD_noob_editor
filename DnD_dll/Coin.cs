@@ -58,16 +58,16 @@ namespace DnD
             return Ammount.GetHashCode() ^ Type.GetHashCode();
         }
         [XmlIgnore]
-        public int Weight
+        public decimal Weight
         {
-            get { return Ammount * 10; }
+            get { return Ammount * 0.01m; }
         }
         [XmlIgnore]
-        public int ValueInCopper
+        public decimal Value
         {
             get
             {
-                return Ammount * (int)Math.Pow(10, (int)Type);
+                return Ammount * (int)Math.Pow(10, (int)Type) * 0.01m;
             }
         }
     }
