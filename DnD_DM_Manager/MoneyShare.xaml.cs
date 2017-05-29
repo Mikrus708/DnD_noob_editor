@@ -28,15 +28,22 @@ namespace DnD_DM_Manager
         private void DivideActive_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            MoneyArguments.Amount[DnD.CoinType.Copper] = int.Parse(CopCh.Text);
-            MoneyArguments.Amount[DnD.CoinType.Silver] = int.Parse(SilCh.Text);
-            MoneyArguments.Amount[DnD.CoinType.Gold] = int.Parse(GolCh.Text);
-            MoneyArguments.Amount[DnD.CoinType.Platinium] = int.Parse(PlaCh.Text);
+            ParseCoins();
             MoneyArguments.Mode = ShareMode.Divide;
+            MoneyArguments.Status = HeroStatus.Active;
+            this.Close();
+        }
+        private void GiveAll_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            ParseCoins();
+            MoneyArguments.Mode = ShareMode.ToAll;
+            MoneyArguments.Status = HeroStatus.All;
             this.Close();
         }
         private void TextChanged_Ch(object sender, TextChangedEventArgs e)
         {
+            if(MoneyArguments == null) return;
             int change;
             TextBox tb = sender as TextBox;
             if (tb.Text == "-") change = 0;
@@ -44,9 +51,8 @@ namespace DnD_DM_Manager
             {
                 tb.Text = System.Text.RegularExpressions.Regex.Replace(tb.Text, "[^0-9]", "");
                 tb.Select(tb.Text.Length, 0);
-                return;
             }
-            //RefreshWV();
+            RefreshWV();
         }
         private void RefreshWV()
         {
@@ -62,6 +68,13 @@ namespace DnD_DM_Manager
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             (sender as TextBox).SelectAll();
+        }
+        private void ParseCoins()
+        {
+            MoneyArguments.Amount[DnD.CoinType.Copper] = int.Parse(CopCh.Text);
+            MoneyArguments.Amount[DnD.CoinType.Silver] = int.Parse(SilCh.Text);
+            MoneyArguments.Amount[DnD.CoinType.Gold] = int.Parse(GolCh.Text);
+            MoneyArguments.Amount[DnD.CoinType.Platinium] = int.Parse(PlaCh.Text);
         }
     }
 

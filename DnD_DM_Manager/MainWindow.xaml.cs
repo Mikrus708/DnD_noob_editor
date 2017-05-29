@@ -86,16 +86,19 @@ namespace DnD_DM_Manager
             MoneyArgs ma = new MoneyArgs();
             MoneyShare ms = new MoneyShare(ma);
             if (ms.ShowDialog() ==false) return;
-            foreach(Hero h in heroes)
-            {
-                h.Inventory.Pouch[CoinType.Copper] += ma.Amount[CoinType.Copper];
-                h.Inventory.Pouch[CoinType.Silver] += ma.Amount[CoinType.Silver];
-                h.Inventory.Pouch[CoinType.Gold] += ma.Amount[CoinType.Gold];
-                h.Inventory.Pouch[CoinType.Platinium] += ma.Amount[CoinType.Platinium];
-                MessageBox.Show($"{ma.Amount.ToString()} added to {h.ToString()} main inventory.");
-            }
-            
+            if (ma.Mode == ShareMode.ToAll && ma.Status == HeroStatus.All) GiveMoney(ma.Amount, heroes);
 
+        }
+        private void GiveMoney (Pouch p, IEnumerable<Hero> heroes)
+        {
+            foreach (Hero h in heroes)
+            {
+                h.Inventory.Pouch[CoinType.Copper] += p[CoinType.Copper];
+                h.Inventory.Pouch[CoinType.Silver] += p[CoinType.Silver];
+                h.Inventory.Pouch[CoinType.Gold] += p[CoinType.Gold];
+                h.Inventory.Pouch[CoinType.Platinium] += p[CoinType.Platinium];
+                MessageBox.Show($"{p.TotalValue} added to {h.Name}'s main inventory.");
+            }
         }
             
     }
