@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<Hero Name="Arato" PlayerName="Michał">
+  <Class Level="0">Tropiciel</Class>
+  <Race>Elf</Race>
+  <Speed>9</Speed>
+  <Size>Medium</Size>
+  <MaxHealthPoints>17</MaxHealthPoints>
+  <CurrentHealthPoints>13</CurrentHealthPoints>
+  <Bruise>0</Bruise>
+  <Inventory>
+    <Pouch>
+      <Coin Type="Copper" Ammount="0" />
+      <Coin Type="Silver" Ammount="0" />
+      <Coin Type="Gold" Ammount="0" />
+      <Coin Type="Platinium" Ammount="0" />
+    </Pouch>
+    <Bag />
+  </Inventory>
+  <Attributes>
+    <Strength Value="0" />
+    <Dexterity Value="0" />
+    <Constitution Value="0" />
+    <Intelligence Value="0" />
+    <Wisdom Value="0" />
+    <Charisma Value="0" />
+  </Attributes>
+  <SkillMarks>
+    <Bluff Value="0" />
+    <MoveSilently Value="0" />
+    <Spellcraft Value="0" />
+    <Diplomacy Value="0" />
+    <Forgery Value="0" />
+    <Ride Value="0" />
+    <SpeakLanguage Value="0" />
+    <Concentration Value="0" />
+    <Heal Value="0" />
+    <Listen Value="0" />
+    <DecipherScript Value="0" />
+    <OpenLock Value="0" />
+    <Swim Value="0" />
+    <HandleAnimal Value="0" />
+    <Disguise Value="0" />
+    <Search Value="0" />
+    <Craft Value="0" />
+    <Jump Value="0" />
+    <Spot Value="0" />
+    <Appraise Value="0" />
+    <Survival Value="0" />
+    <Hide Value="0" />
+    <DisableDevice Value="0" />
+    <UseRope Value="0" />
+    <UseMagicDevice Value="0" />
+    <Knowledge Value="0" />
+    <Climb Value="0" />
+    <SenseMotive Value="0" />
+    <Perform Value="0" />
+    <EscapeArtist Value="0" />
+    <Balance Value="0" />
+    <Intimidate Value="0" />
+    <Profession Value="0" />
+    <GatherInformation Value="0" />
+    <SleightOfHand Value="0" />
+    <Tumble Value="0" />
+  </SkillMarks>
+  <Age>0</Age>
+  <Height>165</Height>
+  <Weight>50</Weight>
+  <Sex>Male</Sex>
+  <EyesColor>#FF0000FF</EyesColor>
+  <HairColor>#FFA52A2A</HairColor>
+</Hero>

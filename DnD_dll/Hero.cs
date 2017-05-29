@@ -10,16 +10,19 @@ using System.Windows.Media;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Schema;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace DnD
 {
-    public class Hero : IXmlSerializable
+    public class Hero : IXmlSerializable, INotifyPropertyChanged
     {
         private int[] _atr = new int[Enum.GetValues(typeof(HeroAttribute.Type)).Length];
         private int[] _marks = new int[Enum.GetValues(typeof(Skill.Type)).Length];
         private Weapon _mainWeapon;
         private Armor _mainArmor;
         private Armor _mainShield;
+        public event PropertyChangedEventHandler PropertyChanged;
         public Hero()
         {
             Inventory = new Inventory();
@@ -61,6 +64,7 @@ namespace DnD
             set
             {
                 _atr[(int)t] = value;
+                NotifyPropertyChanged("Item[]");
             }
         }
         public int this[Skill.Type t]
@@ -72,9 +76,10 @@ namespace DnD
             set
             {
                 _marks[(int)t] = value;
+                NotifyPropertyChanged("Item[]");
             }
         }
-        public string Name { get; set; }
+        public string Name { get; set; }    
         public string PlayerName { get; set; }
         public Race Race { get; set; }
         public HeroClass Class { get; set; }
@@ -121,6 +126,11 @@ namespace DnD
         public XmlSchema GetSchema()
         {
             return null;
+        }
+        protected void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
         public void ReadXml(XmlReader reader)
         {
