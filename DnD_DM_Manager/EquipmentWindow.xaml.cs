@@ -202,10 +202,10 @@ namespace DnD_DM_Manager
 
         private void RefreshCoins()
         {
-            smLabel.Content = _inv.Pouch[CoinType.Copper].ToString();
-            ssLabel.Content = _inv.Pouch[CoinType.Silver].ToString();
-            szLabel.Content = _inv.Pouch[CoinType.Gold].ToString();
-            spLabel.Content = _inv.Pouch[CoinType.Platinium].ToString();
+            //smLabel.Content = _inv.Pouch[CoinType.Copper].ToString();
+            //ssLabel.Content = _inv.Pouch[CoinType.Silver].ToString();
+            //szLabel.Content = _inv.Pouch[CoinType.Gold].ToString();
+            //spLabel.Content = _inv.Pouch[CoinType.Platinium].ToString();
         }
 
 

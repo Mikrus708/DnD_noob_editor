@@ -83,7 +83,7 @@
         <StackPanel Orientation="Vertical">
             <Label Content="Bohaterowie" FontSize="28" HorizontalAlignment="Center" Foreground="Goldenrod" Style="{StaticResource LabelStyle}"/>
             <Border Margin="10,5,5,10" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="10" Background="AntiqueWhite">
-                <ListView Name="HeroesListView" Margin="5" ItemsSource="{Binding}" Background="Transparent" HorizontalContentAlignment="Stretch" BorderBrush="Transparent">
+                <ListView Name="HeroesListView" Margin="5" ItemsSource="{Binding}" Background="Transparent" HorizontalContentAlignment="Stretch" BorderBrush="Transparent" MouseDoubleClick="Hero_DblClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border Margin="3" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="5">

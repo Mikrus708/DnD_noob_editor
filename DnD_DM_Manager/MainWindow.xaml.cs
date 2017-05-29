@@ -95,6 +95,7 @@ namespace DnD_DM_Manager
             MoneyShare ms = new MoneyShare(ma);
             if (ms.ShowDialog() ==false) return;
             if (ma.Mode == ShareMode.ToAll && ma.Status == HeroStatus.All) GiveMoney(ma.Amount, heroes);
+            if (ma.Mode == ShareMode.ToAll && ma.Status == HeroStatus.Active) GiveMoney(ma.Amount, HeroesListView.SelectedItems.Cast<Hero>());
 
         }
         private void GiveMoney (Pouch p, IEnumerable<Hero> heroes)
@@ -134,5 +135,12 @@ namespace DnD_DM_Manager
                 EasyXML.SerializeXML(h, FolderPath + '/' + h.Name + ".xml");
             }
         }
+        private void Hero_DblClick(object sender, RoutedEventArgs e)
+        {
+            EquipmentWindow eqw = new EquipmentWindow((HeroesListView.SelectedItem as Hero).Inventory, lista);
+            eqw.Show();
+        }
+            
+
     }
 }

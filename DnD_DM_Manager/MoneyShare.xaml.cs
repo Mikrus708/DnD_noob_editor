@@ -25,11 +25,11 @@ namespace DnD_DM_Manager
             InitializeComponent();
             MoneyArguments = ma;
         }
-        private void DivideActive_Click(object sender, RoutedEventArgs e)
+        private void GiveActive_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
             ParseCoins();
-            MoneyArguments.Mode = ShareMode.Divide;
+            MoneyArguments.Mode = ShareMode.ToAll;
             MoneyArguments.Status = HeroStatus.Active;
             this.Close();
         }
