@@ -27,6 +27,16 @@ namespace DnD
         {
             Inventory = new Inventory();
             Inventory.Name = $"Inventory of {Name}";
+            Inventory.Bag.CollectionChanged += Bag_CollectionChanged;
+        }
+        private void Bag_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems.Cast<Item>().Contains(MainWeapon) && !Inventory.Bag.Contains(MainWeapon))
+                MainWeapon = null;
+            if (e.OldItems.Cast<Item>().Contains(MainArmor) && !Inventory.Bag.Contains(MainArmor))
+                MainArmor = null;
+            if (e.OldItems.Cast<Item>().Contains(MainShield) && !Inventory.Bag.Contains(MainShield))
+                MainShield = null;
         }
         public int Speed { get; set; }
         public Inventory Inventory { get; set; }
@@ -203,6 +213,7 @@ namespace DnD
                         lit.Add((Item)sss.Deserialize(new XmlNodeReader(it)));
                 }
                 Inventory = new Inventory(lit, pppc);
+                Inventory.Name = inv.GetAttribute("Name");
                 el = (XmlElement)inv.SelectSingleNode("MainWeapon")?.SelectSingleNode("Weapon");
                 sss = new XmlSerializer(typeof(Weapon));
                 if (el != null)
@@ -275,6 +286,7 @@ namespace DnD
             XmlSerializer otherSer;
             {
                 writer.WriteStartElement("Inventory");
+                writer.WriteAttributeString("Name", Inventory.Name);
                 if (_mainWeapon != null)
                 {
                     otherSer = new XmlSerializer(typeof(Weapon));
@@ -342,6 +354,7 @@ namespace DnD
             if (HairColor != null)
                 writer.WriteElementString("HairColor", HairColor);
         }
+        //public enum Character
     }
     public enum CreatureSize
     {

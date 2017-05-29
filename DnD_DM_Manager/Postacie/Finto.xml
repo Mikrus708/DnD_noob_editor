@@ -7,7 +7,7 @@
   <MaxHealthPoints>15</MaxHealthPoints>
   <CurrentHealthPoints>15</CurrentHealthPoints>
   <Bruise>0</Bruise>
-  <Inventory>
+  <Inventory Name="Finto's Inventory">
     <Pouch>
       <Coin Type="Copper" Ammount="0" />
       <Coin Type="Silver" Ammount="0" />

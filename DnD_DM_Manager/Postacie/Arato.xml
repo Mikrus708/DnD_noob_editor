@@ -7,7 +7,7 @@
   <MaxHealthPoints>17</MaxHealthPoints>
   <CurrentHealthPoints>13</CurrentHealthPoints>
   <Bruise>0</Bruise>
-  <Inventory>
+  <Inventory Name="Arato's Inventory">
     <Pouch>
       <Coin Type="Copper" Ammount="0" />
       <Coin Type="Silver" Ammount="0" />
@@ -17,7 +17,7 @@
     <Bag />
   </Inventory>
   <Attributes>
-    <Strength Value="0" />
+    <Strength Value="5" />
     <Dexterity Value="0" />
     <Constitution Value="0" />
     <Intelligence Value="0" />

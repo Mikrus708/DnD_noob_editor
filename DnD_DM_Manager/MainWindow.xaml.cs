@@ -74,7 +74,6 @@ namespace DnD_DM_Manager
         private void Box1_Click(object sender, RoutedEventArgs e)
         {
             EquipmentWindow eqw = new EquipmentWindow(lista[0],lista);
-            heroes[0][HeroAttribute.Type.Strength] += 5;
             eqw.Show();
         }
 

@@ -7,7 +7,7 @@
   <MaxHealthPoints>11</MaxHealthPoints>
   <CurrentHealthPoints>11</CurrentHealthPoints>
   <Bruise>0</Bruise>
-  <Inventory>
+  <Inventory Name="Naeli's Inventory">
     <Pouch>
       <Coin Type="Copper" Ammount="0" />
       <Coin Type="Silver" Ammount="0" />
