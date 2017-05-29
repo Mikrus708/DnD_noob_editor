@@ -21,6 +21,7 @@ namespace DnD_DM_Manager
     public partial class MoneyEdit : Window
     {
         private DnD.Pouch _p;
+        
 
 
         public MoneyEdit(DnD.Pouch p)
@@ -32,6 +33,7 @@ namespace DnD_DM_Manager
             PlaAm.Text = p[DnD.CoinType.Platinium].ToString();
             _p = p;
         }
+
 
         private void TextChanged_Ch(object sender, TextChangedEventArgs e)
         {
@@ -90,5 +92,6 @@ namespace DnD_DM_Manager
             this.Close();
         }
     }
-    
+
+
 }

@@ -68,6 +68,9 @@
     <Compile Include="MoneyEdit.xaml.cs">
       <DependentUpon>MoneyEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MoneyShare.xaml.cs">
+      <DependentUpon>MoneyShare.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RandomRewardChoosingWindow.xaml.cs">
       <DependentUpon>RandomRewardChoosingWindow.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MoneyEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MoneyShare.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

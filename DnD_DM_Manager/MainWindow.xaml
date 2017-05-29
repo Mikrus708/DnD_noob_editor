@@ -99,6 +99,7 @@
                     <ListBoxItem Content="Hero3"/>-->
                 </ListView>
             </Border>
+            <Button Content="Dodaj złoto/doświadczenie" Width="100" Height="50" VerticalAlignment="Bottom" Click="GoldExpToHeroes_Click"/>
         </StackPanel>
         <Grid Name="BoxesGrid" Grid.Row="1" Margin="10,5,5,10">
             <Grid.ColumnDefinitions>

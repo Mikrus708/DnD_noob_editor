@@ -81,5 +81,22 @@ namespace DnD_DM_Manager
             EquipmentWindow eqw = new EquipmentWindow(x, lista);
             eqw.Show();
         }
+        private void GoldExpToHeroes_Click(object sender, RoutedEventArgs e)
+        {
+            MoneyArgs ma = new MoneyArgs();
+            MoneyShare ms = new MoneyShare(ma);
+            if (ms.ShowDialog() ==false) return;
+            foreach(Hero h in heroes)
+            {
+                h.Inventory.Pouch[CoinType.Copper] += ma.Amount[CoinType.Copper];
+                h.Inventory.Pouch[CoinType.Silver] += ma.Amount[CoinType.Silver];
+                h.Inventory.Pouch[CoinType.Gold] += ma.Amount[CoinType.Gold];
+                h.Inventory.Pouch[CoinType.Platinium] += ma.Amount[CoinType.Platinium];
+                MessageBox.Show($"{ma.Amount.ToString()} added to {h.ToString()} main inventory.");
+            }
+            
+
+        }
+            
     }
 }

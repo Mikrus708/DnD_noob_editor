@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="MoneyEdit" Height="240" Width="300" Background="AntiqueWhite" ResizeMode="CanMinimize">
+        Title="MoneyEdit" Height="240" Width="300" Background="AntiqueWhite" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner">
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>
