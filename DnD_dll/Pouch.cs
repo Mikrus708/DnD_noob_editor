@@ -42,6 +42,7 @@ namespace DnD
         public static Pouch operator+(Pouch p, Coin c)
         {
             p[c.Type] += c.Ammount;
+            NotifyPropertyChanged($"Pouch[{c.Type}]");
             p.Changes();
             return p;
         }
