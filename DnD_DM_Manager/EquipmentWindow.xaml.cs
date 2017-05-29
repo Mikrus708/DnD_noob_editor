@@ -21,11 +21,12 @@ namespace DnD_DM_Manager
     /// </summary>
     public partial class EquipmentWindow : Window 
     {
-        List<Item> lista;
+
+        private static bool messageshown = false;
 
         private Inventory _inv;
         private List<Inventory> _otherInventories = new List<Inventory>();
-
+        
 
 
         public List<Inventory> ComboList
@@ -38,20 +39,10 @@ namespace DnD_DM_Manager
             get { return _inv; }
         }
 
-        public EquipmentWindow()
-        {
-            InitializeComponent();
 
-            lista = SomeThings.list();
-            _inv = new Inventory(lista, null);
-
-            DataContext = this;
-            //DataContext = SomeThings.list();
-        }
 
         
         
-#warning jakiś fajny pomysł na przesyłanie między ekwipunkami poza drag&dropem? Nie chce mi się nad nim na razie pracować;
         public EquipmentWindow(Inventory inv, List<Inventory> allInventories)
         {
             InitializeComponent();
@@ -64,26 +55,82 @@ namespace DnD_DM_Manager
             Title = inv.ToString();
             this.DataContext = this;
             sta.DataContext = Inventory;
+            this.KeyDown += EquipmentWindow_KeyDown;
+            MainGrid.MouseDoubleClick += MainGrid_MouseDoubleClick;
+            MainList.MouseDoubleClick += MainGrid_MouseDoubleClick;
+            RefreshCoins();
+        }
+
+        private void MainGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Edit_Item(TabPanel.SelectedContent, null);
+        }
+
+        private void EquipmentWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Delete)
+            {
+                Remove_Item(TabPanel.SelectedContent, null);
+            }
         }
 
         private void Add_New_Item (object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("Not implemented yet. It'll just change the button color", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //Color c = new Color();
-            //c.A = 255;
-            //Random R = new Random();
-            //c.B = (byte)R.Next(0, 255);
-            //c.G = (byte)R.Next(0, 255);
-            //c.R = (byte)R.Next(0, 255);
-            //(sender as Button).Background = new SolidColorBrush(c);
-            //_inv.someText = R.Next(10000, 1000000).ToString();
+            e.Handled = true;
+            UnclickAddButton();
             Item it = new Item("");
-            NewItemForm wnd = new NewItemForm(ref it);
-            if(wnd.ShowDialog() == true)
-                _inv.AddItem(it);
+            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            wnd.Owner = this;
 
+            if (wnd.ShowDialog() == true)
+                _inv.AddItem(it);
+            
+        }
+        private void Add_New_Weapon(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            UnclickAddButton();
+            Weapon it = new Weapon();
+            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            wnd.Owner = this;
+
+            if (wnd.ShowDialog() == true)
+                _inv.AddItem(it);
+        }
+        private void Add_New_Armour(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            UnclickAddButton();
+            Armor it = new Armor();
+            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            wnd.Owner = this;
+
+            if (wnd.ShowDialog() == true)
+                _inv.AddItem(it);
         }
 
+        private void Edit_Item(object sender, RoutedEventArgs e)
+        {
+            if (TabPanel.SelectedIndex == 0)
+            {
+                if (MainGrid.SelectedItems.Count != 1) { MessageBox.Show("Musisz wybrać dokładnie jeden przedmiot do edycj.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error); return; }
+                Item sel = MainGrid.SelectedItem as Item;
+                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                wnd.Owner = this;
+                wnd.ShowDialog();
+                MainGrid.Items.Refresh();
+            }
+            else if (TabPanel.SelectedIndex == 1)
+            {
+                if (MainList.SelectedItems.Count != 1) { MessageBox.Show("Musisz wybrać dokładnie jeden przedmiot do edycj.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error); return; }
+                Item sel = MainList.SelectedItem as Item;
+                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                wnd.Owner = this;
+                wnd.ShowDialog();
+                MainList.Items.Refresh();
+            }
+            _inv.NotifyChanges();
+        }
         private void Remove_Item(object sender, RoutedEventArgs e)
         {
             int lim = 0;
@@ -93,19 +140,12 @@ namespace DnD_DM_Manager
                 for (int i = 0; i < lim; ++i)
                     _inv.RemoveItem(MainGrid.SelectedItems[0] as Item);
             }
-            //foreach (Item i in MainGrid.SelectedItems)
-            //_inv.RemoveItem(i);
-            //_inv.Bag.Remove(i);
             else if (TabPanel.SelectedIndex == 1)
             {
                 lim = MainList.SelectedItems.Count;
                 for (int i = 0; i < lim; ++i)
                     _inv.RemoveItem(MainList.SelectedItems[0] as Item);
             }
-
-
-            //MainGrid.Items.Refresh();
-            //MainList.Items.Refresh();
         }
         private void Give_Item(object sender, RoutedEventArgs e)
         {
@@ -118,13 +158,9 @@ namespace DnD_DM_Manager
                 for (int i = 0; i < lim; ++i)
                 {
                     To.AddItem(MainGrid.SelectedItems[0] as Item);
-                    _inv.RemoveItem(MainGrid.SelectedItems[0] as Item);
-                    
+                    _inv.RemoveItem(MainGrid.SelectedItems[0] as Item); 
                 }
             }
-            //foreach (Item i in MainGrid.SelectedItems)
-            //_inv.RemoveItem(i);
-            //_inv.Bag.Remove(i);
             else if (TabPanel.SelectedIndex == 1)
             {
                 lim = MainList.SelectedItems.Count;
@@ -134,12 +170,44 @@ namespace DnD_DM_Manager
                     _inv.RemoveItem(MainList.SelectedItems[0] as Item);
                 }
             }
-
-
-
-            //MainGrid.Items.Refresh();
-            //MainList.Items.Refresh();
         }
+
+        private void Money_Click(object sender, RoutedEventArgs e)
+        {
+            MoneyEdit me = new MoneyEdit(_inv.Pouch);
+            me.Owner = this;
+            me.ShowDialog();
+
+            RefreshCoins();
+        }
+        private void Show_Add_Options(object sender, RoutedEventArgs e)
+        {
+            if (messageshown == false) { MessageBox.Show("na razie dziala biednie", "", MessageBoxButton.OK, MessageBoxImage.Information); messageshown = true; }
+
+            Add_Label.Visibility = Visibility.Hidden;
+            AddWeapon_Button.Visibility = Visibility.Visible;
+            AddItem_Button.Visibility = Visibility.Visible;
+            AddArmour_Button.Visibility = Visibility.Visible;
+            AddNothing_Button.Visibility = Visibility.Visible;
+        }
+
+        private void UnclickAddButton()
+        {
+            Add_Label.Visibility = Visibility.Visible;
+            AddWeapon_Button.Visibility = Visibility.Hidden;
+            AddItem_Button.Visibility = Visibility.Hidden;
+            AddArmour_Button.Visibility = Visibility.Hidden;
+            AddNothing_Button.Visibility = Visibility.Hidden;
+        }
+
+        private void RefreshCoins()
+        {
+            //smLabel.Content = _inv.Pouch[CoinType.Copper].ToString();
+            //ssLabel.Content = _inv.Pouch[CoinType.Silver].ToString();
+            //szLabel.Content = _inv.Pouch[CoinType.Gold].ToString();
+            //spLabel.Content = _inv.Pouch[CoinType.Platinium].ToString();
+        }
+
 
     }
 

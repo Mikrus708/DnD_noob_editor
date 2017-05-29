@@ -8,49 +8,51 @@ namespace DnD
 {
     public static class Skill
     {
-        private static Atribute.Type[] _atr;
+        private static HeroAttribute.Type[] _atr;
         private static bool[] _training;
+        private static string[] _pol;
         static Skill()
         {
-            _atr = new Atribute.Type[Enum.GetValues(typeof(Type)).Length];
+            _atr = new HeroAttribute.Type[Enum.GetValues(typeof(Type)).Length];
             _training = new bool[Enum.GetValues(typeof(Type)).Length];
+            _pol = new string[Enum.GetValues(typeof(Type)).Length];
             #region Atrybuty umiejętności
-            _atr[(int)Type.Bluff] = Atribute.Type.Charisma;
-            _atr[(int)Type.MoveSilently] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Spellcraft] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Diplomacy] = Atribute.Type.Charisma;
-            _atr[(int)Type.Forgery] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Ride] = Atribute.Type.Dexterity;
-            _atr[(int)Type.SpeakLanguage] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Concentration] = Atribute.Type.Constitution;
-            _atr[(int)Type.Heal] = Atribute.Type.Wisdom;
-            _atr[(int)Type.Listen] = Atribute.Type.Wisdom;
-            _atr[(int)Type.DecipherScript] = Atribute.Type.Intelligence;
-            _atr[(int)Type.OpenLock] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Swim] = Atribute.Type.Strength;
-            _atr[(int)Type.HandleAnimal] = Atribute.Type.Charisma;
-            _atr[(int)Type.Disguise] = Atribute.Type.Charisma;
-            _atr[(int)Type.Search] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Craft] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Jump] = Atribute.Type.Strength;
-            _atr[(int)Type.Spot] = Atribute.Type.Wisdom;
-            _atr[(int)Type.Appraise] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Survival] = Atribute.Type.Wisdom;
-            _atr[(int)Type.Hide] = Atribute.Type.Dexterity;
-            _atr[(int)Type.DisableDevice] = Atribute.Type.Intelligence;
-            _atr[(int)Type.UseRope] = Atribute.Type.Dexterity;
-            _atr[(int)Type.UseMagicDevice] = Atribute.Type.Charisma;
-            _atr[(int)Type.Knowledge] = Atribute.Type.Intelligence;
-            _atr[(int)Type.Climb] = Atribute.Type.Strength;
-            _atr[(int)Type.SenseMotive] = Atribute.Type.Wisdom;
-            _atr[(int)Type.Perform] = Atribute.Type.Charisma;
-            _atr[(int)Type.EscapeArtist] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Balance] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Intimidate] = Atribute.Type.Charisma;
-            _atr[(int)Type.Profession] = Atribute.Type.Wisdom;
-            _atr[(int)Type.GatherInformation] = Atribute.Type.Charisma;
-            _atr[(int)Type.SleightOfHand] = Atribute.Type.Dexterity;
-            _atr[(int)Type.Tumble] = Atribute.Type.Dexterity;
+            _atr[(int)Type.Bluff] = HeroAttribute.Type.Charisma;
+            _atr[(int)Type.MoveSilently] = HeroAttribute.Type.Dexterity;
+            _atr[(int)Type.Spellcraft] = HeroAttribute.Type.Intelligence;
+            _atr[(int)Type.Diplomacy] = HeroAttribute.Type.Charisma;
+            _atr[(int)Type.Forgery] = HeroAttribute.Type.Intelligence;
+            _atr[(int)Type.Ride] = HeroAttribute.Type.Dexterity;
+            _atr[(int)Type.SpeakLanguage] = HeroAttribute.Type.Intelligence;
+            _atr[(int)Type.Concentration] = HeroAttribute.Type.Constitution;
+            _atr[(int)Type.Heal] = HeroAttribute.Type.Wisdom;
+            _atr[(int)Type.Listen] = HeroAttribute.Type.Wisdom;
+            _atr[(int)Type.DecipherScript] = HeroAttribute.Type.Intelligence;
+            _atr[(int)Type.OpenLock] = HeroAttribute.Type.Dexterity;
+            _atr[(int)Type.Swim] = HeroAttribute.Type.Strength;
+            _atr[(int)Type.HandleAnimal] = HeroAttribute.Type.Charisma;
+            _atr[(int)Type.Disguise] = HeroAttribute.Type.Charisma;
+            _atr[(int)Type.Search] = HeroAttribute.Type.Intelligence;
+            _atr[(int)Type.Craft] = HeroAttribute.Type.Intelligence;
+            _atr[(int)Type.Jump] = HeroAttribute.Type.Strength;
+            _atr[(int)Type.Spot] = HeroAttribute.Type.Wisdom;
+            _atr[(int)Type.Appraise] = HeroAttribute.Type.Intelligence;
+            _atr[(int)Type.Survival] = HeroAttribute.Type.Wisdom;
+            _atr[(int)Type.Hide] = HeroAttribute.Type.Dexterity;
+            _atr[(int)Type.DisableDevice] = HeroAttribute.Type.Intelligence;
+            _atr[(int)Type.UseRope] = HeroAttribute.Type.Dexterity;
+            _atr[(int)Type.UseMagicDevice] = HeroAttribute.Type.Charisma;
+            _atr[(int)Type.Knowledge] = HeroAttribute.Type.Intelligence;
+            _atr[(int)Type.Climb] = HeroAttribute.Type.Strength;
+            _atr[(int)Type.SenseMotive] = HeroAttribute.Type.Wisdom;
+            _atr[(int)Type.Perform] = HeroAttribute.Type.Charisma;
+            _atr[(int)Type.EscapeArtist] = HeroAttribute.Type.Dexterity;
+            _atr[(int)Type.Balance] = HeroAttribute.Type.Dexterity;
+            _atr[(int)Type.Intimidate] = HeroAttribute.Type.Charisma;
+            _atr[(int)Type.Profession] = HeroAttribute.Type.Wisdom;
+            _atr[(int)Type.GatherInformation] = HeroAttribute.Type.Charisma;
+            _atr[(int)Type.SleightOfHand] = HeroAttribute.Type.Dexterity;
+            _atr[(int)Type.Tumble] = HeroAttribute.Type.Dexterity;
             #endregion
             #region Czy wyszkolone
             _training[(int)Type.Bluff] = false;
@@ -90,12 +92,54 @@ namespace DnD
             _training[(int)Type.SleightOfHand] = true;
             _training[(int)Type.Tumble] = true;
             #endregion
+            #region Polskie nazwy
+            _pol[(int)Type.Bluff] = "Blefowanie";
+            _pol[(int)Type.MoveSilently] = "Ciche poruszanie się";
+            _pol[(int)Type.Spellcraft] = "Czarostwo";
+            _pol[(int)Type.Diplomacy] = "Dyplomacja";
+            _pol[(int)Type.Forgery] = "Fałszerstwo";
+            _pol[(int)Type.Ride] = "Jeździectwo";
+            _pol[(int)Type.SpeakLanguage] = "Język obcy";
+            _pol[(int)Type.Concentration] = "Koncentracja";
+            _pol[(int)Type.Heal] = "Leczenie";
+            _pol[(int)Type.Listen] = "Nasłuchiwanie";
+            _pol[(int)Type.DecipherScript] = "Odcyfrowywanie zapisków";
+            _pol[(int)Type.OpenLock] = "Otwieranie zamków";
+            _pol[(int)Type.Swim] = "Pływanie";
+            _pol[(int)Type.HandleAnimal] = "Postępowanie ze zwierzętami";
+            _pol[(int)Type.Disguise] = "Przebieranie się";
+            _pol[(int)Type.Search] = "Przeszukiwanie";
+            _pol[(int)Type.Craft] = "Rzemisoło";
+            _pol[(int)Type.Jump] = "Skakanie";
+            _pol[(int)Type.Spot] = "Spostrzegwaczość";
+            _pol[(int)Type.Appraise] = "Szacowanie";
+            _pol[(int)Type.Survival] = "Sztuka przetrwania";
+            _pol[(int)Type.Hide] = "Ukrywanie się";
+            _pol[(int)Type.DisableDevice] = "Unieszkodliwianie mechanizmów";
+            _pol[(int)Type.UseRope] = "Używanie liny";
+            _pol[(int)Type.UseMagicDevice] = "Używanie magicznych urządzeń";
+            _pol[(int)Type.Knowledge] = "Wiedza";
+            _pol[(int)Type.Climb] = "Wspinaczka";
+            _pol[(int)Type.SenseMotive] = "Wyczucie pobudek";
+            _pol[(int)Type.Perform] = "Występy";
+            _pol[(int)Type.EscapeArtist] = "Wyzwalanie się";
+            _pol[(int)Type.Balance] = "Zachowanie równowagi";
+            _pol[(int)Type.Intimidate] = "Zastraszanie";
+            _pol[(int)Type.Profession] = "Zawód";
+            _pol[(int)Type.GatherInformation] = "Zbieranie informacji";
+            _pol[(int)Type.SleightOfHand] = "Zręczna dłoń";
+            _pol[(int)Type.Tumble] = "Zwinność";
+            #endregion
+        }
+        public static string GetPolishName(Type t)
+        {
+            return _pol[(int)t];
         }
         public static bool NeedTraining(Type t)
         {
             return _training[(int)t];
         }
-        public static Atribute.Type BaseAtribute(Type t)
+        public static HeroAttribute.Type BaseAtribute(Type t)
         {
             return _atr[(int)t];
         }

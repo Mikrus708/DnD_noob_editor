@@ -2,19 +2,20 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="Equipment" Height="500" Width="450" MinHeight="350" MinWidth="200" Name="EqWnd" >
+        Title="Equipment" Height="500" Width="500" MinHeight="450" MinWidth="500" Name="EqWnd" Background="#FF7D4C30">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="110"/>
         </Grid.RowDefinitions>
-        <TabControl Name="TabPanel">
-            <TabItem Header="Grid">
-                <ListView Name="MainGrid" ItemsSource="{Binding Inventory.Bag}" >
+
+        <TabControl Name="TabPanel" Background="#FF7D4C30">
+            <TabItem Header="Siatka">
+                <ListView Name="MainGrid" ItemsSource="{Binding Inventory.Bag}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.UseDefaultDragAdorner="True" dd:DragDrop.UseDefaultEffectDataTemplate="True" Background="AntiqueWhite">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -23,7 +24,7 @@
                                     <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFBB2D2D"/>
                                 </Border>
                                 <Label Content="{Binding Name}" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding ValueInCopper}" HorizontalAlignment="Center"/>
+                                <Label Content="{Binding Value}" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -35,14 +36,14 @@
                     </ListView.ItemsPanel>
                 </ListView>
             </TabItem>
-            <TabItem Header="List">
+            <TabItem Header="Lista">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Rectangle Fill="Bisque"/>
-                    <ListView Name="MainList" ItemsSource="{Binding Inventory.Bag}" Grid.Column="1">
+                    <ListView Name="MainList" ItemsSource="{Binding Inventory.Bag}" Grid.Column="1" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.UseDefaultDragAdorner="True" dd:DragDrop.UseDefaultEffectDataTemplate="True">
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -60,21 +61,79 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Width="80" Click="Add_New_Item" Content="Add"/>
-            <Button Width="80" Click="Remove_Item" Content="Remove"/>
-            <StackPanel Width="120">
-                <Button Height="50" Click="Give_Item" Content="Give"/>
-                <ComboBox Name="ComboInv" ItemsSource="{Binding ComboList}" Width="Auto" Height="30"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                <Button Width="90" Click="Show_Add_Options">
+                    <Grid Width="85" Height="75">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Dodaj" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Name="Add_Label"/>
+                        <Button Grid.Column="0" Grid.Row="0" Content="Przedmiot" Visibility="Hidden" Name="AddItem_Button" Click="Add_New_Item"/>
+                        <Button Grid.Column="1" Grid.Row="0" Content="Broń" Visibility="Hidden" Name="AddWeapon_Button" Click="Add_New_Weapon"/>
+                        <Button Grid.Column="0" Grid.Row="1" Content="Zbroja" Visibility="Hidden" Name="AddArmour_Button" Click="Add_New_Armour"/>
+                        <Button Grid.Column="1" Grid.Row="1" Content="Useless" Visibility="Hidden" Name="AddNothing_Button" Click="Add_New_Item"/>
+                    </Grid>
+                </Button>
+                <Button Width="60" Click="Remove_Item" Content="Usuń"/>
+                <StackPanel Width="120">
+                    <Button Height="50" Click="Give_Item" Content="Przekaż"/>
+                    <ComboBox Name="ComboInv" ItemsSource="{Binding ComboList}" Width="Auto" Height="30" SelectedIndex="0" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <Button Width="60" Click="Edit_Item" Content="Edytuj"/>
+                <StackPanel Orientation="Vertical" Width="80">
+                    <Button Height="80" Content="Zmień $" Click="Money_Click" Name="DodajHajsButton"/>
+                </StackPanel>
+
+
             </StackPanel>
-        </StackPanel>
-        <StackPanel x:Name="sta" Grid.Row="2" Background="LightGray" Orientation="Horizontal" DataContext="{Binding Inventory}">
-            <Label Content="Total weight: "/>
-            <Label Content="{Binding TotalWeight}" />
-            <Label Content="Total value: "/>
-            <Label Content="{Binding TotalValue}" />
-        </StackPanel>
+            <StackPanel x:Name="sta" Grid.Row="2"  Orientation="Horizontal" DataContext="{Binding Inventory}">
+                <Label Content="Waga całkowita: "/>
+                <Label Content="{Binding TotalWeight}"/>
+                <Label Content="Wartość całkowita: "/>
+                <Label Content="{Binding TotalValue}" />
+            </StackPanel>
+            <Grid Width="80" Grid.Column="1" Grid.RowSpan="2" DataContext="{Binding Inventory.Pouch}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <Label  Width="Auto" Content="sm:" />
+                    <Label Name="smLabel" Content="{Binding [Copper]}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Grid.Row="1">
+                    <Label  Width="Auto" Content="ss:" />
+                    <Label Content="{Binding [Silver]}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Grid.Row="2">
+                    <Label  Width="Auto" Content="sz:" />
+                    <Label Name="szLabel" Content="{Binding [Gold]}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Grid.Row="3">
+                    <Label  Width="Auto" Content="sp:" />
+                    <Label Name="spLabel" Content="{Binding [Platinium]}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
 
     </Grid>
 </Window>
+

@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 using DnD.Equipment;
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
+using System.IO;
 
 namespace DnD
 {
-#warning Stasiu weź ogarnij tutaj i spójrz czy Ci wszystko odpowiada. Hero może mieć inventory zamiast listy, dodatkowo jedna osoba może mieć ich kilka, albo można coś gdziś wówczas zostawić itp. \
-
     public class Inventory : INotifyPropertyChanged
     {
         private Pouch _pouch = new Pouch();
@@ -22,7 +21,7 @@ namespace DnD
             _pouch.PropertyChanged += _pouch_PropertyChanged;
             _itemList.CollectionChanged += _itemList_CollectionChanged;
         }
-        public Inventory(IEnumerable<Item> items, IEnumerable<Coin> coins,string name="Untitled")
+        public Inventory(IEnumerable<Item> items, IEnumerable<Coin> coins,string name=null)
         {
             _pouch.PropertyChanged += _pouch_PropertyChanged;
             _itemList.CollectionChanged += _itemList_CollectionChanged;
@@ -34,24 +33,28 @@ namespace DnD
                 foreach (var c in coins)
                     _pouch.Add(c);
         }
-        private void changes()
+        public void NotifyChanges()
         {
             NotifyPropertyChanged("TotalValue");
             NotifyPropertyChanged("TotalWeight");
         }
         private void _pouch_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            changes();
+            NotifyChanges();
         }
         private void _itemList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            changes();
+            NotifyChanges();
         }
         public string Description { get; set; }
         public Pouch Pouch
         {
             get { return _pouch; }
         }
+        [XmlArray("Bag")]
+        [XmlArrayItem("Item", typeof(Item))]
+        [XmlArrayItem("Weapon", typeof(Weapon))]
+        [XmlArrayItem("Armor", typeof(Armor))]
         public ObservableCollection<Item> Bag
         {
             get { return _itemList; }
@@ -66,13 +69,13 @@ namespace DnD
         {
             _itemList.Add(item);
         }
-        public int TotalWeight
+        public decimal TotalWeight
         {
             get { return _itemList.Sum(x => x.Weight) + Pouch.Weight; }
         }
-        public int TotalValue
+        public decimal TotalValue
         {
-            get { return _itemList.Sum(x => x.ValueInCopper) + Pouch.ValueInCopper; }
+            get { return _itemList.Sum(x => x.Value) + Pouch.TotalValue; }
         }
         public override string ToString()
         {

@@ -84,7 +84,7 @@
         <StackPanel Orientation="Vertical">
             <Label Content="Bohaterowie" FontSize="28" HorizontalAlignment="Center" Foreground="Goldenrod" Style="{StaticResource LabelStyle}"/>
             <Border Margin="10,5,5,10" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="10" Background="AntiqueWhite">
-                <ListView Name="HeroesListView" Margin="5" ItemsSource="{Binding}" Background="Transparent" HorizontalContentAlignment="Stretch" BorderBrush="Transparent" SelectionChanged="HeroesListView_SelectionChanged">
+                <ListView Name="HeroesListView" Margin="5" ItemsSource="{Binding}" Background="Transparent" HorizontalContentAlignment="Stretch" BorderBrush="Transparent" MouseDoubleClick="Hero_DblClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border Margin="3" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="5">
@@ -100,6 +100,7 @@
                     <ListBoxItem Content="Hero3"/>-->
                 </ListView>
             </Border>
+            <Button Content="Dodaj złoto/doświadczenie" Width="100" Height="50" VerticalAlignment="Bottom" Click="GoldExpToHeroes_Click"/>
         </StackPanel>
         <Grid Name="BoxesGrid" Grid.Row="1" Margin="10,5,5,10">
             <Grid.ColumnDefinitions>
@@ -213,12 +214,12 @@
                         <Label Grid.Row="3" Content="Intelekt" FontWeight="SemiBold"/>
                         <Label Grid.Row="4" Content="Roztropność" FontWeight="SemiBold"/>
                         <Label Grid.Row="5" Content="Charyzma" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Content="Siła" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Atribute.Type.Dexterity]}" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="2" Content="Budowa" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="3" Content="Intelekt" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="4" Content="Roztropność" FontWeight="SemiBold"/>
-                        <Label Grid.Column="1" Grid.Row="5" Content="Charyzma" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Strength]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Dexterity]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="2" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Constitution]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="3" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Intelligence]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="4" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Wisdom]}" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Grid.Row="5" Content="{Binding ElementName=HeroesListView, Path=SelectedItem[Charisma]}" FontWeight="SemiBold"/>
                     </Grid>
                 </Expander>
             </Border>
