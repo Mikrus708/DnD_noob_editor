@@ -34,6 +34,7 @@ namespace DnD
             NotifyPropertyChanged("Coins");
             NotifyPropertyChanged("ValueInCopper");
             NotifyPropertyChanged("Weight");
+            NotifyPropertyChanged("Indexer");
         }
         public void Add(Coin c)
         {
@@ -42,7 +43,7 @@ namespace DnD
         public static Pouch operator+(Pouch p, Coin c)
         {
             p[c.Type] += c.Ammount;
-            NotifyPropertyChanged($"Pouch[{c.Type}]");
+
             p.Changes();
             return p;
         }
@@ -138,6 +139,7 @@ namespace DnD
             {
                 _coins[(int)type].Ammount = value;
                 Changes();
+                NotifyPropertyChanged("Item[]");
             }
         }
     }
