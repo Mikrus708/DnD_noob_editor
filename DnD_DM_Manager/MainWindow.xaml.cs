@@ -38,8 +38,8 @@ namespace DnD_DM_Manager
             {
                 //Grid.SetColumn()
             }
-            Hero druid = new Hero{ Name = "Finto", Class = "Druid", EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 170, Weight = 70, PlayerName = "Michał", Race = "Human", Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 15, CurrentHealthPoints = 15 };
-            Hero hunter = new Hero{ Name = "Arato", Class = "Hunter", EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 165, Weight = 50, PlayerName = "Michał", Race = "Elf", Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 17, CurrentHealthPoints = 13 };
+            Hero druid = new Hero{ Name = "Finto", Class = "Other", EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 170, Weight = 70, PlayerName = "Michał", Race = "Human", Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 15, CurrentHealthPoints = 15 };
+            Hero hunter = new Hero{ Name = "Arato", Class = "Warrior", EyesColor = Colors.Blue.ToString(), HairColor = Colors.Brown.ToString(), Height = 165, Weight = 50, PlayerName = "Michał", Race = "Elf", Sex = "Male", Size = CreatureSize.Medium, Speed = 9, MaxHealthPoints = 17, CurrentHealthPoints = 13 };
             heroes.Add(rogue);
             heroes.Add(druid);
             heroes.Add(hunter);
@@ -69,6 +69,28 @@ namespace DnD_DM_Manager
 #warning blah
             EquipmentWindow eqw = new EquipmentWindow(lista[1], lista);
             eqw.Show();
+        }
+
+        private void HeroesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Hero h = HeroesListView.SelectedItem as Hero;
+            if (h != null)
+            {
+                switch (h.Class)
+                {
+                    case "Rogue":
+                        HeroPicture.Source = new BitmapImage(new Uri(".\\resources\\figures\\FemaleWarrior.png", UriKind.Relative));
+                        break;
+                    case "Warrior":
+                        HeroPicture.Source = new BitmapImage(new Uri(".\\resources\\figures\\Knight.png", UriKind.Relative));
+                        break;
+                    case "Other":
+                        HeroPicture.Source = new BitmapImage(new Uri(".\\resources\\figures\\Boar.png", UriKind.Relative));
+                        break;
+                }
+                HeroPicture.Visibility = Visibility.Visible;
+            }
+            else HeroPicture.Visibility = Visibility.Hidden;
         }
     }
 }
