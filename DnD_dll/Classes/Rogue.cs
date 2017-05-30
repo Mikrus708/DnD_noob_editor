@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace DnD.Classes
 {
-    public class Rouge : HeroClass
+    public class Rogue : HeroClass
     {
-        private static Rouge _singleton;
-        private Rouge() { }
-        public static Rouge Instance
+        private static Rogue _singleton;
+        private Rogue() { }
+        public static Rogue Instance
         {
             get
             {
                 if (_singleton == null)
                 {
-                    Rouge tmp = new Rouge();
+                    Rogue tmp = new Rogue();
                     if (_singleton == null)
                         _singleton = tmp;
                 }

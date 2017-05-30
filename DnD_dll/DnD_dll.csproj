@@ -50,7 +50,7 @@
     <Compile Include="Classes\Paladin.cs" />
     <Compile Include="Classes\Priest.cs" />
     <Compile Include="Classes\Ranger.cs" />
-    <Compile Include="Classes\Rouge.cs" />
+    <Compile Include="Classes\Rogue.cs" />
     <Compile Include="Classes\Sorcerer.cs" />
     <Compile Include="Classes\Warrior.cs" />
     <Compile Include="Classes\Wizard.cs" />

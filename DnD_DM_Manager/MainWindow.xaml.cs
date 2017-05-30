@@ -145,15 +145,15 @@ namespace DnD_DM_Manager
             Hero h = HeroesListView.SelectedItem as Hero;
             if (h != null)
             {
-                switch (h.Class)
+                switch (h.Class.Name)
                 {
-                    case "Rogue":
+                    case "Łotrzyk":
                         HeroPicture.Source = new BitmapImage(new Uri(".\\resources\\figures\\FemaleWarrior.png", UriKind.Relative));
                         break;
-                    case "Warrior":
+                    case "Tropiciel":
                         HeroPicture.Source = new BitmapImage(new Uri(".\\resources\\figures\\Knight.png", UriKind.Relative));
                         break;
-                    case "Other":
+                    default:
                         HeroPicture.Source = new BitmapImage(new Uri(".\\resources\\figures\\Boar.png", UriKind.Relative));
                         break;
                 }
