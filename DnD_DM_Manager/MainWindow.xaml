@@ -36,7 +36,6 @@
                                         <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
                                     </RadialGradientBrush>
                                 </Border.Background>
-                                
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextElement.FontFamily="{StaticResource Beyond Wonderland}"  TextElement.FontSize="25" TextElement.FontWeight="Bold" TextElement.Foreground="Goldenrod"/>
                             </Border>
                         </Grid>
@@ -84,7 +83,7 @@
         <StackPanel Orientation="Vertical">
             <Label Content="Bohaterowie" FontSize="28" HorizontalAlignment="Center" Foreground="Goldenrod" Style="{StaticResource LabelStyle}"/>
             <Border Margin="10,5,5,10" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="10" Background="AntiqueWhite">
-                <ListView Name="HeroesListView" Margin="5" ItemsSource="{Binding}" Background="Transparent" HorizontalContentAlignment="Stretch" BorderBrush="Transparent" MouseDoubleClick="Hero_DblClick" SelectionChanged="HeroesListView_SelectionChanged">
+                <ListView Name="HeroesListView" Margin="5" ItemsSource="{Binding}" Background="Transparent" HorizontalContentAlignment="Stretch" BorderBrush="Transparent" MouseDoubleClick="Hero_DblClick" SelectionChanged="HeroesListView_SelectionChanged" PreviewMouseRightButtonUp="HeroesListView_PreviewMouseRightButtonUp" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border Margin="3" BorderBrush="#FF4B2B1A" BorderThickness="2" CornerRadius="5">

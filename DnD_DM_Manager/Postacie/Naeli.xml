@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Hero Name="Naeli" PlayerName="Ania">
-  <Class Level="0">Łotrzyk</Class>
+  <Class Level="1">Łotrzyk</Class>
   <Race>Elf</Race>
   <Speed>10</Speed>
   <Size>Medium</Size>

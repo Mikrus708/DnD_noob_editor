@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Hero Name="Arato" PlayerName="Michał">
-  <Class Level="0">Tropiciel</Class>
+  <Class Level="1">Tropiciel</Class>
   <Race>Elf</Race>
   <Speed>9</Speed>
   <Size>Medium</Size>
@@ -19,9 +19,9 @@
   <Attributes>
     <Strength Value="5" />
     <Dexterity Value="0" />
-    <Constitution Value="0" />
+    <Constitution Value="13" />
     <Intelligence Value="0" />
-    <Wisdom Value="0" />
+    <Wisdom Value="4" />
     <Charisma Value="0" />
   </Attributes>
   <SkillMarks>

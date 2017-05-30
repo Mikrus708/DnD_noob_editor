@@ -354,6 +354,10 @@ namespace DnD
             if (HairColor != null)
                 writer.WriteElementString("HairColor", HairColor);
         }
+        public override string ToString()
+        {
+            return Name;
+        }
         //public enum Character
     }
     public enum CreatureSize

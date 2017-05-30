@@ -161,5 +161,11 @@ namespace DnD_DM_Manager
             }
             else HeroPicture.Visibility = Visibility.Hidden;
         }
+
+        private void HeroesListView_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            HeroForm form = new HeroForm { DataContext = HeroesListView.SelectedItem, Owner = this };
+            form.ShowDialog();
+        }
     }
 }

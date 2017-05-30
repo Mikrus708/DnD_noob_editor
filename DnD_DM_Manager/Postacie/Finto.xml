@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Hero Name="Finto" PlayerName="Michał">
-  <Class Level="0">Druid</Class>
+  <Class Level="1">Druid</Class>
   <Race>Człowiek</Race>
   <Speed>9</Speed>
   <Size>Medium</Size>

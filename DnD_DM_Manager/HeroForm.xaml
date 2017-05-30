@@ -1,0 +1,232 @@
+﻿<Window x:Class="DnD_DM_Manager.HeroForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DnD_DM_Manager"
+        mc:Ignorable="d"
+        Title="HeroForm" Height="457.826" Width="332" DataContext="{Binding Hero}" WindowStartupLocation="CenterOwner">
+    <ScrollViewer>
+        <StackPanel>
+            <Expander Header="Podstawowe informacje o bohaterze" IsExpanded="False">
+                <Grid Name="HeroInfoGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Gracz: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="1" Content="Imię: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="2" Content="Rasa: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="3" Content="Charakter: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="4" Content="Bóstwo: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="5" Content="Bazowa Level/Klasa: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="6" Content="Rozmiar: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="7" Content="Modifkator: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="8" Content="Szybkość: " FontWeight="SemiBold"/>
+                    <TextBox Grid.Column="1" Text="{Binding PlayerName}"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Name}"/>
+                    <ComboBox x:Name="rcbox" Grid.Column="1" Grid.Row="2" SelectedItem="{Binding Race}"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Character}"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding God}"/>
+                    <!--<TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Class}"/>-->
+                    <Grid Grid.Column="1" Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding ClassLevel}" />
+                        <ComboBox x:Name="cbx" Grid.Column="1" SelectedItem="{Binding Class}"/>
+                    </Grid>
+                    <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Size}"/>
+                    <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Modifier}"/>
+                    <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Speed}"/>
+                </Grid>
+            </Expander>
+            <Expander Header="Statystyki bohatera" IsExpanded="False">
+                <Grid Name="StatsGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Siła" FontWeight="SemiBold"/>
+                    <Label Grid.Row="1" Content="Zręczność" FontWeight="SemiBold"/>
+                    <Label Grid.Row="2" Content="Budowa" FontWeight="SemiBold"/>
+                    <Label Grid.Row="3" Content="Intelekt" FontWeight="SemiBold"/>
+                    <Label Grid.Row="4" Content="Roztropność" FontWeight="SemiBold"/>
+                    <Label Grid.Row="5" Content="Charyzma" FontWeight="SemiBold"/>
+                    <TextBox Grid.Column="1" Text="{Binding [Strength]}" FontWeight="SemiBold"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding [Dexterity]}" FontWeight="SemiBold"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding [Constitution]}" FontWeight="SemiBold"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding [Intelligence]}" FontWeight="SemiBold"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding [Wisdom]}" FontWeight="SemiBold"/>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding [Charisma]}" FontWeight="SemiBold"/>
+                </Grid>
+            </Expander>
+            <Expander Header="Umiejętności" IsExpanded="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Blefowanie: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="1" Content="Ciche poruszanie się: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="2" Content="Czarostwo: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="3" Content="Dyplomacja: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="4" Content="Fałszerstwo: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="5" Content="Jeździectwo: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="6" Content="Język obcy: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="7" Content="Koncentracja: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="8" Content="Leczenie: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="9" Content="Nasłuchiwanie: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="10" Content="Odcyfrowywanie zapisków: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="11" Content="Otwieranie zamków: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="12" Content="Pływanie: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="13" Content="Postępowanie ze zwierzętami: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="14" Content="Przebieranie się: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="15" Content="Przeszukiwanie: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="16" Content="Rzemisoło: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="17" Content="Skakanie: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="18" Content="Spostrzegwaczość: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="19" Content="Szacowanie: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="20" Content="Sztuka przetrwania: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="21" Content="Ukrywanie się: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="22" Content="Unieszkodliwianie mechanizmów: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="23" Content="Używanie liny: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="24" Content="Używanie magicznych urządzeń: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="25" Content="Wiedza: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="26" Content="Wspinaczka: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="27" Content="Wyczucie pobudek: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="28" Content="Występy: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="29" Content="Wyzwalanie się: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="30" Content="Zachowanie równowagi: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="31" Content="Zastraszanie: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="32" Content="Zawód: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="33" Content="Zbieranie informacji: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="34" Content="Zręczna dłoń: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="35" Content="Zwinność: " FontWeight="SemiBold"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding [Bluff]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding [MoveSilently]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding [Spellcraft]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding [Diplomacy]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding [Forgery]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding [Ride]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding [SpeakLanguage]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding [Concentration]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding [Heal]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding [Listen]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding [DecipherScript]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="11" Text="{Binding [OpenLock]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="12" Text="{Binding [Swim]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="13" Text="{Binding [HandleAnimal]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="14" Text="{Binding [Disguise]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="15" Text="{Binding [Search]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="16" Text="{Binding [Craft]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="17" Text="{Binding [Jump]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="18" Text="{Binding [Spot]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="19" Text="{Binding [Appraise]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="20" Text="{Binding [Survival]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="21" Text="{Binding [Hide]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="22" Text="{Binding [DisableDevice]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="23" Text="{Binding [UseRope]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="24" Text="{Binding [UseMagicDevice]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="25" Text="{Binding [Knowledge]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="26" Text="{Binding [Climb]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="27" Text="{Binding [SenseMotive]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="28" Text="{Binding [Perform]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="29" Text="{Binding [EscapeArtist]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="30" Text="{Binding [Balance]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="31" Text="{Binding [Intimidate]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="32" Text="{Binding [Profession]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="33" Text="{Binding [GatherInformation]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="34" Text="{Binding [SleightOfHand]}"/>
+                    <TextBox Grid.Column="1" Grid.Row="35" Text="{Binding [Tumble]}"/>
+                </Grid>
+            </Expander>
+            <Expander Header="Dodatkowe informacje o bohaterze" IsExpanded="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Wiek: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="1" Content="Płeć: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="2" Content="Wzrost: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="3" Content="Waga: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="4" Content="Kolor oczu: " FontWeight="SemiBold"/>
+                    <Label Grid.Row="5" Content="Kolor włosów: " FontWeight="SemiBold"/>
+                    <TextBox Grid.Column="1" Text="{Binding Age}"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Sex}"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Height}"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Weight}"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding EyesColor}"/>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding HairColor}"/>
+                </Grid>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

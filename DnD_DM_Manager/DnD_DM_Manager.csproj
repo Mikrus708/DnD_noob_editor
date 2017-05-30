@@ -65,6 +65,9 @@
     <Compile Include="EquipmentWindow.xaml.cs">
       <DependentUpon>EquipmentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HeroForm.xaml.cs">
+      <DependentUpon>HeroForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MoneyEdit.xaml.cs">
       <DependentUpon>MoneyEdit.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
     <Compile Include="RandomRewardChoosingWindow.xaml.cs">
       <DependentUpon>RandomRewardChoosingWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="HeroForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
