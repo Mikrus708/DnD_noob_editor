@@ -5,5 +5,21 @@
       <Name>Magiczny flet</Name>
       <Description>Gra jak pojebany</Description>
     </Item>
+    <Weapon Value="0.05" Weight="0">
+      <Name>Metalowa wykałaczka</Name>
+      <Description />
+      <Damage Base="1">
+        <Dices>
+          <k2 Ammount="2" />
+        </Dices>
+      </Damage>
+      <Critical>20/x4</Critical>
+      <Range>0</Range>
+    </Weapon>
+    <Armor Value="0.03" Weight="0.5">
+      <Name>Garnek na głowe</Name>
+      <Defense>1</Defense>
+      <FailureSpell>0.15</FailureSpell>
+    </Armor>
   </Bag>
 </Inventory>

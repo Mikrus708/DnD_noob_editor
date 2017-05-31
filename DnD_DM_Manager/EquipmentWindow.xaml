@@ -7,6 +7,9 @@
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
         Title="Equipment" Height="500" Width="500" MinHeight="450" MinWidth="500" Name="EqWnd" Background="#FF7D4C30">
+    <Window.Resources>
+        <local:ItemToImageSource x:Key="converter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,8 +23,11 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" Width="120" Height="120">
-                                <Border Width="60" Height="60" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Center" >
-                                    <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFBB2D2D"/>
+                                <Border Width="60" Height="60" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Center" Background="#FFBB2D2D">
+                                    <Image Source="{Binding Converter={StaticResource converter}}" Margin="3" />
+                                    <!--<Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFBB2D2D">
+                                        
+                                    </Rectangle>-->
                                 </Border>
                                 <Label Content="{Binding Name}" HorizontalAlignment="Center"/>
                                 <Label Content="{Binding Value}" HorizontalAlignment="Center"/>

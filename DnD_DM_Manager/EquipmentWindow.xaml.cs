@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -205,6 +206,21 @@ namespace DnD_DM_Manager
         }
 
 
+    }
+    public class ItemToImageSource : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Weapon)
+                return new BitmapImage(new Uri($@"pack://application:,,,/resources/placeholders/Weapon.png"));
+            else if (value is Armor)
+                return new BitmapImage(new Uri($@"pack://application:,,,/resources/placeholders/Armor.png"));
+            return new BitmapImage(new Uri($@"pack://application:,,,/resources/placeholders/Item.png"));
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class SomeThings
