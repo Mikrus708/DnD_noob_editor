@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DnD;
+using DnD.Equipment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,96 +21,74 @@ namespace DnD_DM_Manager
     /// </summary>
     public partial class NewItemForm : Window
     {
-        private DnD.Equipment.Item _item;
-        private ItemFormMode _ifm;
-        public NewItemForm(ref DnD.Equipment.Item it, ItemFormMode ifm)
+        private Item _item;
+        public NewItemForm(Item it)
         {
             InitializeComponent();
             _item = it;
-            _ifm = ifm;
-            if(ifm == ItemFormMode.Edit || ifm == ItemFormMode.Show)
-            {
-                NameBox.Text = it.Name;
-                ValueBox.Text = it.Value.ToString();
-                WeightBox.Text = it.Weight.ToString();
-                DescBox.Text = it.Description;
-            }
-            this.Height = 270;
-            
+            itemGrid.DataContext = it;
         }
 
-        public NewItemForm(ref DnD.Equipment.Weapon it, ItemFormMode ifm)
+        public NewItemForm(Weapon it)
         {
             InitializeComponent();
             _item = it;
-            _ifm = ifm;
-            if (ifm == ItemFormMode.Edit || ifm == ItemFormMode.Show)
-            {
-                NameBox.Text = it.Name;
-                ValueBox.Text = it.Value.ToString();
-                WeightBox.Text = it.Weight.ToString();
-                DescBox.Text = it.Description;
-            }
-            this.Height = 400;
+            initDmgBox();
+            dmgGrid.DataContext = it.Damage;
+            itemGrid.DataContext = it;
+            weapongGrid.DataContext = it;
+            weapongGrid.Height = double.NaN;
+            weapongGrid.Visibility = Visibility.Visible;
             this.Title = "Dodaj nową broń";
         }
 
-        public NewItemForm(ref DnD.Equipment.Armor it, ItemFormMode ifm)
+        public NewItemForm(Armor it)
         {
             InitializeComponent();
             _item = it;
-            _ifm = ifm;
-            if (ifm == ItemFormMode.Edit || ifm == ItemFormMode.Show)
-            {
-                NameBox.Text = it.Name;
-                ValueBox.Text = it.Value.ToString();
-                WeightBox.Text = it.Weight.ToString();
-                DescBox.Text = it.Description;
-            }
-            this.Height = 400;
+            itemGrid.DataContext = it;
+            armorGrid.DataContext = it;
+            armorGrid.Height = double.NaN;
+            armorGrid.Visibility = Visibility.Visible;
             this.Title = "Dodaj nowy pancerz";
-            Value_Box1.Visibility = Visibility.Visible;
-            Value_Box2.Visibility = Visibility.Visible;
-            Value_Label1.Visibility = Visibility.Visible;
-            Value_Label1.Content = "KP: ";
-            Value_Label2.Visibility = Visibility.Visible;
-            Value_Label2.Content = "Niepowodzenie: ";
-
+        }
+        private void initDmgBox()
+        {
+            dmgBox.Items.Add("Base");
+            foreach (var d in Enum.GetValues(typeof(Dice.Type)))
+                dmgBox.Items.Add(d);
+            dmgBox.SelectedIndex = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            string name = NameBox.Text;
-            decimal value;
-            decimal weight;
-            string desc = DescBox.Text;
-            if(decimal.TryParse(ValueBox.Text, out value)==false)
-            {
-                MessageBox.Show("Value is incorrect", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.DialogResult = false;
-                this.Close();
-            }
-            if (decimal.TryParse(WeightBox.Text, out weight) == false)
-            {
-                MessageBox.Show("Weight is incorrect", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.DialogResult = false;
-                this.Close();
-            }
-            _item.Name = name;
-            _item.Weight = weight;
-            _item.Value = value;
-            _item.Description = desc;
             this.DialogResult = true;
             this.Close();
         }
-    }
 
-    public enum ItemFormMode
-    {
-        Add,
-        Edit,
-        Show
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            int val;
+            if (int.TryParse(valBox.Text, out val))
+            {
+                dynamic x = dmgBox.SelectedItem;
+                if (x is string)
+                    (_item as Weapon).Damage.Base += 1 * val;
+                else
+                    (_item as Weapon).Damage.Add(x, val);
+            }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            (_item as Weapon).Damage.Clear();
+        }
     }
 }
 

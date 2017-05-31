@@ -5,9 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DnD_DM_Manager"
         mc:Ignorable="d"
-        Title="Dodaj nowy przedmiot" Height="270" Width="250" ResizeMode="CanMinimize" Background="BurlyWood" WindowStartupLocation="CenterOwner"> 
-    <Grid>
-        <Grid.ColumnDefinitions>
+        Title="Dodaj nowy przedmiot" Width="280" SizeToContent="Height" ResizeMode="CanMinimize" Background="BurlyWood" WindowStartupLocation="CenterOwner">
+    <StackPanel>
+        <Grid x:Name="itemGrid" DataContext="{Binding Item}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Height="30">Nazwa:</Label>
+            <Label Grid.Row="1" Height="30">Wartość:</Label>
+            <Label Grid.Row="2" Height="30">Waga:</Label>
+            <Label Grid.Row="3" Height="30">Opis:</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" Height="30" Name="NameBox" Text="{Binding Name}"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Height="30" Name="ValueBox" Text="{Binding Value}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Height="30" Name="WeightBox" Text="{Binding Weight}"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Height="90" Name="DescBox" Text="{Binding DescBox}"/>
+        </Grid>
+        <Grid x:Name="armorGrid" DataContext="{Binding Armor}" Visibility="Hidden" Height="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Height="30">KP:</Label>
+            <Label Grid.Row="1" Height="30">Niepowodzenie:</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" Height="30" Name="KPBox" Text="{Binding Defense}"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Height="30" Name="ChanceBox" Text="{Binding FailureSpell}"/>
+
+        </Grid>
+        <Grid x:Name="weapongGrid" DataContext="{Binding Weapon}" Visibility="Hidden" Height="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Height="30">Obrażenia:</Label>
+            <Label Grid.Row="1" Height="30">Szansa na krytyka:</Label>
+            <Label Grid.Row="2" Height="30">Zasięg:</Label>
+            <Grid Grid.Column="1" Grid.Row="0" x:Name="dmgGrid" DataContext="{Binding Damage}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBox Grid.Column="0" Grid.Row="0" x:Name="valBox" />
+                <ComboBox Grid.Column="1" Grid.Row="0" x:Name="dmgBox" />
+                <Button Grid.Column="2" Grid.Row="0" Content="Dodaj" Click="Button_Click_2" x:Name="addBut"/>
+                <Label Grid.ColumnSpan="2" Grid.Row="1" Content="{Binding Name}"/>
+                <Button Grid.Column="2" Grid.Row="1" Content="Wyczyść" Click="Button_Click_3" />
+            </Grid>
+            <TextBox Grid.Column="1" Grid.Row="1" Height="30" Name="CriticalBox" Text="{Binding Critical}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Height="30" Name="RangeBox" Text="{Binding Range}"/>
+        </Grid>
+        <Grid Height="35">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <!--<ColumnDefinition />-->
+            </Grid.ColumnDefinitions>
+            <Button Height="30" Width="100" Content="OK" Click="Button_Click"/>
+            <Button Grid.Column="1" Height="30" Width="100" Visibility="Hidden" Content="Cancel" Click="Button_Click_1"/>
+        </Grid>
+    </StackPanel>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -21,10 +97,6 @@
                     <Setter Property="Margin" Value="0,2,0,0"/>
                 </Style>
             </StackPanel.Resources>
-            <Label Height="30">Nazwa: </Label>
-            <Label Height="30">Wartość: </Label>
-            <Label Height="30">Waga: </Label>
-            <Label Height="30">Opis: </Label>
             <Label Height="30" Content="val1:" Name="Value_Label1" Margin="0,62,0,0" Visibility="Hidden"/>
             <Label Height="30" Content="val2:" Name="Value_Label2"  Visibility="Hidden"/>
             <Label Height="30" Content="val3:" Name="Value_Label3"  Visibility="Hidden"/>
@@ -43,6 +115,5 @@
             <TextBox Height="30" Name="Value_Box2" Visibility="Hidden"/>
             <TextBox Height="30" Name="Value_Box3" Visibility="Hidden"/>
         </StackPanel>
-        <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="100" Content="OK" Click="Button_Click"/>
-    </Grid>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="100" Content="OK" Click="Button_Click"/>-->
 </Window>

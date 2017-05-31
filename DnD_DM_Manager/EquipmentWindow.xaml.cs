@@ -19,14 +19,14 @@ namespace DnD_DM_Manager
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class EquipmentWindow : Window 
+    public partial class EquipmentWindow : Window
     {
 
         private static bool messageshown = false;
 
         private Inventory _inv;
         private List<Inventory> _otherInventories = new List<Inventory>();
-        
+
 
 
         public List<Inventory> ComboList
@@ -41,8 +41,8 @@ namespace DnD_DM_Manager
 
 
 
-        
-        
+
+
         public EquipmentWindow(Inventory inv, List<Inventory> allInventories)
         {
             InitializeComponent();
@@ -68,32 +68,29 @@ namespace DnD_DM_Manager
 
         private void EquipmentWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Delete)
+            if (e.Key == Key.Delete)
             {
                 Remove_Item(TabPanel.SelectedContent, null);
             }
         }
 
-        private void Add_New_Item (object sender, RoutedEventArgs e)
+        private void Add_New_Item(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
             UnclickAddButton();
-            Item it = new Item("");
-            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            Item it = new Item();
+            NewItemForm wnd = new NewItemForm(it);
             wnd.Owner = this;
-
             if (wnd.ShowDialog() == true)
                 _inv.AddItem(it);
-            
         }
         private void Add_New_Weapon(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
             UnclickAddButton();
             Weapon it = new Weapon();
-            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            NewItemForm wnd = new NewItemForm(it);
             wnd.Owner = this;
-
             if (wnd.ShowDialog() == true)
                 _inv.AddItem(it);
         }
@@ -102,9 +99,8 @@ namespace DnD_DM_Manager
             e.Handled = true;
             UnclickAddButton();
             Armor it = new Armor();
-            NewItemForm wnd = new NewItemForm(ref it, ItemFormMode.Add);
+            NewItemForm wnd = new NewItemForm(it);
             wnd.Owner = this;
-
             if (wnd.ShowDialog() == true)
                 _inv.AddItem(it);
         }
@@ -114,8 +110,8 @@ namespace DnD_DM_Manager
             if (TabPanel.SelectedIndex == 0)
             {
                 if (MainGrid.SelectedItems.Count != 1) { MessageBox.Show("Musisz wybrać dokładnie jeden przedmiot do edycj.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error); return; }
-                Item sel = MainGrid.SelectedItem as Item;
-                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                dynamic sel = MainGrid.SelectedItem;
+                NewItemForm wnd = new NewItemForm(sel);
                 wnd.Owner = this;
                 wnd.ShowDialog();
                 MainGrid.Items.Refresh();
@@ -123,8 +119,8 @@ namespace DnD_DM_Manager
             else if (TabPanel.SelectedIndex == 1)
             {
                 if (MainList.SelectedItems.Count != 1) { MessageBox.Show("Musisz wybrać dokładnie jeden przedmiot do edycj.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error); return; }
-                Item sel = MainList.SelectedItem as Item;
-                NewItemForm wnd = new NewItemForm(ref sel, ItemFormMode.Edit);
+                dynamic sel = MainList.SelectedItem;
+                NewItemForm wnd = new NewItemForm(sel);
                 wnd.Owner = this;
                 wnd.ShowDialog();
                 MainList.Items.Refresh();
@@ -158,7 +154,7 @@ namespace DnD_DM_Manager
                 for (int i = 0; i < lim; ++i)
                 {
                     To.AddItem(MainGrid.SelectedItems[0] as Item);
-                    _inv.RemoveItem(MainGrid.SelectedItems[0] as Item); 
+                    _inv.RemoveItem(MainGrid.SelectedItems[0] as Item);
                 }
             }
             else if (TabPanel.SelectedIndex == 1)
@@ -182,7 +178,7 @@ namespace DnD_DM_Manager
         }
         private void Show_Add_Options(object sender, RoutedEventArgs e)
         {
-            if (messageshown == false) { MessageBox.Show("na razie dziala biednie", "", MessageBoxButton.OK, MessageBoxImage.Information); messageshown = true; }
+            //if (messageshown == false) { MessageBox.Show("na razie dziala biednie", "", MessageBoxButton.OK, MessageBoxImage.Information); messageshown = true; }
 
             Add_Label.Visibility = Visibility.Hidden;
             AddWeapon_Button.Visibility = Visibility.Visible;
@@ -216,28 +212,28 @@ namespace DnD_DM_Manager
         public static List<Item> list()
         {
             var ret = new List<Item>();
-            ret.Add(new Item("Śmieć", 20, "Family Rzepiński", "cat"));
-            ret.Add(new Item("Śmieć", 20, "Family", "bron"));
-            ret.Add(new Item("Kamień", 50, "Family Remiszewski"));
-            ret.Add(new Item("Kabanos", 120, "sth", "superItem"));
-            ret.Add(new Item("Kapusta", 40, "blah"));
-            ret.Add(new Item("Zbroja z kaktusa", 5520));
-            ret.Add(new Item("Wódka ze szklanką ", 320, "fdfd"));
-            ret.Add(new Item("Drzewo", 12320));
+            ret.Add(new Item { Name = "Śmieć", Value = 20, Family = "Family Rzepiński", Category = "cat" });
+            ret.Add(new Item { Name = "Śmieć", Value = 20, Family = "Family", Category = "bron" });
+            ret.Add(new Item { Name = "Kamień", Value = 50, Family = "Family Remiszewski" });
+            ret.Add(new Item { Name = "Kabanos", Value = 120, Family = "sth", Category = "superItem" });
+            ret.Add(new Item { Name = "Kapusta", Value = 40, Family = "blah" });
+            ret.Add(new Item { Name = "Zbroja z kaktusa", Value = 5520 });
+            ret.Add(new Item { Name = "Wódka ze szklanką ", Value = 320, Family = "fdfd" });
+            ret.Add(new Item { Name = "Drzewo", Value = 12320 });
             return ret;
         }
 
         public static List<Item> list2()
         {
             var ret = new List<Item>();
-            ret.Add(new Item("Trawa", 40, "Family Rzepiński", "cat"));
-            ret.Add(new Item("Bieda", -100, "Family", "bron"));
-            ret.Add(new Item("Kamień", 0, "Family Remiszewski"));
-            ret.Add(new Item("Kula do kręgli", 150, "sth", "superItem"));
-            ret.Add(new Item("Kapusta", 30, "blah"));
-            ret.Add(new Item("Półtoraręczny telefon", 5000));
-            ret.Add(new Item("Szklanka z wódką ", 700, "fdfd"));
-            ret.Add(new Item("Drzewo", 1));
+            ret.Add(new Item { Name = "Trawa", Value = 40, Family = "Family Rzepiński", Category = "cat" });
+            ret.Add(new Item { Name = "Bieda", Value = -100, Family = "Family", Category = "bron" });
+            ret.Add(new Item { Name = "Kamień", Value = 0, Family = "Family Remiszewski" });
+            ret.Add(new Item { Name = "Kula do kręgli", Value = 150, Family = "sth", Category = "superItem" });
+            ret.Add(new Item { Name = "Kapusta", Value = 30, Family = "blah" });
+            ret.Add(new Item { Name = "Półtoraręczny telefon", Value = 5000 });
+            ret.Add(new Item { Name = "Szklanka z wódką ", Value = 700, Family = "fdfd" });
+            ret.Add(new Item { Name = "Drzewo", Value = 1 });
             return ret;
         }
     }

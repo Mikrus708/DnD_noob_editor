@@ -8,60 +8,34 @@ using System.Xml.Serialization;
 
 namespace DnD.Equipment
 {
-    public class Item
+    public class Item : ICloneable
     {
-        protected string _name;
-        protected string _family;
-        protected string _category;
-        protected decimal _value;
-        protected string _description;
-        public Item()
-        {
-            _name = string.Empty;
-            _category = string.Empty;
-            _family = string.Empty;
-            _value = 0;
-        }
-        public Item(string name, decimal value = 0, string family = null, string category = null)
-        {
-            _name = name;
-            _category = category;
-            _family = family;
-            _value = value;
-        }
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
+        public Item() { }
+        public string Name { get; set; }
         [XmlAttribute]
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Family { get; set; }
         [XmlAttribute]
-        public string Family
-        {
-            get { return _family; }
-            set { _family = value; }
-        }
+        public string Category { get; set; }
         [XmlAttribute]
-        public string Category
-        {
-            get { return _category; }
-            set { _category = value; }
-        }
-        [XmlAttribute]
-        public decimal Value
-        {
-            get { return _value; }
-            set { _value = value; }
-        }
+        public decimal Value { get; set; }
         /// <summary>
         /// Waga w 0.01 kg
         /// </summary>
         [XmlAttribute]
         public decimal Weight { get; set; }
+        public string Description { get; set; }
+        public virtual object Clone()
+        {
+            Item result = new Item
+            {
+                Name = Name,
+                Family = Family,
+                Category = Category,
+                Value = Value,
+                Weight = Weight,
+                Description = Description
+            };
+            return result;
+        }
     }
 }

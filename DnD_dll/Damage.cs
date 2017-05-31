@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,30 @@ using System.Xml.Serialization;
 
 namespace DnD
 {
-    public class Damage : IXmlSerializable
+    public class Damage : IXmlSerializable, INotifyPropertyChanged
     {
-        public Damage() { }
+        public event PropertyChangedEventHandler PropertyChanged;
+        int _base;
         private int[] diceNum = new int[Enum.GetValues(typeof(Dice.Type)).Length];
-        public int Base { get; set; }
+        public Damage() { }
+        public int Base
+        {
+            get { return _base; }
+            set
+            {
+                _base = value;
+                NotifyPropertyChanged("Name");
+            }
+        }
+        public void Clear()
+        {
+            _base = 0;
+            for (int i = diceNum.Length - 1; i >= 0; --i)
+                diceNum[i] = 0;
+            NotifyPropertyChanged("Item[]");
+            NotifyPropertyChanged("Name");
+            NotifyPropertyChanged("Base");
+        }
         public int this[Dice.Type t]
         {
             get
@@ -23,11 +43,13 @@ namespace DnD
             set
             {
                 diceNum[(int)t] = value;
+                NotifyPropertyChanged("Item[]");
+                NotifyPropertyChanged("Name");
             }
         }
         public void Add(Dice.Type t, int ammount = 1)
         {
-            diceNum[(int)t] += ammount;
+            this[t] += ammount;
         }
         public int Roll()
         {
@@ -37,6 +59,10 @@ namespace DnD
                 result += Dice.Roll(t, this[t]);
             }
             return result + Base;
+        }
+        public string Name
+        {
+            get { return ToString(); }
         }
         public override string ToString()
         {
@@ -86,6 +112,10 @@ namespace DnD
                 }
             }
             writer.WriteEndElement();
+        }
+        protected void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public enum DamageType
         {
