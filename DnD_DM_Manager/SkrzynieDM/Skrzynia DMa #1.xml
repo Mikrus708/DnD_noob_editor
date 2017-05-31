@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Inventory Name="Skrzynia DMa #1">
+  <Bag>
+    <Item Family="Family Rzepiński" Category="cat" Value="40" Weight="0">
+      <Name>Trawa</Name>
+    </Item>
+    <Item Family="Family" Category="bron" Value="-100" Weight="0">
+      <Name>Bieda</Name>
+    </Item>
+    <Item Family="Family Remiszewski" Value="0" Weight="0">
+      <Name>Kamień</Name>
+    </Item>
+    <Item Family="sth" Category="superItem" Value="150" Weight="0">
+      <Name>Kula do kręgli</Name>
+    </Item>
+    <Item Family="blah" Value="30" Weight="0">
+      <Name>Kapusta</Name>
+    </Item>
+    <Item Value="5000" Weight="0">
+      <Name>Półtoraręczny telefon</Name>
+    </Item>
+    <Item Family="fdfd" Value="700" Weight="0">
+      <Name>Szklanka z wódką </Name>
+    </Item>
+    <Item Value="1" Weight="0">
+      <Name>Drzewo</Name>
+    </Item>
+  </Bag>
+</Inventory>

@@ -28,7 +28,8 @@ namespace DnD_DM_Manager
     public partial class MainWindow : Window
     {
         ObservableCollection<Hero> heroes;
-        public static List<DnD.Inventory> lista = new List<DnD.Inventory> { new DnD.Inventory(SomeThings.list2(), null, "Skrzynia DMa #1"), new DnD.Inventory(SomeThings.list(), null, "Skrzynia DMa #2"), new DnD.Inventory(SomeThings.list(), null, "Skrzynia DMa #3")  };
+        //public static List<DnD.Inventory> lista = new List<DnD.Inventory> { new DnD.Inventory(SomeThings.list2(), null, "Skrzynia DMa #1"), new DnD.Inventory(SomeThings.list(), null, "Skrzynia DMa #2"), new DnD.Inventory(SomeThings.list(), null, "Skrzynia DMa #3") };
+        public static List<DnD.Inventory> lista = new List<DnD.Inventory>();
         public MainWindow()
         {
             InitializeComponent();
@@ -51,12 +52,13 @@ namespace DnD_DM_Manager
             //heroes.Add(hunter);
             this.DataContext = heroes;
             loadHeroesFromFolder("../../Postacie");
+            loadDMChestsFromFolder("../../SkrzynieDM");
             this.Closing += MainWindow_Closing;
         }
-
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             saveHerosToFolder("../../Postacie");
+            saveDMChestsToFolder("../../SkrzynieDM");
         }
 
         private void Box3_Click(object sender, RoutedEventArgs e)
@@ -123,6 +125,32 @@ namespace DnD_DM_Manager
                     Hero h = EasyXML.DeserializeXML<Hero>(str);
                     heroes.Add(h);
                 }
+            }
+        }
+        private void loadDMChestsFromFolder(string FolderPath)
+        {
+            string[] names = null;
+            try
+            {
+                names = System.IO.Directory.GetFiles(FolderPath, "*.xml");
+            }
+            catch { }
+            if (names != null)
+            {
+                foreach (string str in names)
+                {
+                    Inventory h = EasyXML.DeserializeXML<Inventory>(str);
+                    lista.Add(h);
+                }
+            }
+        }
+        private void saveDMChestsToFolder(string FolderPath)
+        {
+            if (!System.IO.Directory.Exists(FolderPath))
+                System.IO.Directory.CreateDirectory(FolderPath);
+            foreach (Inventory inv in lista)
+            {
+                EasyXML.SerializeXML(inv, FolderPath + '/' + inv.Name + ".xml");
             }
         }
         private void saveHerosToFolder(string FolderPath)

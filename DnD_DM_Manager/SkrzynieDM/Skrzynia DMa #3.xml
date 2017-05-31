@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Inventory Name="Skrzynia DMa #3">
+  <Bag>
+    <Item Value="5000" Weight="1.5">
+      <Name>Magiczny flet</Name>
+      <Description>Gra jak pojebany</Description>
+    </Item>
+  </Bag>
+</Inventory>

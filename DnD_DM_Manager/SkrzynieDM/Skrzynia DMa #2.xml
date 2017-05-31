@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Inventory Name="Skrzynia DMa #2">
+  <Bag>
+    <Item Family="Family Rzepiński" Category="cat" Value="20" Weight="0">
+      <Name>Śmieć</Name>
+    </Item>
+    <Item Family="Family" Category="bron" Value="20" Weight="0">
+      <Name>Śmieć</Name>
+    </Item>
+    <Item Family="Family Remiszewski" Value="50" Weight="0">
+      <Name>Kamień</Name>
+    </Item>
+    <Item Family="sth" Category="superItem" Value="120" Weight="0">
+      <Name>Kabanos</Name>
+    </Item>
+    <Item Family="blah" Value="40" Weight="0">
+      <Name>Kapusta</Name>
+    </Item>
+    <Item Value="5520" Weight="0">
+      <Name>Zbroja z kaktusa</Name>
+    </Item>
+    <Item Family="fdfd" Value="320" Weight="0">
+      <Name>Wódka ze szklanką </Name>
+    </Item>
+    <Item Value="12320" Weight="0">
+      <Name>Drzewo</Name>
+    </Item>
+  </Bag>
+</Inventory>
